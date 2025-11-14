@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "cork-arm-200",
+    "name": "Cork Arm 200",
+    "badge": "Starter",
+    "price": 349,
+    "currency": "USD",
+    "status": "coming-soon",
+    "image": ""
+  },
+  {
+    "slug": "precision-gripper",
+    "name": "Precision Gripper",
+    "badge": "Accessory",
+    "price": 79,
+    "currency": "USD",
+    "status": "coming-soon",
+    "image": ""
+  },
+  {
+    "slug": "motion-controller",
+    "name": "Motion Controller",
+    "badge": "Control",
+    "price": 129,
+    "currency": "USD",
+    "status": "coming-soon",
+    "image": ""
+  }
+]
