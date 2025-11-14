@@ -3,26 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cork Robotics</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <title>Cork Robotics — Natural materials. Precise motion.</title>
+  <meta name="description" content="Educational and research-ready robotics—approachable design, robust hardware, and lifetime support.">
+  <meta property="og:title" content="Cork Robotics">
+  <meta property="og:description" content="Natural materials. Precise motion.">
+  <meta property="og:image" content="/assets/img/social-card.jpg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/img/favicon.png">
+  <link rel="stylesheet" href="/assets/css/styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Cork Robotics</h1>
-    <p>Precision tools, firmware, and updates.</p>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/downloads.html">Downloads</a>
-      <a href="mailto:hello@corkrobotics.com">Contact</a>
-    </nav>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/img/logo.png" alt="Cork Robotics">
+        <span>Cork Robotics</span>
+      </a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/downloads.html">Downloads</a>
+        <a href="mailto:hello@corkrobotics.com">Contact</a>
+        <a class="btn" href="/downloads.html">Get Firmware</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section>
-      <h2>Coming Soon</h2>
-      <p>We’re preparing product pages and OTA-enabled firmware delivery.</p>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Natural materials. Precise motion.</h1>
+        <p class="lead">Robotics kits and components for education and research—approachable design, robust hardware, and lifetime support.</p>
+        <a class="btn" href="/downloads.html">Explore Kits</a>
+      </div>
+      <img src="/assets/img/hero.jpg" alt="Cork Robotics kit" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow);" />
+    </section>
+
+    <h2>Explore Best‑Sellers</h2>
+    <div class="grid">
+      <article class="card">
+        <img src="/assets/img/product-1.jpg" alt="Cork Arm 200">
+        <div class="content">
+          <div class="badge">Starter</div>
+          <h3>Cork Arm 200</h3>
+          <div class="price">$349</div>
+          <a class="btn" href="#">View</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="/assets/img/product-2.jpg" alt="Precision Gripper">
+        <div class="content">
+          <div class="badge">Accessory</div>
+          <h3>Precision Gripper</h3>
+          <div class="price">$79</div>
+          <a class="btn" href="#">View</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="/assets/img/product-3.jpg" alt="Motion Controller">
+        <div class="content">
+          <div class="badge">Control</div>
+          <h3>Motion Controller</h3>
+          <div class="price">$129</div>
+          <a class="btn" href="#">View</a>
+        </div>
+      </article>
+    </div>
+
+    <section style="margin-top: var(--s-7)">
+      <h2>Why choose Cork Robotics</h2>
+      <div class="value-props">
+        <div class="item"><h3>Lifetime Help</h3><p>Direct support from engineers via email and forum.</p></div>
+        <div class="item"><h3>Global Shipping</h3><p>Fast delivery with tracking worldwide.</p></div>
+        <div class="item"><h3>7‑Day Returns</h3><p>Easy exchanges within a week.</p></div>
+        <div class="item"><h3>Secure Checkout</h3><p>Credit cards, PayPal, and wallet payments.</p></div>
+      </div>
+    </section>
+
+    <section class="newsletter" style="margin-top: var(--s-7)">
+      <h2>Get $25 off your first kit</h2>
+      <p>Sign up for new builds, tutorials, and discounts.</p>
+      <form class="grid" style="grid-template-columns: 1fr auto;" action="#" method="post">
+        <input class="input" type="email" placeholder="you@domain.com" required>
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
     </section>
   </main>
-  <footer>© <span id="y"></span> Cork Robotics</footer>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+
+  <footer>
+    <div class="container">© <span data-year></span> Cork Robotics</div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>

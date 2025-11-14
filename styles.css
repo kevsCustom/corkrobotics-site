@@ -1,0 +1,96 @@
+/* ===== Cork Robotics — Design tokens & components ===== */
+:root {
+  --bg: #F7F5F2;
+  --surface: #FFFFFF;
+  --text: #373B42;
+  --muted: #4C535A;
+  --cork-100: #D6C9B9;
+  --cork-200: #D3B79D;
+  --accent: #0F766E;    /* swap to #1D4ED8 (blue) or #C2410C (orange) if you prefer */
+  --accent-contrast: #FFFFFF;
+
+  --radius: 12px;
+  --shadow: 0 10px 24px rgba(0,0,0,.08);
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e2227; --surface: #242a31; --text: #E8EAED; --muted: #A8B0B7;
+    --accent: #1D4ED8; --accent-contrast: #FFFFFF; --shadow: 0 8px 20px rgba(0,0,0,.35);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg); color: var(--text); line-height: 1.55; text-rendering: optimizeLegibility;
+}
+
+/* Type */
+h1, h2, h3 { font-family: Sora, Inter, ui-sans-serif, system-ui; letter-spacing: -.01em; }
+h1 { font-size: 48px; line-height: 1.05; margin: 0 0 var(--s-5); }
+h2 { font-size: 30px; margin: 0 0 var(--s-4); }
+h3 { font-size: 24px; margin: 0 0 var(--s-3); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-5); }
+
+/* Header / nav */
+.header {
+  position: sticky; top: 0; z-index: 20;
+  backdrop-filter: saturate(180%) blur(8px);
+  background: color-mix(in oklab, var(--bg) 85%, white 15%);
+  border-bottom: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+}
+.header-inner { display:flex; gap: var(--s-5); align-items:center; height: 64px; }
+.brand { display:flex; align-items:center; gap: var(--s-3); }
+.brand img { height: 28px; }
+.brand span { font-weight: 700; letter-spacing: .2px; }
+.nav { display:flex; gap: var(--s-4); margin-left: auto; align-items:center; }
+.nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.nav a:hover, .nav a:focus { color: var(--text); }
+
+/* Buttons */
+.btn {
+  --b: var(--accent); --c: var(--accent-contrast);
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 12px 18px; border-radius: var(--radius);
+  background: var(--b); color: var(--c); font-weight: 600; text-decoration:none;
+  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: var(--shadow);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus { outline: 3px solid color-mix(in oklab, var(--b) 40%, white); outline-offset: 2px; }
+
+/* Layout blocks */
+.hero {
+  padding: clamp(56px, 8vw, 104px) 0;
+  display:grid; gap: var(--s-6);
+  grid-template-columns: 1.1fr 1fr; align-items:center;
+}
+.hero .lead { font-size: 20px; color: var(--muted); max-width: 52ch; }
+
+.grid { display:grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card {
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--muted) 14%, transparent);
+  border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);
+  display:flex; flex-direction:column;
+}
+.card img { width:100%; height: 200px; object-fit: cover; background: var(--cork-100); }
+.card .content { padding: var(--s-4); display:flex; flex-direction:column; gap: var(--s-3); }
+.price { font-weight: 700; }
+.badge { background: var(--cork-200); color: var(--text); padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+.value-props { display:grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.value-props .item { background: var(--surface); padding: var(--s-4); border-radius: var(--radius); border: 1px solid color-mix(in oklab, var(--muted) 14%, transparent); }
+
+.newsletter { background: linear-gradient(180deg, var(--cork-100), transparent); border: 1px solid color-mix(in oklab, var(--muted) 14%, transparent); border-radius: var(--radius); padding: var(--s-6); }
+.input { height: 44px; padding: 0 var(--s-3); border-radius: 8px; width: 100%; border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent); }
+
+footer { margin-top: var(--s-7); padding: var(--s-6) 0; border-top: 1px solid color-mix(in oklab, var(--muted) 20%, transparent); }
+
+/* Mobile */
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }

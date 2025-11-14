@@ -1,10 +1,32 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Downloads</title>
-<link rel="stylesheet" href="/styles.css"></head>
-<body><header><h1>Downloads</h1><nav><a href="/">Home</a></nav></header>
-<main>
-  <p>Firmware and tools will appear here once we connect R2 and the OTA API.</p>
-</main>
-<footer>© <span id="y"></span> Cork Robotics</footer>
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
-</body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Downloads — Cork Robotics</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.png" alt="Cork Robotics"><span>Cork Robotics</span></a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/downloads.html">Downloads</a>
+        <a href="mailto:hello@corkrobotics.com">Contact</a>
+        <a class="btn" href="/downloads.html">Get Firmware</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding: clamp(40px, 6vw, 72px) 0;">
+    <h1>Downloads</h1>
+    <p class="lead">Firmware and tools will appear here once we connect R2 and the OTA API.</p>
+  </main>
+
+  <footer>
+    <div class="container">© <span data-year></span> Cork Robotics</div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
