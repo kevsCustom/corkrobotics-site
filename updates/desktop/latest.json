@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "manifestType": "cork-robotics-desktop",
+  "channel": "stable",
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "pollIntervalSeconds": 21600,
+  "platforms": [
+    {
+      "id": "macos-arm64",
+      "displayName": "macOS Apple Silicon",
+      "description": "Desktop app build for Apple Silicon Macs.",
+      "latest": null,
+      "releases": []
+    },
+    {
+      "id": "macos-x64",
+      "displayName": "macOS Intel",
+      "description": "Desktop app build for Intel Macs.",
+      "latest": null,
+      "releases": []
+    },
+    {
+      "id": "windows-x64",
+      "displayName": "Windows",
+      "description": "Desktop app build for 64-bit Windows.",
+      "latest": null,
+      "releases": []
+    },
+    {
+      "id": "linux-x64",
+      "displayName": "Linux",
+      "description": "Desktop app build for 64-bit Linux.",
+      "latest": null,
+      "releases": []
+    }
+  ]
+}

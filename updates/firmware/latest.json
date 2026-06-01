@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "manifestType": "cork-robotics-firmware",
+  "channel": "stable",
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "pollIntervalSeconds": 21600,
+  "boards": [
+    {
+      "id": "main-board",
+      "displayName": "Main Board",
+      "description": "Primary ESP32 controller firmware.",
+      "chip": "esp32",
+      "hardwareIds": [
+        "main-board",
+        "cork-main-esp32"
+      ],
+      "latest": null,
+      "releases": []
+    },
+    {
+      "id": "sensor-board",
+      "displayName": "Sensor Board",
+      "description": "Sensor ESP32 firmware.",
+      "chip": "esp32",
+      "hardwareIds": [
+        "sensor-board",
+        "cork-sensor-esp32"
+      ],
+      "latest": null,
+      "releases": []
+    }
+  ]
+}

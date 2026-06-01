@@ -4,6 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Downloads — Cork Robotics</title>
+  <meta name="description" content="Firmware, desktop app releases, and OTA update manifests for Cork Robotics products.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/img/favicon.png">
   <link rel="stylesheet" href="/assets/css/styles.css" />
 </head>
 <body>
@@ -19,14 +23,55 @@
     </div>
   </header>
 
-  <main class="container" style="padding: clamp(40px, 6vw, 72px) 0;">
-    <h1>Downloads</h1>
-    <p class="lead">Firmware and tools will appear here once we connect R2 and the OTA API.</p>
+  <main class="container downloads-page">
+    <section class="page-hero">
+      <div>
+        <h1>Downloads</h1>
+        <p class="lead">Firmware and desktop releases for Cork Robotics apps and ESP32 boards.</p>
+      </div>
+      <div class="endpoint-list" aria-label="Update endpoints">
+        <a href="/updates/firmware/latest.json">
+          <span>Firmware manifest</span>
+          <code>/updates/firmware/latest.json</code>
+        </a>
+        <a href="/updates/desktop/latest.json">
+          <span>Desktop manifest</span>
+          <code>/updates/desktop/latest.json</code>
+        </a>
+      </div>
+    </section>
+
+    <section class="download-section" aria-labelledby="firmware-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">OTA Firmware</p>
+          <h2 id="firmware-title">ESP32 Board Updates</h2>
+        </div>
+        <a class="btn secondary" href="/updates/firmware/latest.json">View JSON</a>
+      </div>
+      <div id="firmwareDownloads" class="release-grid" aria-live="polite">
+        <p class="lead">Loading firmware releases...</p>
+      </div>
+    </section>
+
+    <section class="download-section" aria-labelledby="desktop-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Desktop App</p>
+          <h2 id="desktop-title">App Updates</h2>
+        </div>
+        <a class="btn secondary" href="/updates/desktop/latest.json">View JSON</a>
+      </div>
+      <div id="desktopDownloads" class="release-grid" aria-live="polite">
+        <p class="lead">Loading desktop releases...</p>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="container">© <span data-year></span> Cork Robotics</div>
   </footer>
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/downloads.js" defer></script>
 </body>
 </html>

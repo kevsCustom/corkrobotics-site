@@ -2,6 +2,7 @@
 :root {
   --bg: #F7F5F2;
   --surface: #FFFFFF;
+  --surface-2: #F0F6F4;
   --text: #373B42;
   --muted: #4C535A;
   --cork-100: #D6C9B9;
@@ -16,7 +17,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1e2227; --surface: #242a31; --text: #E8EAED; --muted: #A8B0B7;
+    --bg: #1e2227; --surface: #242a31; --surface-2: #1f3332; --text: #E8EAED; --muted: #A8B0B7;
     --accent: #1D4ED8; --accent-contrast: #FFFFFF; --shadow: 0 8px 20px rgba(0,0,0,.35);
   }
 }
@@ -63,6 +64,12 @@ h3 { font-size: 24px; margin: 0 0 var(--s-3); }
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 .btn:focus { outline: 3px solid color-mix(in oklab, var(--b) 40%, white); outline-offset: 2px; }
+.btn.secondary {
+  --b: color-mix(in oklab, var(--accent) 12%, var(--surface));
+  --c: var(--text);
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
+  box-shadow: none;
+}
 
 /* Layout blocks */
 .hero {
@@ -102,3 +109,111 @@ footer { margin-top: var(--s-7); padding: var(--s-6) 0; border-top: 1px solid co
 
 /* Make “Coming Soon” buttons obviously disabled but still legible */
 .btn[aria-disabled="true"] { opacity: .6; pointer-events: none; }
+
+/* Downloads */
+.downloads-page { padding: clamp(40px, 6vw, 72px) var(--s-5) 0; }
+.page-hero {
+  display:grid;
+  gap: var(--s-6);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  align-items:start;
+  margin-bottom: var(--s-7);
+}
+.page-hero .lead { font-size: 20px; color: var(--muted); max-width: 56ch; }
+.endpoint-list {
+  display:grid;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--surface-2);
+  border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+  border-radius: var(--radius);
+}
+.endpoint-list a {
+  display:grid;
+  gap: var(--s-1);
+  color: var(--text);
+  text-decoration: none;
+}
+.endpoint-list span { font-weight: 700; }
+code {
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--surface) 80%, var(--text) 8%);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.download-section { margin-top: var(--s-7); }
+.section-heading {
+  display:flex;
+  gap: var(--s-4);
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: var(--s-5);
+}
+.section-heading h2 { margin-bottom: 0; }
+.eyebrow {
+  margin: 0 0 var(--s-1);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.release-grid {
+  display:grid;
+  gap: var(--s-5);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.release-card {
+  min-height: 100%;
+  padding: var(--s-5);
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--muted) 14%, transparent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.release-card h3 { margin-bottom: var(--s-2); }
+.release-card p { color: var(--muted); }
+.release-meta {
+  display:grid;
+  gap: var(--s-2);
+  margin: var(--s-4) 0;
+  padding: 0;
+  list-style: none;
+}
+.release-meta li {
+  display:flex;
+  gap: var(--s-3);
+  justify-content:space-between;
+  border-top: 1px solid color-mix(in oklab, var(--muted) 12%, transparent);
+  padding-top: var(--s-2);
+}
+.release-meta span:first-child { color: var(--muted); }
+.status-pill {
+  display:inline-flex;
+  align-items:center;
+  min-height: 28px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 14%, var(--surface));
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+.release-actions {
+  display:flex;
+  gap: var(--s-3);
+  flex-wrap:wrap;
+  margin-top: var(--s-4);
+}
+
+@media (max-width: 900px) {
+  .page-hero { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .header-inner { height: auto; min-height: 64px; flex-wrap: wrap; padding-top: var(--s-3); padding-bottom: var(--s-3); }
+  .nav { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: var(--s-1); }
+  h1 { font-size: 40px; }
+  .section-heading { align-items:flex-start; flex-direction:column; }
+}
