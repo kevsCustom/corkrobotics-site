@@ -4,12 +4,15 @@
   "channel": "stable",
   "generatedAt": "2026-06-01T00:00:00Z",
   "pollIntervalSeconds": 21600,
+  "updateMode": "app-assisted-board-pull",
+  "artifactBasePath": "/releases/firmware",
   "boards": [
     {
       "id": "main-board",
       "displayName": "Main Board",
       "description": "Primary ESP32 controller firmware.",
       "chip": "esp32",
+      "architecture": "xtensa-esp32",
       "hardwareIds": [
         "main-board",
         "cork-main-esp32"
@@ -22,6 +25,7 @@
       "displayName": "Sensor Board",
       "description": "Sensor ESP32 firmware.",
       "chip": "esp32",
+      "architecture": "xtensa-esp32",
       "hardwareIds": [
         "sensor-board",
         "cork-sensor-esp32"

@@ -1,6 +1,13 @@
 # Cork Robotics Update Manifests
 
-This folder contains the public update contract for Cork Robotics apps.
+This folder contains the public update contract for Cork Robotics apps and ESP32 OTA firmware.
+
+Production endpoints:
+
+- Firmware: `/updates/firmware/latest.json`
+- Desktop app: `/updates/desktop/latest.json`
+
+Both manifests are intentionally served with `Cache-Control: no-store` from `_headers`. Apps should still request them with caching disabled.
 
 ## Firmware OTA
 
@@ -9,7 +16,17 @@ Apps should request `/updates/firmware/latest.json` with caching disabled. Each 
 - `main-board`: primary ESP32 controller firmware.
 - `sensor-board`: sensor ESP32 firmware.
 
-When a firmware release is ready:
+Current launch state has `latest: null` for each board, which means no firmware update is published yet.
+
+When a firmware release is ready, prefer the publisher script:
+
+```sh
+node tools/publish-release.mjs firmware main-board 1.0.0 ./build/main-board.bin --notes "Initial production firmware."
+node tools/publish-release.mjs firmware sensor-board 1.0.0 ./build/sensor-board.bin --notes "Initial production firmware."
+node tools/validate-updates.mjs
+```
+
+Manual publishing steps, if needed:
 
 1. Add the firmware binary under `/releases/firmware/<board-id>/<version>/<board-id>.bin`.
 2. Calculate the binary size and SHA-256 digest.
@@ -39,11 +56,31 @@ Firmware release shape:
 
 Apps can compare a board's installed semantic version with `latest.version`. When an update is accepted, the app should send the board the resolved absolute firmware URL and expected SHA-256 so the ESP32 can download over HTTPS and verify the image.
 
+ESP32 boards should not need to parse the full manifest. The phone or desktop app can resolve the relative `firmware.url` against the site origin, then pass the board:
+
+- Absolute HTTPS firmware URL.
+- Expected SHA-256.
+- Expected byte size.
+- Target version.
+- Required flag.
+
+The board should download over TLS, verify the SHA-256 before booting the image, then report the installed firmware version back to the app after reboot.
+
 ## Desktop App
 
 Desktop update checks should request `/updates/desktop/latest.json` with caching disabled, select the matching platform, and compare the installed semantic version with `latest.version`.
 
-When a desktop release is ready:
+Current launch state has `latest: null` for each platform, which means no desktop update is published yet.
+
+When a desktop release is ready, prefer the publisher script:
+
+```sh
+node tools/publish-release.mjs desktop macos-arm64 1.0.0 ./dist/Cork-Robotics-1.0.0-arm64.dmg --notes "Initial desktop release."
+node tools/publish-release.mjs desktop windows-x64 1.0.0 ./dist/Cork-Robotics-Setup-1.0.0.exe --notes "Initial desktop release."
+node tools/validate-updates.mjs
+```
+
+Manual publishing steps, if needed:
 
 1. Add the installer/archive under `/releases/desktop/<platform-id>/<version>/`.
 2. Calculate the binary size and SHA-256 digest.
@@ -66,3 +103,20 @@ Desktop release shape:
   "signature": null
 }
 ```
+
+## Update Check Rules
+
+Client apps should:
+
+1. Fetch the relevant manifest with caching disabled.
+2. Find the matching board or platform ID.
+3. Treat `latest: null` as no update.
+4. Compare semantic versions. Offer an update only when `latest.version` is newer than the installed version.
+5. Resolve relative artifact URLs against the website origin.
+6. Verify SHA-256 after download.
+7. Respect `required: true` when present by blocking normal use until the update is installed.
+
+Stable IDs:
+
+- Firmware board IDs: `main-board`, `sensor-board`
+- Desktop platform IDs: `macos-arm64`, `macos-x64`, `windows-x64`, `linux-x64`

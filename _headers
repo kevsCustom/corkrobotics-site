@@ -4,11 +4,20 @@
 /updates/*
   Cache-Control: no-store, no-cache, must-revalidate
   Access-Control-Allow-Origin: *
+  Access-Control-Expose-Headers: Content-Length, Content-Type, ETag
 
 /releases/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
+  Access-Control-Expose-Headers: Content-Length, Content-Type, ETag
   Content-Disposition: attachment
+
+/releases/firmware/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Expose-Headers: Content-Length, Content-Type, ETag
+  Content-Disposition: attachment
+  Content-Type: application/octet-stream
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

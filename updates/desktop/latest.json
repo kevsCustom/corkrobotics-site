@@ -4,6 +4,7 @@
   "channel": "stable",
   "generatedAt": "2026-06-01T00:00:00Z",
   "pollIntervalSeconds": 21600,
+  "artifactBasePath": "/releases/desktop",
   "platforms": [
     {
       "id": "macos-arm64",
