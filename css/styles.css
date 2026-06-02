@@ -174,6 +174,85 @@ p { margin: 0; }
 .panel h3 { margin-top: var(--s-4); }
 .panel p, .card p, .release-card p { margin-top: var(--s-3); color: var(--muted); }
 
+.module-header h2 { max-width: 17ch; }
+.attachment-grid {
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+.attachment-card {
+  overflow: hidden;
+  display:grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: var(--shadow);
+}
+.attachment-card figure {
+  margin: 0;
+  overflow: hidden;
+  background: #d9dcdf;
+}
+.attachment-card img {
+  width: 100%;
+  height: auto;
+}
+.attachment-content {
+  display:grid;
+  align-content:start;
+  gap: var(--s-3);
+  padding: var(--s-5);
+}
+.attachment-content p { color: var(--muted); }
+.status-pill.preview {
+  background: rgba(180, 83, 9, .11);
+  color: var(--warning);
+}
+
+.mobility-feature {
+  display:grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items:start;
+}
+.mobility-copy {
+  display:grid;
+  gap: var(--s-4);
+}
+.mobility-copy h2 { max-width: 11ch; }
+.mobility-copy .section-lead { font-size: 18px; }
+.module-note {
+  padding: var(--s-4);
+  border-left: 3px solid var(--warning);
+  background: rgba(180, 83, 9, .08);
+  color: var(--text);
+  font-weight: 700;
+}
+.mobility-media-grid {
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+.mobility-media-grid figure {
+  overflow:hidden;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.92);
+  box-shadow: var(--shadow);
+}
+.mobility-media-grid img {
+  width: 100%;
+  height: auto;
+}
+.mobility-media-grid figcaption {
+  padding: var(--s-4);
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 800;
+}
+
 .use-case-grid {
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -321,7 +400,7 @@ footer {
       linear-gradient(180deg, #fff 0%, rgba(255,255,255,.96) 48%, rgba(255,255,255,.28) 76%, rgba(255,255,255,0) 100%),
       url('/assets/img/hero.png') 62% bottom / auto 68% no-repeat;
   }
-  .metric-strip, .capability-grid, .page-hero-inner, .release-band, .use-case-grid, .integrity-band { grid-template-columns: 1fr; }
+  .metric-strip, .capability-grid, .attachment-grid, .mobility-feature, .mobility-media-grid, .page-hero-inner, .release-band, .use-case-grid, .integrity-band { grid-template-columns: 1fr; }
   .release-band { align-items:start; }
 }
 
