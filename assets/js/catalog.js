@@ -3,7 +3,7 @@
   if (!grid) return;
 
   try {
-    const res = await fetch('/assets/data/products.json?v=launch-20260602', { cache: 'no-store' });
+    const res = await fetch('/assets/data/products.json?v=launch-20260602-corkbotv0', { cache: 'no-store' });
     const items = await res.json();
 
     const card = (p) => {

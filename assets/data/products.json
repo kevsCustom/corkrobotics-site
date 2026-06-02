@@ -1,5 +1,13 @@
 [
   {
+    "slug": "corkbot-v0",
+    "name": "corkBot v0",
+    "badge": "Main Robot Unit",
+    "description": "Portable modular robot core with closed-loop servo motion, integrated power, modular tool heads, and plug-and-play submodule support.",
+    "status": "coming-soon",
+    "image": "/assets/img/corkbot-v0-main-robot-unit.png?v=launch-20260602-corkbotv0"
+  },
+  {
     "slug": "main-control-board",
     "name": "Main Control Board",
     "badge": "ESP32 Control",
