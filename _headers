@@ -22,6 +22,24 @@
 /assets/*
   Cache-Control: public, max-age=86400
 
+/favicon.ico
+  Cache-Control: no-cache, must-revalidate
+
+/favicon.svg
+  Cache-Control: no-cache, must-revalidate
+
+/favicon-16x16.png
+  Cache-Control: no-cache, must-revalidate
+
+/favicon-32x32.png
+  Cache-Control: no-cache, must-revalidate
+
+/favicon-48x48.png
+  Cache-Control: no-cache, must-revalidate
+
+/apple-touch-icon.png
+  Cache-Control: no-cache, must-revalidate
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
