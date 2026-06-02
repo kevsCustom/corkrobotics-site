@@ -114,7 +114,7 @@ p { margin: 0; }
   align-items:center;
   background:
     linear-gradient(90deg, #fff 0%, rgba(255,255,255,.98) 34%, rgba(255,255,255,.78) 52%, rgba(255,255,255,.12) 74%, rgba(255,255,255,0) 100%),
-    url('/assets/img/hero.png') right center / cover no-repeat;
+    url('/assets/img/hero.png?v=launch-20260602') right center / cover no-repeat;
   color: var(--text);
 }
 .hero-inner { padding: clamp(76px, 10vw, 132px) 0 var(--s-7); }
@@ -398,7 +398,7 @@ footer {
     min-height: 760px;
     background:
       linear-gradient(180deg, #fff 0%, rgba(255,255,255,.96) 48%, rgba(255,255,255,.28) 76%, rgba(255,255,255,0) 100%),
-      url('/assets/img/hero.png') 62% bottom / auto 68% no-repeat;
+      url('/assets/img/hero.png?v=launch-20260602') 62% bottom / auto 68% no-repeat;
   }
   .metric-strip, .capability-grid, .attachment-grid, .mobility-feature, .mobility-media-grid, .page-hero-inner, .release-band, .use-case-grid, .integrity-band { grid-template-columns: 1fr; }
   .release-band { align-items:start; }
@@ -418,7 +418,7 @@ footer {
     min-height: 760px;
     background:
       linear-gradient(180deg, #fff 0%, rgba(255,255,255,.98) 55%, rgba(255,255,255,.46) 80%, rgba(255,255,255,0) 100%),
-      url('/assets/img/hero.png') 58% bottom / auto 54% no-repeat;
+      url('/assets/img/hero.png?v=launch-20260602') 58% bottom / auto 54% no-repeat;
   }
   .metric-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .metric-strip strong { font-size: 16px; }
