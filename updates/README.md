@@ -9,6 +9,11 @@ Production endpoints:
 
 Both manifests are intentionally served with `Cache-Control: no-store` from `_headers`. Apps should still request them with caching disabled.
 
+These IDs are release-contract identifiers. Do not rename them without coordinating app clients, OTA board handlers, and manifest validation together.
+
+- Firmware board IDs: `main-board`, `sensor-board`
+- Desktop platform IDs: `macos-arm64`, `macos-x64`, `windows-x64`, `linux-x64`
+
 ## Firmware OTA
 
 Apps should request `/updates/firmware/latest.json` with caching disabled. Each board entry represents one update channel:
@@ -33,6 +38,8 @@ Manual publishing steps, if needed:
 3. Add a release object to that board's `releases` array.
 4. Copy that same release object into the board's `latest` field.
 
+The publisher script already performs steps 1-4 for the manifest entry and computes both `size` and `sha256`. The validator requires both fields and checks them against the on-disk artifact.
+
 Firmware release shape:
 
 ```json
@@ -54,7 +61,7 @@ Firmware release shape:
 }
 ```
 
-Apps can compare a board's installed semantic version with `latest.version`. When an update is accepted, the app should send the board the resolved absolute firmware URL and expected SHA-256 so the ESP32 can download over HTTPS and verify the image.
+Apps can compare a board's installed semantic version with `latest.version`. When an update is accepted, the app should send the board the resolved absolute HTTPS firmware URL, expected byte size, and expected SHA-256 so the ESP32 can download over HTTPS and verify the image.
 
 ESP32 boards should not need to parse the full manifest. The phone or desktop app can resolve the relative `firmware.url` against the site origin, then pass the board:
 
@@ -65,6 +72,8 @@ ESP32 boards should not need to parse the full manifest. The phone or desktop ap
 - Required flag.
 
 The board should download over TLS, verify the SHA-256 before booting the image, then report the installed firmware version back to the app after reboot.
+
+This flow is the canonical `app-assisted-board-pull` OTA mode for drawBot. The manifest is app-facing, while the board-facing command payload is a reduced release contract. See `agent_memory/shared/OTA_APP_ASSISTED_BOARD_PULL_CONTRACT.md` for the tighter handoff rules.
 
 ## Desktop App
 
@@ -86,6 +95,8 @@ Manual publishing steps, if needed:
 2. Calculate the binary size and SHA-256 digest.
 3. Add a release object to that platform's `releases` array.
 4. Copy that same release object into the platform's `latest` field.
+
+The publisher script computes `size` and `sha256`. The validator requires both fields and verifies that the artifact on disk still matches the manifest.
 
 Desktop release shape:
 
@@ -115,8 +126,3 @@ Client apps should:
 5. Resolve relative artifact URLs against the website origin.
 6. Verify SHA-256 after download.
 7. Respect `required: true` when present by blocking normal use until the update is installed.
-
-Stable IDs:
-
-- Firmware board IDs: `main-board`, `sensor-board`
-- Desktop platform IDs: `macos-arm64`, `macos-x64`, `windows-x64`, `linux-x64`
