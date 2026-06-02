@@ -15,7 +15,7 @@
       <article class="card">
         ${p.image
           ? `<div class="media"><img src="${p.image}" alt="${p.name}"></div>`
-          : `<div class="media placeholder">Image coming soon</div>`
+          : `<div class="media placeholder">Product channel</div>`
         }
         <div class="content">
           ${p.badge ? `<div class="badge">${p.badge}</div>` : ''}

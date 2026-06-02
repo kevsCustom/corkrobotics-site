@@ -28,7 +28,7 @@
         <div>
           <p class="eyebrow">Release Center</p>
           <h1>Firmware and app updates.</h1>
-          <p class="lead">Public manifests, OTA firmware channels, and desktop app release slots for Cork Robotics systems.</p>
+          <p class="lead">Public manifests, OTA firmware channels, checksums, and desktop app release slots for Cork Robotics systems.</p>
         </div>
         <div class="endpoint-list" aria-label="Update endpoints">
           <a href="/updates/firmware/latest.json">
@@ -40,6 +40,16 @@
             <code>/updates/desktop/latest.json</code>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="container integrity-band">
+        <div>
+          <p class="eyebrow">Release integrity</p>
+          <h2>Manifests stay uncached. Artifacts stay immutable.</h2>
+        </div>
+        <p>Apps check the latest JSON on launch, compare semantic versions, then verify byte size and SHA-256 before installing a firmware or desktop release. No production updates are published until a real artifact is attached to the matching channel.</p>
       </div>
     </section>
 

@@ -5,7 +5,7 @@
     "badge": "ESP32 Control",
     "description": "Primary controller firmware channel for motion, device state, and OTA update handoff.",
     "status": "coming-soon",
-    "image": ""
+    "image": "/assets/img/product-main-board.png"
   },
   {
     "slug": "sensor-board",
@@ -13,7 +13,7 @@
     "badge": "Telemetry",
     "description": "Modular ESP32 sensor firmware channel for synchronized data collection and experiments.",
     "status": "coming-soon",
-    "image": ""
+    "image": "/assets/img/product-sensor-board.png"
   },
   {
     "slug": "desktop-control-app",
@@ -21,6 +21,6 @@
     "badge": "Tooling",
     "description": "Desktop release channel for device setup, update checks, and classroom operations.",
     "status": "coming-soon",
-    "image": ""
+    "image": "/assets/img/product-desktop-app.png"
   }
 ]

@@ -73,7 +73,7 @@ ESP32 boards should not need to parse the full manifest. The phone or desktop ap
 
 The board should download over TLS, verify the SHA-256 before booting the image, then report the installed firmware version back to the app after reboot.
 
-This flow is the canonical `app-assisted-board-pull` OTA mode for drawBot. The manifest is app-facing, while the board-facing command payload is a reduced release contract. See `agent_memory/shared/OTA_APP_ASSISTED_BOARD_PULL_CONTRACT.md` for the tighter handoff rules.
+This flow is the canonical `app-assisted-board-pull` OTA mode for drawBot. The manifest is app-facing, while the board-facing command payload should stay reduced to the URL, version, expected byte size, expected SHA-256, and required flag.
 
 ## Desktop App
 

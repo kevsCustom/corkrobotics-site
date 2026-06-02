@@ -41,7 +41,7 @@
             ['SHA-256', latest?.firmware?.sha256]
           ])}
           <div class="release-actions">
-            <a class="btn" href="${hasRelease ? releaseUrl(latest) : '#'}" ${hasRelease ? '' : 'aria-disabled="true"'}>Download</a>
+            <a class="btn" href="${hasRelease ? releaseUrl(latest) : '#'}" ${hasRelease ? '' : 'aria-disabled="true"'}>${hasRelease ? 'Download' : 'Awaiting Release'}</a>
           </div>
         </article>`;
     }).join('');
@@ -71,7 +71,7 @@
             ['SHA-256', latest?.sha256]
           ])}
           <div class="release-actions">
-            <a class="btn" href="${hasRelease ? releaseUrl(latest) : '#'}" ${hasRelease ? '' : 'aria-disabled="true"'}>Download</a>
+            <a class="btn" href="${hasRelease ? releaseUrl(latest) : '#'}" ${hasRelease ? '' : 'aria-disabled="true"'}>${hasRelease ? 'Download' : 'Awaiting Release'}</a>
           </div>
         </article>`;
     }).join('');
