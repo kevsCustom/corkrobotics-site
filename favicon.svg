@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cork Robotics">
+  <g fill="none" stroke="#0d1117" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="12" d="M83 18A48 48 0 1 0 84 98"/>
+    <circle cx="55" cy="59" r="28" stroke-width="12"/>
+    <path stroke-width="12" d="M92 34a37 37 0 0 1 10 34"/>
+    <path stroke-width="10" d="M91 29l19 18 13-13"/>
+    <path stroke-width="10" d="M35 108c13 4 30 4 43 0"/>
+    <path stroke-width="10" d="M52 112l-9 9"/>
+    <path stroke-width="10" d="M60 112l9 9"/>
+  </g>
+  <circle cx="115" cy="32" r="10" fill="#0d1117"/>
+</svg>
