@@ -22,46 +22,49 @@
     </div>
   </header>
 
-  <main class="container downloads-page">
+  <main class="downloads-page">
     <section class="page-hero">
-      <div>
-        <h1>Downloads</h1>
-        <p class="lead">Firmware and desktop releases for Cork Robotics apps and ESP32 boards.</p>
-      </div>
-      <div class="endpoint-list" aria-label="Update endpoints">
-        <a href="/updates/firmware/latest.json">
-          <span>Firmware manifest</span>
-          <code>/updates/firmware/latest.json</code>
-        </a>
-        <a href="/updates/desktop/latest.json">
-          <span>Desktop manifest</span>
-          <code>/updates/desktop/latest.json</code>
-        </a>
+      <div class="container page-hero-inner">
+        <div>
+          <p class="eyebrow">Release Center</p>
+          <h1>Firmware and app updates.</h1>
+          <p class="lead">Public manifests, OTA firmware channels, and desktop app release slots for Cork Robotics systems.</p>
+        </div>
+        <div class="endpoint-list" aria-label="Update endpoints">
+          <a href="/updates/firmware/latest.json">
+            <span>Firmware manifest</span>
+            <code>/updates/firmware/latest.json</code>
+          </a>
+          <a href="/updates/desktop/latest.json">
+            <span>Desktop manifest</span>
+            <code>/updates/desktop/latest.json</code>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="download-section" aria-labelledby="firmware-title">
-      <div class="section-heading">
+    <section class="section download-section" aria-labelledby="firmware-title">
+      <div class="container section-heading">
         <div>
           <p class="eyebrow">OTA Firmware</p>
           <h2 id="firmware-title">ESP32 Board Updates</h2>
         </div>
         <a class="btn secondary" href="/updates/firmware/latest.json">View JSON</a>
       </div>
-      <div id="firmwareDownloads" class="release-grid" aria-live="polite">
+      <div id="firmwareDownloads" class="container release-grid" aria-live="polite">
         <p class="lead">Loading firmware releases...</p>
       </div>
     </section>
 
-    <section class="download-section" aria-labelledby="desktop-title">
-      <div class="section-heading">
+    <section class="section download-section" aria-labelledby="desktop-title">
+      <div class="container section-heading">
         <div>
           <p class="eyebrow">Desktop App</p>
           <h2 id="desktop-title">App Updates</h2>
         </div>
         <a class="btn secondary" href="/updates/desktop/latest.json">View JSON</a>
       </div>
-      <div id="desktopDownloads" class="release-grid" aria-live="polite">
+      <div id="desktopDownloads" class="container release-grid" aria-live="polite">
         <p class="lead">Loading desktop releases...</p>
       </div>
     </section>

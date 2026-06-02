@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cork Robotics — Natural materials. Precise motion.</title>
-  <meta name="description" content="Educational and research-ready robotics—approachable design, robust hardware, and lifetime support.">
+  <title>Cork Robotics — Robotics hardware, firmware, and tools</title>
+  <meta name="description" content="Robotics hardware, firmware, and desktop tools for classrooms, labs, and embedded systems teams.">
   <meta property="og:title" content="Cork Robotics">
-  <meta property="og:description" content="Natural materials. Precise motion.">
-  <meta property="og:image" content="/assets/img/social-card.jpg">
+  <meta property="og:description" content="Robotics hardware, firmware, and tools for labs and classrooms.">
+  <meta property="og:image" content="/assets/img/social-card.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/assets/img/favicon.png">
@@ -28,64 +28,69 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
     <section class="hero">
-      <div>
-        <h1>Natural materials. Precise motion.</h1>
-        <p class="lead">Robotics kits and components for education and research—approachable design, robust hardware, and lifetime support.</p>
-        <a class="btn" href="/downloads.html">Downloads</a>
-      </div>
-      <img src="/assets/img/hero.jpg" alt="Cork Robotics kit" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow);" />
-    </section>
-
-    <h2>Explore Best‑Sellers</h2>
-    <div id="productsGrid" class="grid" aria-live="polite"></div>
-      <article class="card">
-        <img src="/assets/img/product-1.jpg" alt="Cork Arm 200">
-        <div class="content">
-          <div class="badge">Starter</div>
-          <h3>Cork Arm 200</h3>
-          <div class="price">$349</div>
-          <a class="btn" href="#">View</a>
+      <div class="container hero-inner">
+        <p class="eyebrow">Robotics platform engineering</p>
+        <h1>Hardware, firmware, and tools for serious robotics education.</h1>
+        <p class="lead">Cork Robotics develops classroom-ready robot hardware with ESP32 firmware, desktop tooling, and OTA release infrastructure designed for labs that need repeatable systems.</p>
+        <div class="hero-actions">
+          <a class="btn" href="/downloads.html">Release Center</a>
+          <a class="btn secondary" href="mailto:hello@corkrobotics.com">Contact Engineering</a>
         </div>
-      </article>
-      <article class="card">
-        <img src="/assets/img/product-2.jpg" alt="Precision Gripper">
-        <div class="content">
-          <div class="badge">Accessory</div>
-          <h3>Precision Gripper</h3>
-          <div class="price">$79</div>
-          <a class="btn" href="#">View</a>
+        <div class="metric-strip" aria-label="Platform highlights">
+          <div><strong>ESP32</strong><span>Main and sensor boards</span></div>
+          <div><strong>OTA</strong><span>Firmware delivery ready</span></div>
+          <div><strong>Desktop</strong><span>App updates planned</span></div>
         </div>
-      </article>
-      <article class="card">
-        <img src="/assets/img/product-3.jpg" alt="Motion Controller">
-        <div class="content">
-          <div class="badge">Control</div>
-          <h3>Motion Controller</h3>
-          <div class="price">$129</div>
-          <a class="btn" href="#">View</a>
-        </div>
-      </article>
-    </div>
-
-    <section style="margin-top: var(--s-7)">
-      <h2>Why choose Cork Robotics</h2>
-      <div class="value-props">
-        <div class="item"><h3>Lifetime Help</h3><p>Direct support from engineers via email and forum.</p></div>
-        <div class="item"><h3>Global Shipping</h3><p>Fast delivery with tracking worldwide.</p></div>
-        <div class="item"><h3>7‑Day Returns</h3><p>Easy exchanges within a week.</p></div>
-        <div class="item"><h3>Secure Checkout</h3><p>Credit cards, PayPal, and wallet payments.</p></div>
       </div>
     </section>
 
-    <section class="newsletter" style="margin-top: var(--s-7)">
-      <h2>Get $25 off your first kit</h2>
-      <p>Sign up for new builds, tutorials, and discounts.</p>
-      <form class="grid" style="grid-template-columns: 1fr auto;" action="#" method="post">
-        <input class="input" type="email" placeholder="you@domain.com" required>
-        <button class="btn" type="submit">Subscribe</button>
-      </form>
+    <section class="section">
+      <div class="container section-header">
+        <p class="eyebrow">Platform</p>
+        <h2>Built for repeatable robotics programs.</h2>
+        <p class="section-lead">The system is organized around durable hardware, clear release channels, and software that lets instructors and students spend more time working with robots and less time recovering from setup drift.</p>
+      </div>
+      <div class="container capability-grid">
+        <article class="panel">
+          <span class="panel-kicker">Control</span>
+          <h3>Embedded motion stack</h3>
+          <p>Main-board firmware coordinates motion, device state, and update handoff for classroom and lab deployments.</p>
+        </article>
+        <article class="panel">
+          <span class="panel-kicker">Sensing</span>
+          <h3>Modular sensor board</h3>
+          <p>Sensor firmware is versioned independently so field fixes and experiments can ship without disrupting the main controller.</p>
+        </article>
+        <article class="panel">
+          <span class="panel-kicker">Tooling</span>
+          <h3>Desktop and mobile workflow</h3>
+          <p>Apps check release manifests on launch and guide users through firmware and desktop software updates.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-contrast">
+      <div class="container section-header">
+        <p class="eyebrow">In development</p>
+        <h2>Hardware and software channels.</h2>
+        <p class="section-lead">Current product channels are being prepared for launch. Public downloads will appear as production firmware and app builds are published.</p>
+      </div>
+      <div class="container">
+        <div id="productsGrid" class="grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container release-band">
+        <div>
+          <p class="eyebrow">Launch readiness</p>
+          <h2>OTA infrastructure is already in place.</h2>
+          <p>Firmware and desktop releases are distributed through versioned manifests, immutable artifacts, and checksum validation so apps can offer updates with confidence.</p>
+        </div>
+        <a class="btn" href="/downloads.html">View Downloads</a>
+      </div>
     </section>
   </main>
 
