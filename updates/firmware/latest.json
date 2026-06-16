@@ -18,22 +18,38 @@
         "cork-main-esp32"
       ],
       "latest": {
-        "version": "0.1.1",
+        "version": "0.1.2",
         "releasedAt": "2026-06-16T00:00:00.000Z",
         "required": false,
         "notes": [
-          "OTA app-assisted board-pull smoke build from drawBot firmware."
+          "Distributed main ESP32 desktop-connect and OTA readiness fix: valid status JSON, 115200 handshake, sensor OTA keeps main gateway pollable."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.1/main-board-0.1.1.bin",
-          "size": 1310720,
-          "sha256": "ed4289f5c7184624787ff383265f789460273a0a107c21191b7a20957c81fc35",
+          "url": "/releases/firmware/main-board/0.1.2/main-board-0.1.2.bin",
+          "size": 1316400,
+          "sha256": "1d1db4c202ebea3d0ddb34202c5dda11a189ddf46a7ad8df149036837db83dac",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.2",
+          "releasedAt": "2026-06-16T00:00:00.000Z",
+          "required": false,
+          "notes": [
+            "Distributed main ESP32 desktop-connect and OTA readiness fix: valid status JSON, 115200 handshake, sensor OTA keeps main gateway pollable."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.2/main-board-0.1.2.bin",
+            "size": 1316400,
+            "sha256": "1d1db4c202ebea3d0ddb34202c5dda11a189ddf46a7ad8df149036837db83dac",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.1",
           "releasedAt": "2026-06-16T00:00:00.000Z",
