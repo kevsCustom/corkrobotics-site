@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestType": "cork-robotics-firmware",
   "channel": "stable",
-  "generatedAt": "2026-06-16T22:25:12.131Z",
+  "generatedAt": "2026-06-16T22:35:56.342Z",
   "pollIntervalSeconds": 21600,
   "updateMode": "app-assisted-board-pull",
   "artifactBasePath": "/releases/firmware",
@@ -19,34 +19,34 @@
       ],
       "latest": {
         "version": "0.1.3",
-        "releasedAt": "2026-06-16T22:25:12.131Z",
+        "releasedAt": "2026-06-16T22:35:56.342Z",
         "required": false,
         "notes": [
-          "Main ESP32 Node2 sensor-UART recovery diagnostics: richer relay counters, gated sensor relay commands, and explicit CAN2 probe status for no-motion bring-up."
+          "Main ESP32 Node2 CAN2 probe pin-name fix after UART recovery diagnostics; keeps no-motion gates and sensor relay protections."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3-node2-uart-recovery-20260616.bin",
-          "size": 1331760,
-          "sha256": "7063a73ffca85ff5a5e1f0c8fa3289923c93ad8910c4495f588603d160489e61",
+          "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3-node2-can-pinfix-20260616.bin",
+          "size": 1331744,
+          "sha256": "9fddf08c0f2eeabfdc329623d6ddbb124f678bf180573e1d3469262edf29874c",
           "signature": null
         }
       },
       "releases": [
         {
           "version": "0.1.3",
-          "releasedAt": "2026-06-16T22:25:12.131Z",
+          "releasedAt": "2026-06-16T22:35:56.342Z",
           "required": false,
           "notes": [
-            "Main ESP32 Node2 sensor-UART recovery diagnostics: richer relay counters, gated sensor relay commands, and explicit CAN2 probe status for no-motion bring-up."
+            "Main ESP32 Node2 CAN2 probe pin-name fix after UART recovery diagnostics; keeps no-motion gates and sensor relay protections."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
           "firmware": {
-            "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3-node2-uart-recovery-20260616.bin",
-            "size": 1331760,
-            "sha256": "7063a73ffca85ff5a5e1f0c8fa3289923c93ad8910c4495f588603d160489e61",
+            "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3-node2-can-pinfix-20260616.bin",
+            "size": 1331744,
+            "sha256": "9fddf08c0f2eeabfdc329623d6ddbb124f678bf180573e1d3469262edf29874c",
             "signature": null
           }
         },
