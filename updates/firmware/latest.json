@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestType": "cork-robotics-firmware",
   "channel": "stable",
-  "generatedAt": "2026-06-01T00:00:00Z",
+  "generatedAt": "2026-06-16T00:00:00.000Z",
   "pollIntervalSeconds": 21600,
   "updateMode": "app-assisted-board-pull",
   "artifactBasePath": "/releases/firmware",
@@ -17,8 +17,40 @@
         "main-board",
         "cork-main-esp32"
       ],
-      "latest": null,
-      "releases": []
+      "latest": {
+        "version": "0.1.1",
+        "releasedAt": "2026-06-16T00:00:00.000Z",
+        "required": false,
+        "notes": [
+          "OTA app-assisted board-pull smoke build from drawBot firmware."
+        ],
+        "minHardwareRevision": null,
+        "maxHardwareRevision": null,
+        "firmware": {
+          "url": "/releases/firmware/main-board/0.1.1/main-board-0.1.1.bin",
+          "size": 1310720,
+          "sha256": "ed4289f5c7184624787ff383265f789460273a0a107c21191b7a20957c81fc35",
+          "signature": null
+        }
+      },
+      "releases": [
+        {
+          "version": "0.1.1",
+          "releasedAt": "2026-06-16T00:00:00.000Z",
+          "required": false,
+          "notes": [
+            "OTA app-assisted board-pull smoke build from drawBot firmware."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.1/main-board-0.1.1.bin",
+            "size": 1310720,
+            "sha256": "ed4289f5c7184624787ff383265f789460273a0a107c21191b7a20957c81fc35",
+            "signature": null
+          }
+        }
+      ]
     },
     {
       "id": "sensor-board",
@@ -30,8 +62,40 @@
         "sensor-board",
         "cork-sensor-esp32"
       ],
-      "latest": null,
-      "releases": []
+      "latest": {
+        "version": "0.1.1",
+        "releasedAt": "2026-06-16T00:00:00.000Z",
+        "required": false,
+        "notes": [
+          "OTA app-assisted board-pull smoke build from drawBot sensor firmware."
+        ],
+        "minHardwareRevision": null,
+        "maxHardwareRevision": null,
+        "firmware": {
+          "url": "/releases/firmware/sensor-board/0.1.1/sensor-board-0.1.1.bin",
+          "size": 1100112,
+          "sha256": "5ebeb4f2c5bdd3643f9443ddbabd28b6930e901d15396890fdc00c8a33897644",
+          "signature": null
+        }
+      },
+      "releases": [
+        {
+          "version": "0.1.1",
+          "releasedAt": "2026-06-16T00:00:00.000Z",
+          "required": false,
+          "notes": [
+            "OTA app-assisted board-pull smoke build from drawBot sensor firmware."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/sensor-board/0.1.1/sensor-board-0.1.1.bin",
+            "size": 1100112,
+            "sha256": "5ebeb4f2c5bdd3643f9443ddbabd28b6930e901d15396890fdc00c8a33897644",
+            "signature": null
+          }
+        }
+      ]
     }
   ]
 }
