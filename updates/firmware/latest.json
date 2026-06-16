@@ -18,22 +18,38 @@
         "cork-main-esp32"
       ],
       "latest": {
-        "version": "0.1.2",
+        "version": "0.1.3",
         "releasedAt": "2026-06-16T00:00:00.000Z",
         "required": false,
         "notes": [
-          "Distributed main ESP32 desktop-connect and OTA readiness fix: valid status JSON, 115200 handshake, sensor OTA keeps main gateway pollable."
+          "Main ESP32 BLE provisioning supports main plus sensor Wi-Fi relay from product apps."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.2/main-board-0.1.2.bin",
-          "size": 1316400,
-          "sha256": "1d1db4c202ebea3d0ddb34202c5dda11a189ddf46a7ad8df149036837db83dac",
+          "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3.bin",
+          "size": 1316976,
+          "sha256": "1444e7d3ace219b9157ab2d2c9ad276b710dd5ee1051754015636ffbb2de3b8a",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.3",
+          "releasedAt": "2026-06-16T00:00:00.000Z",
+          "required": false,
+          "notes": [
+            "Main ESP32 BLE provisioning supports main plus sensor Wi-Fi relay from product apps."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3.bin",
+            "size": 1316976,
+            "sha256": "1444e7d3ace219b9157ab2d2c9ad276b710dd5ee1051754015636ffbb2de3b8a",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.2",
           "releasedAt": "2026-06-16T00:00:00.000Z",
@@ -79,22 +95,38 @@
         "cork-sensor-esp32"
       ],
       "latest": {
-        "version": "0.1.1",
+        "version": "0.1.2",
         "releasedAt": "2026-06-16T00:00:00.000Z",
         "required": false,
         "notes": [
-          "OTA app-assisted board-pull smoke build from drawBot sensor firmware."
+          "Sensor ESP32-S3 Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/sensor-board/0.1.1/sensor-board-0.1.1.bin",
-          "size": 1100112,
-          "sha256": "5ebeb4f2c5bdd3643f9443ddbabd28b6930e901d15396890fdc00c8a33897644",
+          "url": "/releases/firmware/sensor-board/0.1.2/sensor-board-0.1.2.bin",
+          "size": 1100224,
+          "sha256": "374c091c0bf07e3cb68954b744a75b49e868fef2f53734244dedbf4b930ee78e",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.2",
+          "releasedAt": "2026-06-16T00:00:00.000Z",
+          "required": false,
+          "notes": [
+            "Sensor ESP32-S3 Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/sensor-board/0.1.2/sensor-board-0.1.2.bin",
+            "size": 1100224,
+            "sha256": "374c091c0bf07e3cb68954b744a75b49e868fef2f53734244dedbf4b930ee78e",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.1",
           "releasedAt": "2026-06-16T00:00:00.000Z",
