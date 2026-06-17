@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestType": "cork-robotics-firmware",
   "channel": "stable",
-  "generatedAt": "2026-06-17T05:57:34.552Z",
+  "generatedAt": "2026-06-17T06:04:20.254Z",
   "pollIntervalSeconds": 21600,
   "updateMode": "app-assisted-board-pull",
   "artifactBasePath": "/releases/firmware",
@@ -18,22 +18,38 @@
         "cork-main-esp32"
       ],
       "latest": {
-        "version": "0.1.11",
-        "releasedAt": "2026-06-17T05:57:34.552Z",
+        "version": "0.1.12",
+        "releasedAt": "2026-06-17T06:04:20.254Z",
         "required": false,
         "notes": [
-          "Main-board SAFE_BOOT CAN2 encoder diagnostic: ACAN2517FD listen/normal receive, encoder heartbeat/status decode, no motion or TMC enable."
+          "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: ACAN2517FD normal/listen receive with explicit poll, no motion or TMC enable."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.11/main-board-0.1.11-can2-encoder-diag-20260617.bin",
-          "size": 1345040,
-          "sha256": "244f239ddb78e35a9ffedecb654842cf5e7f3d4f79eb06c4190ece9192bfbc43",
+          "url": "/releases/firmware/main-board/0.1.12/main-board-0.1.12-can2-encoder-diag-poll-20260617.bin",
+          "size": 1345056,
+          "sha256": "1d1fbef34435308ab51fbe1426f3537de73ee893f63717f5031af0d819780920",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.12",
+          "releasedAt": "2026-06-17T06:04:20.254Z",
+          "required": false,
+          "notes": [
+            "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: ACAN2517FD normal/listen receive with explicit poll, no motion or TMC enable."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.12/main-board-0.1.12-can2-encoder-diag-poll-20260617.bin",
+            "size": 1345056,
+            "sha256": "1d1fbef34435308ab51fbe1426f3537de73ee893f63717f5031af0d819780920",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.11",
           "releasedAt": "2026-06-17T05:57:34.552Z",
