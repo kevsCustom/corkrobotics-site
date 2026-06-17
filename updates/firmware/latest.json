@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestType": "cork-robotics-firmware",
   "channel": "stable",
-  "generatedAt": "2026-06-16T22:35:56.342Z",
+  "generatedAt": "2026-06-17T00:48:22.114Z",
   "pollIntervalSeconds": 21600,
   "updateMode": "app-assisted-board-pull",
   "artifactBasePath": "/releases/firmware",
@@ -18,22 +18,38 @@
         "cork-main-esp32"
       ],
       "latest": {
-        "version": "0.1.3",
-        "releasedAt": "2026-06-16T22:35:56.342Z",
+        "version": "0.1.4",
+        "releasedAt": "2026-06-17T00:48:22.114Z",
         "required": false,
         "notes": [
-          "Main ESP32 Node2 CAN2 probe pin-name fix after UART recovery diagnostics; keeps no-motion gates and sensor relay protections."
+          "Diagnostic main-board OTA to test swapped camSense UART pins: RX GPIO43, TX GPIO44. Safe boot/no-motion only."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.3/main-board-0.1.3-node2-can-pinfix-20260616.bin",
-          "size": 1331744,
-          "sha256": "9fddf08c0f2eeabfdc329623d6ddbb124f678bf180573e1d3469262edf29874c",
+          "url": "/releases/firmware/main-board/0.1.4/main-board-0.1.4-uart-swap-test-20260616.bin",
+          "size": 1332048,
+          "sha256": "2175f6985bc5d6b965d8552ed78fa6bc4badf50c700cf7145e319daa53e9c1de",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.4",
+          "releasedAt": "2026-06-17T00:48:22.114Z",
+          "required": false,
+          "notes": [
+            "Diagnostic main-board OTA to test swapped camSense UART pins: RX GPIO43, TX GPIO44. Safe boot/no-motion only."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.4/main-board-0.1.4-uart-swap-test-20260616.bin",
+            "size": 1332048,
+            "sha256": "2175f6985bc5d6b965d8552ed78fa6bc4badf50c700cf7145e319daa53e9c1de",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.3",
           "releasedAt": "2026-06-16T22:35:56.342Z",
