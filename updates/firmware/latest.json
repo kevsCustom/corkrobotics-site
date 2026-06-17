@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "manifestType": "cork-robotics-firmware",
   "channel": "stable",
-  "generatedAt": "2026-06-17T00:48:22.114Z",
+  "generatedAt": "2026-06-17T05:57:34.552Z",
   "pollIntervalSeconds": 21600,
   "updateMode": "app-assisted-board-pull",
   "artifactBasePath": "/releases/firmware",
@@ -18,22 +18,38 @@
         "cork-main-esp32"
       ],
       "latest": {
-        "version": "0.1.4",
-        "releasedAt": "2026-06-17T00:48:22.114Z",
+        "version": "0.1.11",
+        "releasedAt": "2026-06-17T05:57:34.552Z",
         "required": false,
         "notes": [
-          "Diagnostic main-board OTA to test swapped camSense UART pins: RX GPIO43, TX GPIO44. Safe boot/no-motion only."
+          "Main-board SAFE_BOOT CAN2 encoder diagnostic: ACAN2517FD listen/normal receive, encoder heartbeat/status decode, no motion or TMC enable."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
         "firmware": {
-          "url": "/releases/firmware/main-board/0.1.4/main-board-0.1.4-uart-swap-test-20260616.bin",
-          "size": 1332048,
-          "sha256": "2175f6985bc5d6b965d8552ed78fa6bc4badf50c700cf7145e319daa53e9c1de",
+          "url": "/releases/firmware/main-board/0.1.11/main-board-0.1.11-can2-encoder-diag-20260617.bin",
+          "size": 1345040,
+          "sha256": "244f239ddb78e35a9ffedecb654842cf5e7f3d4f79eb06c4190ece9192bfbc43",
           "signature": null
         }
       },
       "releases": [
+        {
+          "version": "0.1.11",
+          "releasedAt": "2026-06-17T05:57:34.552Z",
+          "required": false,
+          "notes": [
+            "Main-board SAFE_BOOT CAN2 encoder diagnostic: ACAN2517FD listen/normal receive, encoder heartbeat/status decode, no motion or TMC enable."
+          ],
+          "minHardwareRevision": null,
+          "maxHardwareRevision": null,
+          "firmware": {
+            "url": "/releases/firmware/main-board/0.1.11/main-board-0.1.11-can2-encoder-diag-20260617.bin",
+            "size": 1345040,
+            "sha256": "244f239ddb78e35a9ffedecb654842cf5e7f3d4f79eb06c4190ece9192bfbc43",
+            "signature": null
+          }
+        },
         {
           "version": "0.1.4",
           "releasedAt": "2026-06-17T00:48:22.114Z",
