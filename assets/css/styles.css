@@ -487,6 +487,44 @@ code {
 .status-pill { background: rgba(15, 118, 110, .10); color: var(--accent-2); }
 .release-actions { display:flex; gap: var(--s-3); flex-wrap:wrap; margin-top: var(--s-4); }
 
+/* MarketApp download */
+.marketapp-download-hero h1 { max-width: 12ch; }
+.featured-download { padding: var(--s-6); }
+.featured-download h2 { max-width: none; margin-top: var(--s-4); font-size: 30px; }
+.featured-download > p { font-size: 16px; }
+.featured-download .btn { width:100%; }
+.marketapp-integrity { grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); }
+.integrity-copy { display:grid; gap: var(--s-5); }
+.checksum-block { display:grid; gap: var(--s-2); min-width: 0; }
+.checksum-block span,
+.install-step {
+  color: var(--accent);
+  font: 800 12px/1 Sora, Inter, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.checksum-block code { display:block; font-size: 12px; word-break: break-all; }
+.install-grid {
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+  padding-left: 0;
+  list-style:none;
+  counter-reset: install-step;
+}
+.install-grid .panel { display:grid; align-content:start; gap: var(--s-3); }
+.install-grid .panel h3,
+.install-grid .panel p { margin-top: 0; }
+.beta-note {
+  display:grid;
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr) auto;
+  gap: var(--s-6);
+  align-items:center;
+}
+.beta-note h2 { max-width: 15ch; font-size: 32px; }
+.beta-note > p { color: var(--muted); }
+
 /* MarketApp privacy policy */
 .legal-page { background: rgba(246, 248, 251, .62); }
 .legal-hero {
@@ -615,6 +653,9 @@ footer {
   .legal-summary { grid-template-columns: 1fr; }
   .legal-layout { grid-template-columns: 1fr; gap: var(--s-7); }
   .legal-toc { position:static; }
+  .install-grid,
+  .beta-note { grid-template-columns: 1fr; }
+  .beta-note { align-items:start; }
   .release-band { align-items:start; }
 }
 
@@ -640,6 +681,9 @@ footer {
   .development-preview-grid { grid-template-columns: 1fr; }
   .legal-content h2 { font-size: 30px; }
   .legal-contact { padding: var(--s-5); }
+  .featured-download { padding: var(--s-5); }
+  .featured-download h2 { font-size: 26px; }
+  .beta-note .btn { width:100%; }
   .product-specs { grid-template-columns: 1fr; }
   .hero-actions, .hero-actions .btn, .section-heading, .section-heading .btn { width:100%; }
   .hero-actions .btn, .section-heading .btn { justify-content:center; }
