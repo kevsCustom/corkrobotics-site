@@ -487,6 +487,93 @@ code {
 .status-pill { background: rgba(15, 118, 110, .10); color: var(--accent-2); }
 .release-actions { display:flex; gap: var(--s-3); flex-wrap:wrap; margin-top: var(--s-4); }
 
+/* MarketApp privacy policy */
+.legal-page { background: rgba(246, 248, 251, .62); }
+.legal-hero {
+  padding: clamp(68px, 9vw, 112px) 0 var(--s-7);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 82% 30%, rgba(15, 118, 110, .14), transparent 30%),
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(232,240,248,.94));
+}
+.legal-hero-inner { display:grid; gap: var(--s-5); }
+.legal-hero h1 { max-width: 13ch; }
+.legal-hero .lead { max-width: 720px; }
+.legal-effective {
+  width: fit-content;
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.72);
+  color: var(--muted);
+  font-size: 14px;
+}
+.legal-effective strong { color: var(--ink); }
+.legal-summary {
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow:hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--line);
+  box-shadow: var(--shadow);
+  gap: 1px;
+}
+.legal-summary article { padding: var(--s-5); background: rgba(255,255,255,.96); }
+.legal-summary h2 { max-width: none; margin-top: var(--s-4); font-size: 22px; }
+.legal-summary p { margin-top: var(--s-3); color: var(--muted); }
+.summary-number {
+  color: var(--accent);
+  font: 800 12px/1 Sora, Inter, sans-serif;
+  letter-spacing: .12em;
+}
+.legal-section { padding-top: 0; }
+.legal-layout {
+  display:grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 760px);
+  justify-content:space-between;
+  gap: var(--s-8);
+  align-items:start;
+}
+.legal-toc {
+  position:sticky;
+  top: calc(68px + var(--s-5));
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.9);
+}
+.legal-toc ol { display:grid; gap: var(--s-2); margin: 0; padding-left: 1.2rem; color: var(--muted); }
+.legal-toc a { color: var(--text); font-size: 14px; font-weight: 700; text-decoration:none; }
+.legal-toc a:hover,
+.legal-toc a:focus { color: var(--accent); }
+.legal-content { display:grid; gap: var(--s-8); }
+.legal-content section { scroll-margin-top: 100px; }
+.legal-content h2 { max-width: 18ch; font-size: 36px; }
+.legal-content h3 { font-size: 19px; }
+.legal-content p,
+.legal-content li { color: var(--muted); }
+.legal-content section > p:not(.eyebrow) { margin-top: var(--s-4); }
+.legal-content ul { display:grid; gap: var(--s-3); margin: var(--s-5) 0 0; padding-left: 1.25rem; }
+.legal-content li::marker { color: var(--accent); }
+.legal-content a { color: var(--accent); font-weight: 700; }
+.legal-detail-grid { display:grid; gap: var(--s-4); margin-top: var(--s-6); }
+.legal-detail-grid > div {
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.88);
+}
+.legal-detail-grid p { margin-top: var(--s-3); }
+.legal-contact {
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--shadow);
+}
+
 footer {
   margin-top: var(--s-8);
   padding: var(--s-6) 0;
@@ -525,6 +612,9 @@ footer {
   }
   .metric-strip, .capability-grid, .product-feature, .attachment-grid, .mobility-feature, .mobility-media-grid, .page-hero-inner, .release-band, .use-case-grid, .integrity-band { grid-template-columns: 1fr; }
   .development-preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .legal-summary { grid-template-columns: 1fr; }
+  .legal-layout { grid-template-columns: 1fr; gap: var(--s-7); }
+  .legal-toc { position:static; }
   .release-band { align-items:start; }
 }
 
@@ -548,6 +638,8 @@ footer {
   .metric-strip strong { font-size: 16px; }
   .metric-strip span { font-size: 11px; }
   .development-preview-grid { grid-template-columns: 1fr; }
+  .legal-content h2 { font-size: 30px; }
+  .legal-contact { padding: var(--s-5); }
   .product-specs { grid-template-columns: 1fr; }
   .hero-actions, .hero-actions .btn, .section-heading, .section-heading .btn { width:100%; }
   .hero-actions .btn, .section-heading .btn { justify-content:center; }
