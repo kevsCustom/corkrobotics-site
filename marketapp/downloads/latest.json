@@ -1,15 +1,15 @@
 {
-  "version": "0.2.5",
+  "version": "0.2.6",
   "channel": "beta",
   "download_page": "https://corkrobotics.com/marketapp/downloads",
   "platforms": {
     "windows-x64": {
-      "url": "/marketapp/downloads/MarketAppPen-0.2.5-windows-x64.zip",
-      "size": 83167133,
-      "sha256": "f7a889c225e1837dc4e011b7e1639bfef3b57a64812e16f211e215c6b3e41488",
+      "url": "/marketapp/downloads/MarketAppPen-0.2.6-windows-x64.zip",
+      "size": 83176462,
+      "sha256": "81c110206229ecf57f8ec7012ad533552b66feca1f6f6a2e00ee810d36b8f105",
       "signed": false,
       "notarized": false,
-      "version": "0.2.5"
+      "version": "0.2.6"
     },
     "macos-arm64": {
       "url": "/marketapp/downloads/MarketAppPen-0.2.4-macos-arm64.zip",
