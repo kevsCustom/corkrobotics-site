@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+<title id="title">Trade Den</title>
+<rect width="64" height="64" rx="18" fill="#102c31"/>
+<path d="M14 43V21h12v22H14Zm24 0V21h12v22H38Z" fill="none" stroke="#b5ef95" stroke-width="5" stroke-linejoin="round"/>
+<path d="M26 32h12" stroke="#b5ef95" stroke-width="5"/>
+</svg>
