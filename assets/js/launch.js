@@ -136,11 +136,6 @@
         challengeId = window.turnstile.render(challenge, {
           sitekey: siteKey,
           action: 'launch_signup',
-          theme: 'light',
-          size: 'flexible',
-          retry: 'never',
-          'refresh-timeout': 'manual',
-          'refresh-expired': 'manual',
           callback: (token) => {
             if (!current() || pending || typeof token !== 'string' || !token) return;
             clearSecurityTimers();

@@ -126,7 +126,10 @@ test('SDK load and challenge stalls stay disabled and old callbacks cannot reviv
   ui.retry();
   assert.deepEqual(ui.removed, [first.id]);
   first.options.callback('retired-token');
+  first.options['expired-callback']();
+  first.options['error-callback']('200500');
   assert.equal(ui.element('#signup-submit').disabled, true);
+  assert.equal(ui.element('#signup-security-help').hidden, true);
   ui.widgets[1].options.callback('fresh-token');
   await ui.submit();
   assert.equal(ui.requests[0].turnstile_token, 'fresh-token');
@@ -137,7 +140,6 @@ test('SDK load and challenge stalls stay disabled and old callbacks cannot reviv
 test('provider errors expose only a numeric diagnostic and never enable signup', async () => {
   const ui = fixture(); await flush(); ui.load();
   const options = ui.widgets[0].options;
-  assert.equal(options.retry, 'never');
   options.callback('synthetic-token');
   assert.equal(ui.element('#signup-submit').disabled, false);
   options['error-callback']('110200');
@@ -169,6 +171,49 @@ test('expiry, interactive timeout and unsupported browser show help while failin
     assert.equal(ui.timers.size, 0);
     assert.equal(ui.requests.length, 0);
   }
+});
+
+test('automatic expiry refresh clears the old token and accepts a renewed token on the same widget', async () => {
+  const ui = fixture(); await flush(); ui.load();
+  const first = ui.widgets[0];
+  first.options.callback('expired-token');
+  first.options['expired-callback']();
+  assert.equal(ui.element('#signup-submit').disabled, true);
+  await ui.submit();
+  assert.equal(ui.requests.length, 0, 'an expired token cannot be submitted while the SDK refreshes');
+  first.options.callback('renewed-token');
+  assert.equal(ui.widgets.length, 1, 'automatic recovery does not replace the widget');
+  assert.equal(ui.element('#signup-security-help').hidden, true);
+  assert.equal(ui.element('#signup-security-help').dataset.turnstileCode, undefined);
+  assert.equal(ui.element('#signup-submit').disabled, false);
+  await ui.submit();
+  assert.equal(ui.requests.length, 1);
+  assert.equal(ui.requests[0].turnstile_token, 'renewed-token');
+  assert.deepEqual(ui.removed, [first.id]);
+  first.options['expired-callback']();
+  first.options.callback('after-success-token');
+  assert.equal(ui.element('#signup-security-help').hidden, true);
+  assert.equal(ui.element('#signup-submit').disabled, true);
+  assert.equal(ui.requests.length, 1);
+});
+
+test('repeated automatic retry errors never create a widget or submit and later SDK success recovers', async () => {
+  const ui = fixture(); await flush(); ui.load();
+  const options = ui.widgets[0].options;
+  options.callback('invalidated-token');
+  for (let attempt = 0; attempt < 4; attempt++) options['error-callback']('200500');
+  assert.equal(ui.element('#signup-security-help').dataset.turnstileCode, '200500');
+  assert.equal(ui.element('#signup-submit').disabled, true);
+  assert.equal(ui.widgets.length, 1);
+  assert.equal(ui.requests.length, 0);
+  options.callback('recovered-token');
+  assert.equal(ui.element('#signup-security-help').hidden, true);
+  assert.equal(ui.element('#signup-security-help').dataset.turnstileCode, undefined);
+  assert.equal(ui.element('#signup-submit').disabled, false);
+  assert.equal(ui.requests.length, 0, 'SDK success never submits the signup automatically');
+  await ui.submit();
+  assert.equal(ui.requests[0].turnstile_token, 'recovered-token');
+  assert.equal(ui.requests.length, 1);
 });
 
 test('retry is inert during a pending signup and late callbacks cannot change its result', async () => {
