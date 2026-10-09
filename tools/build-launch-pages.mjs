@@ -19,7 +19,7 @@ async function maybeStat(path) {
   catch (error) { if (error.code === 'ENOENT') return null; throw error; }
 }
 
-export async function buildLaunchPages(sourceRoot) {
+export async function buildLaunchPages(sourceRoot, { branch = process.env.CF_PAGES_BRANCH } = {}) {
   const root = resolve(sourceRoot);
   const output = resolve(root, 'dist');
   for (const required of ['index.html', '404.html', '_routes.json']) {
@@ -44,7 +44,9 @@ export async function buildLaunchPages(sourceRoot) {
       count++;
     }
   }
-  for (const name of [...PUBLIC_FILES, ...PUBLIC_DIRECTORIES]) await copy(resolve(root, name), resolve(output, name));
+  // Keep this temporary browser-isolation page out of production and other previews.
+  const previewFiles = branch === 'codex/corkbot-launch-funnel' ? ['challenge-check.html'] : [];
+  for (const name of [...PUBLIC_FILES, ...PUBLIC_DIRECTORIES, ...previewFiles]) await copy(resolve(root, name), resolve(output, name));
   return { directory: output, files: count };
 }
 

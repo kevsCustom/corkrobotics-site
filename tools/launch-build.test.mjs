@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, readFile, lstat, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
+import { execFileSync } from 'node:child_process';
 import { buildLaunchPages } from './build-launch-pages.mjs';
 
 async function fixture(files) {
@@ -48,4 +51,55 @@ test('build refuses source symlinks and requires the site and invocation route f
     await rm(resolve(root, '_routes.json'));
     await assert.rejects(buildLaunchPages(root), /Required public file/);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('temporary browser check is published only to the exact launch feature preview and removed by later non-preview builds', async () => {
+  const root = await fixture({ 'challenge-check.html': '<html>Browser check</html>' });
+  try {
+    const preview = await buildLaunchPages(root, { branch: 'codex/corkbot-launch-funnel' });
+    assert.equal(await readFile(resolve(preview.directory, 'challenge-check.html'), 'utf8'), '<html>Browser check</html>');
+    for (const branch of ['', 'main', 'production', 'codex/other-preview', 'codex/corkbot-launch-funnel-copy']) {
+      const output = await buildLaunchPages(root, { branch });
+      await assert.rejects(lstat(resolve(output.directory, 'challenge-check.html')), { code: 'ENOENT' });
+      assert.equal(await readFile(resolve(output.directory, 'index.html'), 'utf8'), '<html>Existing site</html>');
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('build reads the Cloudflare branch environment and excludes the temporary check when it is unset', async () => {
+  const root = await fixture({ 'challenge-check.html': 'browser check' });
+  const script = `import { buildLaunchPages } from ${JSON.stringify(new URL('./build-launch-pages.mjs', import.meta.url).href)}; await buildLaunchPages(process.argv[1]);`;
+  try {
+    for (const branch of [undefined, 'codex/corkbot-launch-funnel', 'main']) {
+      const env = { ...process.env };
+      if (branch === undefined) delete env.CF_PAGES_BRANCH;
+      else env.CF_PAGES_BRANCH = branch;
+      execFileSync(process.execPath, ['--input-type=module', '-e', script, root], { env });
+      if (branch === 'codex/corkbot-launch-funnel') {
+        assert.equal(await readFile(resolve(root, 'dist/challenge-check.html'), 'utf8'), 'browser check');
+      } else {
+        await assert.rejects(lstat(resolve(root, 'dist/challenge-check.html')), { code: 'ENOENT' });
+      }
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('temporary check uses the canonical implicit widget without signup requests or token handling', async () => {
+  const html = await readFile(fileURLToPath(new URL('../challenge-check.html', import.meta.url)), 'utf8');
+  assert.match(html, /<script src="https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js" async defer><\/script>/);
+  assert.match(html, /class="cf-turnstile"/);
+  assert.match(html, /data-sitekey="0x4AAAAAAFSduqvXzwc75pqD"/);
+  assert.match(html, /data-action="launch_signup"/);
+  assert.doesNotMatch(html, /<form\b|<input\b|\/api\/|fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|console\.|turnstile\.(?:render|reset|execute|ready)|data-(?:retry|timeout|size|refresh)/);
+  const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+  assert.equal(scripts.length, 1);
+  const status = { textContent: 'Checking your browser…' };
+  const context = { document: { getElementById: (id) => { assert.equal(id, 'challenge-status'); return status; } } };
+  runInNewContext(scripts[0], context);
+  assert.equal(context.onChallengeCheckSuccess.length, 0);
+  context.onChallengeCheckSuccess('PRIVATE_TEST_TOKEN');
+  assert.equal(status.textContent, 'Browser verified.');
+  assert.equal(JSON.stringify(context).includes('PRIVATE_TEST_TOKEN'), false);
+  context.onChallengeCheckExpired();
+  assert.equal(status.textContent, 'Checking your browser…');
 });
