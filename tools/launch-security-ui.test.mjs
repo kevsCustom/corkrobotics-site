@@ -11,7 +11,7 @@ const deferred = () => {
   const promise = new Promise(done => { resolve = done; });
   return { promise, resolve };
 };
-function fixture({ readyImmediately = true, renderError = false, post } = {}) {
+function fixture({ sdkCallbackImmediately = true, renderError = false, post } = {}) {
   const elements = new Map();
   const element = selector => {
     if (!elements.has(selector)) elements.set(selector, {
@@ -24,7 +24,8 @@ function fixture({ readyImmediately = true, renderError = false, post } = {}) {
     return elements.get(selector);
   };
   element('#signup-email').value = 'synthetic-ui-test@example.invalid';
-  const scripts = [], widgets = [], removed = [], ready = [], timers = new Map(), requests = [];
+  const scripts = [], widgets = [], removed = [], loaded = [], timers = new Map(), requests = [];
+  let readyCalls = 0;
   let timerId = 0;
   const window = { location: { search: '' } };
   const context = {
@@ -33,7 +34,10 @@ function fixture({ readyImmediately = true, renderError = false, post } = {}) {
     document: {
       querySelector: element, querySelectorAll: () => [],
       createElement: () => ({ listeners: {}, addEventListener(name, callback) { this.listeners[name] = callback; }, remove() { this.removed = true; } }),
-      head: { append: script => scripts.push(script) },
+      head: { append: script => {
+        script.sdkOnload = window[new URL(script.src).searchParams.get('onload')];
+        scripts.push(script);
+      } },
     },
     fetch: async (url, options) => {
       if (url.endsWith('/config')) return { ok: true, json: async () => ({ signup_available: true, signup_mode: 'api', turnstile_site_key: 'synthetic-site-key' }) };
@@ -44,17 +48,26 @@ function fixture({ readyImmediately = true, renderError = false, post } = {}) {
   vm.runInNewContext(source, context);
   const load = (script = scripts.at(-1)) => {
     window.turnstile = {
-      ready(callback) { if (readyImmediately) callback(); else ready.push(callback); },
+      ready() {
+        ++readyCalls;
+        if (script.async || script.defer) throw new Error('Remove async/defer before using turnstile.ready().');
+      },
       render(container, options) {
         if (renderError) throw new Error('Synthetic render failure');
         const id = `synthetic-widget-${widgets.length}`; widgets.push({ id, options }); return id;
       },
       remove: id => removed.push(id),
     };
-    script.listeners.load();
+    if (typeof script.sdkOnload === 'function') {
+      if (sdkCallbackImmediately) script.sdkOnload(); else loaded.push(script.sdkOnload);
+    } else {
+      // Models the earlier element-load integration against the same SDK.
+      script.listeners.load();
+    }
   };
   return {
-    element, scripts, widgets, removed, ready, timers, requests, load,
+    element, scripts, widgets, removed, loaded, timers, requests, load,
+    get readyCalls() { return readyCalls; },
     fire(delay) {
       const matches = [...timers].filter(([, timer]) => timer.delay === delay);
       assert.equal(matches.length, 1, `one active ${delay}ms timer`);
@@ -78,20 +91,38 @@ test('a stalled script offers recovery and retired script callbacks cannot rende
   assert.equal(ui.widgets.length, 0);
   ui.load();
   assert.equal(ui.widgets.length, 1);
+  assert.equal(ui.scripts[1].async, true);
+  assert.equal(ui.scripts[1].defer, true);
+  assert.match(ui.scripts[1].src, /onload=corkbotTurnstileLoaded/);
+  assert.equal(ui.readyCalls, 0, 'async/defer SDK ready() must never be called');
   assert.equal(ui.requests.length, 0);
 });
 
-test('readiness and challenge stalls stay disabled and old callbacks cannot revive a token', async () => {
-  const ui = fixture({ readyImmediately: false }); await flush(); ui.load();
+test('late SDK onload cannot duplicate a widget created by retry after script timeout', async () => {
+  const ui = fixture({ sdkCallbackImmediately: false }); await flush(); ui.load();
+  const retiredOnload = ui.loaded.shift();
+  ui.fire(15000);
+  assert.equal(ui.element('#signup-submit').disabled, true);
+  ui.retry();
+  assert.equal(ui.widgets.length, 1);
+  retiredOnload();
+  assert.equal(ui.widgets.length, 1);
+  ui.widgets[0].options.callback('fresh-token');
+  assert.equal(ui.element('#signup-submit').disabled, false);
+  assert.equal(ui.readyCalls, 0);
+});
+
+test('SDK load and challenge stalls stay disabled and old callbacks cannot revive a token', async () => {
+  const ui = fixture({ sdkCallbackImmediately: false }); await flush(); ui.load();
   assert.equal(ui.widgets.length, 0);
   ui.fire(15000);
   assert.equal(ui.element('#signup-security-help').hidden, false);
-  ui.ready.shift()();
+  ui.loaded.shift()();
   const first = ui.widgets[0];
   ui.fire(45000);
   assert.match(ui.element('#signup-security-notice').textContent, /longer than expected/);
   assert.equal(ui.element('#signup-submit').disabled, true);
-  ui.retry(); ui.ready.shift()();
+  ui.retry();
   assert.deepEqual(ui.removed, [first.id]);
   first.options.callback('retired-token');
   assert.equal(ui.element('#signup-submit').disabled, true);
@@ -118,9 +149,9 @@ test('provider errors expose only a numeric diagnostic and never enable signup',
   assert.equal(ui.requests.length, 0);
 });
 
-test('an asynchronous readiness callback catches render failures and clears its timers', async () => {
-  const ui = fixture({ readyImmediately: false, renderError: true }); await flush(); ui.load();
-  assert.doesNotThrow(() => ui.ready.shift()());
+test('the asynchronous SDK onload callback catches render failures and clears its timers', async () => {
+  const ui = fixture({ sdkCallbackImmediately: false, renderError: true }); await flush(); ui.load();
+  assert.doesNotThrow(() => ui.loaded.shift()());
   assert.equal(ui.element('#signup-security-help').hidden, false);
   assert.equal(ui.element('#signup-submit').disabled, true);
   assert.match(ui.element('#signup-security-notice').textContent, /couldn’t load/);

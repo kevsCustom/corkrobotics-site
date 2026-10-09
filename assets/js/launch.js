@@ -25,6 +25,7 @@
   let challengeTimer;
   let scriptTimer;
   let challengeScript;
+  let challengeOnloadName;
   let challengeSiteKey = '';
   let submissionMessage = false;
 
@@ -80,6 +81,8 @@
     else delete securityHelp.dataset.turnstileCode;
   };
   const removeChallenge = () => {
+    if (challengeOnloadName) delete window[challengeOnloadName];
+    challengeOnloadName = undefined;
     if (challengeId !== undefined && window.turnstile) {
       try { window.turnstile.remove(challengeId); } catch { /* Clear the local container below. */ }
     }
@@ -108,64 +111,58 @@
       updateSubmit();
     };
     const render = () => {
-      if (!current()) return;
+      if (!current() || challengeId !== undefined) return;
       try {
-        if (typeof window.turnstile?.ready !== 'function' || typeof window.turnstile?.render !== 'function') throw new Error('Not ready');
-        window.turnstile.ready(() => {
-          if (!current()) return;
-          clearTimeout(scriptTimer);
-          challengeTimer = setTimeout(() => {
-            if (current() && !challengeToken) {
-              if (!pending && !submissionMessage) message('');
-              showSecurityIssue('The security check is taking longer than expected. You can try it again below.');
-            }
-          }, 45000);
-          try {
-            challengeId = window.turnstile.render(challenge, {
-              sitekey: siteKey,
-              action: 'launch_signup',
-              theme: 'light',
-              size: 'flexible',
-              retry: 'never',
-              'refresh-timeout': 'manual',
-              'refresh-expired': 'manual',
-              callback: (token) => {
-                if (!current() || pending || typeof token !== 'string' || !token) return;
-                clearSecurityTimers();
-                challengeToken = token;
-                securityHelp.hidden = true;
-                delete securityHelp.dataset.turnstileCode;
-                if (!pending && !submissionMessage) message('');
-                updateSubmit();
-              },
-              'expired-callback': () => {
-                failed('The security check expired. Please try it again before sending your signup.');
-              },
-              'error-callback': (code) => {
-                failed('The security check couldn’t finish. Try it again below. If it keeps happening, try another browser.', code);
-                return false;
-              },
-              'timeout-callback': () => failed('The security check timed out. Please try it again below.'),
-              'unsupported-callback': () => failed('This browser couldn’t complete the security check. Please try another browser.'),
-            });
-          } catch {
-            failed('The security check couldn’t load. Please try it again below.');
+        if (typeof window.turnstile?.render !== 'function') throw new Error('Not ready');
+        clearTimeout(scriptTimer);
+        challengeTimer = setTimeout(() => {
+          if (current() && !challengeToken) {
+            if (!pending && !submissionMessage) message('');
+            showSecurityIssue('The security check is taking longer than expected. You can try it again below.');
           }
+        }, 45000);
+        challengeId = window.turnstile.render(challenge, {
+          sitekey: siteKey,
+          action: 'launch_signup',
+          theme: 'light',
+          size: 'flexible',
+          retry: 'never',
+          'refresh-timeout': 'manual',
+          'refresh-expired': 'manual',
+          callback: (token) => {
+            if (!current() || pending || typeof token !== 'string' || !token) return;
+            clearSecurityTimers();
+            challengeToken = token;
+            securityHelp.hidden = true;
+            delete securityHelp.dataset.turnstileCode;
+            if (!pending && !submissionMessage) message('');
+            updateSubmit();
+          },
+          'expired-callback': () => {
+            failed('The security check expired. Please try it again before sending your signup.');
+          },
+          'error-callback': (code) => {
+            failed('The security check couldn’t finish. Try it again below. If it keeps happening, try another browser.', code);
+            return false;
+          },
+          'timeout-callback': () => failed('The security check timed out. Please try it again below.'),
+          'unsupported-callback': () => failed('This browser couldn’t complete the security check. Please try another browser.'),
         });
       } catch {
         failed('The security check couldn’t load. Please try it again below.');
       }
     };
-    // Both loading the script and waiting for its API readiness are bounded.
+    // The SDK onload callback supports async/defer; turnstile.ready() does not.
     scriptTimer = setTimeout(() => failed('The security check couldn’t load. Please try it again below.'), 15000);
-    if (typeof window.turnstile?.ready === 'function') return render();
+    if (typeof window.turnstile?.render === 'function') return render();
     challengeScript?.remove();
     const script = document.createElement('script');
     challengeScript = script;
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    challengeOnloadName = `corkbotTurnstileLoaded${attempt}`;
+    window[challengeOnloadName] = render;
+    script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=${challengeOnloadName}`;
     script.async = true;
     script.defer = true;
-    script.addEventListener('load', render);
     script.addEventListener('error', () => failed('The security check couldn’t load. Please try it again below.'));
     document.head.append(script);
   };
