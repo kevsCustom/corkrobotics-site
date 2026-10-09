@@ -45,10 +45,11 @@
             </div>
 
             <form id="launch-signup" action="/api/launch/subscribe" method="post" hidden>
+              <p class="confirmation-note" id="signup-confirmation"><strong>Two quick steps:</strong> Enter your email, then click the confirmation link we send. You join the launch list only after confirming.</p>
               <label class="email-label" for="signup-email">Your email address</label>
               <div class="email-row">
-                <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@example.com" aria-describedby="signup-status" required />
-                <button class="button" id="signup-submit" type="submit" disabled><span data-submit-label>Notify me</span><span aria-hidden="true">↗</span></button>
+                <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@example.com" aria-describedby="signup-confirmation signup-status" required />
+                <button class="button" id="signup-submit" type="submit" disabled><span data-submit-label>Send confirmation</span><span aria-hidden="true">↗</span></button>
               </div>
               <div class="honeypot" aria-hidden="true"><label for="signup-website">Website</label><input id="signup-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
               <label class="consent-label" for="signup-consent"><input id="signup-consent" name="consent" type="checkbox" required /><span>Email me CorkBot product updates and launch news. I can unsubscribe anytime. <a href="/launch-privacy">Privacy notice</a>.</span></label>
@@ -58,13 +59,13 @@
 
             <div id="signup-hosted" hidden>
               <a class="button hosted-button" id="signup-hosted-link" href="#">Notify me at launch <span aria-hidden="true">↗</span></a>
-              <p class="hosted-note">Join through our email provider’s secure signup form. <a href="/launch-privacy">Privacy notice</a>.</p>
+              <p class="hosted-note">Enter your email on our email provider’s secure form, then click the confirmation link we send. You join the launch list only after confirming. <a href="/launch-privacy">Privacy notice</a>.</p>
             </div>
 
             <div class="signup-success" id="signup-success" tabindex="-1" hidden>
-              <span class="success-mark" aria-hidden="true">✓</span>
-              <h3 id="success-title">Check your inbox.</h3>
-              <p id="success-description">Use the confirmation link in your email to finish joining the list. Check your spam folder if it doesn’t arrive.</p>
+              <span class="success-mark" id="success-mark" aria-hidden="true">✉</span>
+              <h3 id="success-title">One more step: confirm your email.</h3>
+              <p id="success-description">Open the confirmation email and click the link. You’ll be added to the launch list only after confirming. If you don’t see it, check Spam or Promotions.</p>
             </div>
             <noscript><p class="no-script">Please enable JavaScript to check signup availability, or <a href="mailto:hello@corkrobotics.com">contact Cork Robotics</a>.</p></noscript>
             <p class="signup-footnote">Free to join. No purchase or reservation required.</p>

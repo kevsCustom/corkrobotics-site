@@ -135,7 +135,7 @@
     }
     pending = true;
     form.setAttribute('aria-busy', 'true');
-    submitLabel.textContent = 'Joining…';
+    submitLabel.textContent = 'Submitting…';
     message('Sending your signup…');
     updateSubmit();
     const params = new URLSearchParams(window.location.search);
@@ -159,6 +159,7 @@
         throw new Error(safeError);
       }
       if (body.next === 'subscribed') {
+        document.querySelector('#success-mark').textContent = '✓';
         document.querySelector('#success-title').textContent = 'You’re on the list.';
         document.querySelector('#success-description').textContent = 'This email is already confirmed. Watch your inbox for CorkBot product updates and launch news.';
       }
@@ -173,7 +174,7 @@
       message(text, true, true);
     } finally {
       pending = false;
-      submitLabel.textContent = 'Notify me';
+      submitLabel.textContent = 'Send confirmation';
       form.removeAttribute('aria-busy');
       if (requiresChallenge) {
         challengeToken = '';

@@ -44,6 +44,7 @@ h3{font-size:24px;letter-spacing:-.028em;line-height:1.22}
 .signup-availability{font-size:13px;color:var(--muted);margin-top:18px}
 #signup-unavailable{margin-top:18px;border-left:2px solid var(--line);padding-left:15px;font-size:14px}
 #signup-unavailable .text-link{margin-top:2px;font-size:13px}
+.confirmation-note{margin-top:18px;padding:10px 12px;border-left:2px solid var(--accent);background:var(--soft);font-size:13px;line-height:1.5}
 .email-label{display:block;font-size:12px;margin-top:18px;margin-bottom:7px}
 .email-row{display:flex;gap:8px;align-items:stretch}
 .email-row input{border:1px solid #a5aca0;border-radius:0;background:#fff;color:var(--ink);padding:13px;min-width:0;flex:1;width:100%;min-height:50px;font-size:15px}
