@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <title>CorkBot launch updates — Cork Robotics</title>
+    <meta name="description" content="Follow CorkBot, the compact modular robot in development. Join the email list for product updates and news of our planned Kickstarter launch." />
+    <meta property="og:title" content="A robot for your next idea. — CorkBot" />
+    <meta property="og:description" content="Get CorkBot product updates and hear when our planned Kickstarter campaign launches. Free to join." />
+    <meta property="og:image" content="https://corkrobotics.com/assets/img/dev-preview-02-plotting-orientation.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://corkrobotics.com/launch" />
+    <link rel="canonical" href="https://corkrobotics.com/launch" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/assets/img/dev-preview-02-plotting-orientation.jpg" fetchpriority="high" />
+    <link rel="stylesheet" href="/assets/css/launch.css?v=20261009" />
+    <script src="/assets/js/launch.js?v=20261009" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="launch-header">
+      <div class="shell header-row">
+        <a class="wordmark" href="/" aria-label="Cork Robotics home"><img src="/assets/img/logo.png" alt="" width="29" height="32" /><span>Cork Robotics</span></a>
+        <a class="text-link header-link" href="/">Explore CorkBot <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main" data-launch-page>
+      <section class="launch-hero shell" aria-labelledby="launch-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> A Kickstarter launch in the making</p>
+          <h1 id="launch-title">A robot for<br />your next idea.</h1>
+          <p class="hero-description">Meet CorkBot. A compact, modular robot in development for drawing, making, and hands-on exploration.</p>
+
+          <div id="join" class="signup-panel" aria-labelledby="signup-title">
+            <h2 id="signup-title">Be there when it launches.</h2>
+            <p class="signup-description">Get product updates and the email when CorkBot arrives on Kickstarter.</p>
+            <p class="signup-availability" id="signup-availability" role="status">Checking signup availability…</p>
+            <div id="signup-unavailable" hidden>
+              <p>Email signup is being prepared.</p>
+              <a class="text-link" href="mailto:hello@corkrobotics.com">Get in touch <span aria-hidden="true">↗</span></a>
+            </div>
+
+            <form id="launch-signup" action="/api/launch/subscribe" method="post" hidden>
+              <label class="email-label" for="signup-email">Your email address</label>
+              <div class="email-row">
+                <input id="signup-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@example.com" aria-describedby="signup-status" required />
+                <button class="button" id="signup-submit" type="submit" disabled><span data-submit-label>Notify me</span><span aria-hidden="true">↗</span></button>
+              </div>
+              <div class="honeypot" aria-hidden="true"><label for="signup-website">Website</label><input id="signup-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+              <label class="consent-label" for="signup-consent"><input id="signup-consent" name="consent" type="checkbox" required /><span>Email me CorkBot product updates and launch news. I can unsubscribe anytime. <a href="/launch-privacy">Privacy notice</a>.</span></label>
+              <div id="signup-turnstile" class="turnstile-container" hidden></div>
+              <p class="form-status" id="signup-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            </form>
+
+            <div id="signup-hosted" hidden>
+              <a class="button hosted-button" id="signup-hosted-link" href="#">Notify me at launch <span aria-hidden="true">↗</span></a>
+              <p class="hosted-note">Join through our email provider’s secure signup form. <a href="/launch-privacy">Privacy notice</a>.</p>
+            </div>
+
+            <div class="signup-success" id="signup-success" tabindex="-1" hidden>
+              <span class="success-mark" aria-hidden="true">✓</span>
+              <h3 id="success-title">Check your inbox.</h3>
+              <p id="success-description">Use the confirmation link in your email to finish joining the list. Check your spam folder if it doesn’t arrive.</p>
+            </div>
+            <noscript><p class="no-script">Please enable JavaScript to check signup availability, or <a href="mailto:hello@corkrobotics.com">contact Cork Robotics</a>.</p></noscript>
+            <p class="signup-footnote">Free to join. No purchase or reservation required.</p>
+          </div>
+        </div>
+
+        <figure class="hero-figure">
+          <div class="hero-image"><img src="/assets/img/dev-preview-02-plotting-orientation.jpg" alt="Development concept render of the compact CorkBot arm with its pen tool attached" width="1702" height="1054" fetchpriority="high" /></div>
+          <figcaption><span>CorkBot / Pen configuration</span><span>Development concept render</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="possibilities shell" aria-labelledby="possibilities-title">
+        <div class="section-heading"><p class="eyebrow">Small robot. Open possibilities.</p><h2 id="possibilities-title">Start with a pen.<br />See where it takes you.</h2><p>CorkBot brings robotic motion to your desk. We’re building tools and software around one compact core.</p></div>
+        <div class="feature-list">
+          <article><span class="detail-number" aria-hidden="true">01 /</span><div><h3>Put ideas on paper.</h3><p>The pen configuration turns CorkBot into a drawing machine. Follow along as we share real drawings and demonstrations.</p></div></article>
+          <article><span class="detail-number" aria-hidden="true">02 /</span><div><h3>Make room to explore.</h3><p>Interchangeable tools and bases are in development. Discover the concepts, and help shape what comes next.</p></div></article>
+          <article><span class="detail-number" aria-hidden="true">03 /</span><div><h3>Follow the build.</h3><p>See the product take shape, hear the launch details, and decide whether CorkBot belongs on your workbench.</p></div></article>
+        </div>
+      </section>
+
+      <section id="vip" class="vip-section" aria-labelledby="vip-title">
+        <div class="shell vip-layout">
+          <div><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> <span id="vip-status">Reservations opening soon</span></p><h2 id="vip-title">A little closer<br />to the launch.</h2></div>
+          <div class="vip-copy"><p class="vip-lead" id="vip-description">We’re preparing a refundable $5 VIP reservation with access to early-bird pricing during a dedicated launch window.</p><p id="vip-details">The price, launch window, and full terms will be announced before reservations open. Join the free email list to hear the details.</p><a class="text-link" id="vip-join-link" href="#join">Get launch updates <span aria-hidden="true">↑</span></a><p class="vip-draft-terms" id="vip-draft-terms"><a href="/reservation-terms">Proposed reservation terms</a></p><p class="vip-terms" id="vip-terms" hidden><a id="vip-terms-link" href="#">Reservation and refund terms</a><span id="vip-refund-deadline"></span></p><a class="button" id="vip-checkout-link" href="#" hidden>View the VIP reservation <span aria-hidden="true">↗</span></a><p class="vip-fine-print">A reservation is separate from a Kickstarter pledge. Joining the email list does not reserve a unit.</p></div>
+        </div>
+      </section>
+
+      <section class="faq-section shell" aria-labelledby="faq-title">
+        <div><p class="eyebrow">A few things to know</p><h2 id="faq-title">Before the launch.</h2></div>
+        <div class="faq-list">
+          <details><summary>When will CorkBot launch? <span aria-hidden="true">+</span></summary><p>We’re preparing the Kickstarter campaign. The launch date is still being finalized; we’ll announce it to the email list when it’s set.</p></details>
+          <details><summary>What will the launch package cost? <span aria-hidden="true">+</span></summary><p>Pricing and the final launch configuration are being prepared. We’ll share both before the campaign opens so you can make an informed decision.</p></details>
+          <details><summary>What am I signing up for? <span aria-hidden="true">+</span></summary><p>CorkBot product updates and news of our Kickstarter launch. Joining is free and doesn’t commit you to a purchase. Every marketing email will include an unsubscribe link.</p></details>
+          <details><summary>Are these photos of the finished robot? <span aria-hidden="true">+</span></summary><p>The image on this page is a development concept render. CorkBot and its planned modules are in development; final features and availability may change.</p></details>
+        </div>
+      </section>
+
+      <div class="shell kickstarter-follow" id="kickstarter-follow" hidden><p>Prefer to follow the campaign on Kickstarter?</p><a class="text-link" id="kickstarter-link" href="#">Follow CorkBot on Kickstarter <span aria-hidden="true">↗</span></a></div>
+    </main>
+
+    <footer class="launch-footer"><div class="shell footer-row"><span>© <span data-year>2026</span> Cork Robotics</span><nav aria-label="Footer navigation"><a href="/launch-privacy">Privacy notice</a><a href="mailto:hello@corkrobotics.com">Contact</a><a href="/">Explore CorkBot</a></nav></div></footer>
+  </body>
+</html>
