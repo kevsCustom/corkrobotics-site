@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/api/launch/config", "/api/launch/subscribe"],
+  "exclude": []
+}
