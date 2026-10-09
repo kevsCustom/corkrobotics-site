@@ -286,6 +286,44 @@ test('Turnstile requires token and validates action and hostname before contacti
   assert.equal(valid.verificationCalls[0].options.body.get('response'), 'token');
 });
 
+test('every service request uses runtime-supported manual redirects without losing its abort signal', async () => {
+  for (const env of [mailerlite, brevo]) {
+    const finalBody = env.SIGNUP_PROVIDER === 'mailerlite' ? { data: { status: 'unconfirmed' } } : {};
+    const mock = providerFetch([{ status: 404 }, { status: 201, body: finalBody }]);
+    await responseBody(await subscribeResponse(request(), env, mock.fetch), 200);
+    assert.equal(mock.verificationCalls.length, 1);
+    assert.equal(mock.calls.length, 2);
+    for (const call of [...mock.verificationCalls, ...mock.calls]) {
+      assert.equal(call.options.redirect, 'manual');
+      assert.ok(call.options.signal instanceof AbortSignal);
+    }
+  }
+});
+
+test('redirects at every signup stage are rejected before following Location or continuing the service chain', async () => {
+  const target = 'https://redirect.invalid/collect';
+  for (const http_status of [301, 302, 303, 307, 308]) {
+    const redirect = () => new Response(null, { status: http_status, headers: { Location: target } });
+    const cases = [
+      { mock: providerFetch([], [redirect()]), stage: 'turnstile_siteverify', status: 400, providerCalls: 0 },
+      { mock: providerFetch([redirect()]), stage: 'mailerlite_lookup', status: 503, providerCalls: 1 },
+      { mock: providerFetch([{ status: 404 }, redirect()]), stage: 'mailerlite_upsert', status: 503, providerCalls: 2 },
+    ];
+    for (const { mock, stage, status, providerCalls } of cases) {
+      const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), status);
+      assert.equal(result.ok, false);
+      assert.deepEqual(result.diagnostic, { stage, outcome: 'http_error', http_status });
+      assert.equal(mock.verificationCalls.length, 1);
+      assert.equal(mock.calls.length, providerCalls);
+      for (const call of [...mock.verificationCalls, ...mock.calls]) {
+        assert.equal(call.options.redirect, 'manual');
+        assert.notEqual(call.url, target);
+      }
+      assert.ok(!JSON.stringify(result).includes(target));
+    }
+  }
+});
+
 test('diagnostics distinguish Siteverify HTTP errors from MailerLite lookup and upsert HTTP errors without provider-body leakage', async () => {
   const privatePayload = { email, id: mailerlite.MAILERLITE_GROUP_ID, message: mailerlite.MAILERLITE_API_KEY, token: input.turnstile_token, secret: turnstile.TURNSTILE_SECRET_KEY };
   const cases = [

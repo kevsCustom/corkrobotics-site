@@ -241,7 +241,9 @@ async function remoteRequest(url, options, fetchImpl, deadline, stage) {
   const timer = setTimeout(() => controller.abort(), Math.min(PROVIDER_TIMEOUT_MS, remaining));
   let httpStatus;
   try {
-    const response = await fetchImpl(url, { ...options, signal: controller.signal, redirect: 'error' });
+    // The configured Workers runtime supports manual/follow, not error.
+    // Manual never follows redirects; every provider step rejects non-2xx.
+    const response = await fetchImpl(url, { ...options, signal: controller.signal, redirect: 'manual' });
     httpStatus = response.status;
     if (!response.ok) {
       if (response.body) await response.body.cancel();
