@@ -24,12 +24,13 @@ function fixture({ sdkCallbackImmediately = true, renderError = false, post } = 
     return elements.get(selector);
   };
   element('#signup-email').value = 'synthetic-ui-test@example.invalid';
-  const scripts = [], widgets = [], removed = [], loaded = [], timers = new Map(), requests = [];
+  const scripts = [], widgets = [], removed = [], loaded = [], warnings = [], timers = new Map(), requests = [];
   let readyCalls = 0;
   let timerId = 0;
   const window = { location: { search: '' } };
   const context = {
     window, URL, URLSearchParams, AbortController, Date, clearTimeout: id => timers.delete(id),
+    console: { warn: (...args) => warnings.push(args) },
     setTimeout: (callback, delay) => { timers.set(++timerId, { callback, delay }); return timerId; },
     document: {
       querySelector: element, querySelectorAll: () => [],
@@ -66,7 +67,7 @@ function fixture({ sdkCallbackImmediately = true, renderError = false, post } = 
     }
   };
   return {
-    element, scripts, widgets, removed, loaded, timers, requests, load,
+    element, scripts, widgets, removed, loaded, warnings, timers, requests, load,
     get readyCalls() { return readyCalls; },
     fire(delay) {
       const matches = [...timers].filter(([, timer]) => timer.delay === delay);
@@ -205,12 +206,13 @@ test('an already-confirmed response preserves its success copy and cannot restar
 });
 
 test('failed signup retains the email and server message through fresh verification', async () => {
-  const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, message: 'Check your inbox before trying again.' }) }) });
+  const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, error: 'provider_unavailable', message: 'Check your inbox before trying again.', diagnostic: { stage: 'mailerlite_lookup', outcome: 'http_error', http_status: 401 } }) }) });
   await flush(); ui.load();
   const first = ui.widgets[0]; first.options.callback('synthetic-token');
   await ui.submit();
   assert.equal(ui.element('#signup-email').value, 'synthetic-ui-test@example.invalid');
   assert.equal(ui.element('#signup-status').textContent, 'Check your inbox before trying again.');
+  assert.equal(ui.warnings.length, 1);
   assert.equal(ui.element('#signup-submit').disabled, true);
   assert.equal(ui.widgets.length, 2);
   first.options.callback('retired-token');
@@ -218,4 +220,67 @@ test('failed signup retains the email and server message through fresh verificat
   ui.widgets[1].options.callback('fresh-token');
   assert.equal(ui.element('#signup-status').textContent, 'Check your inbox before trying again.');
   assert.equal(ui.element('#signup-submit').disabled, false);
+  await ui.submit();
+  assert.equal(ui.requests[0].turnstile_token, 'synthetic-token');
+  assert.equal(ui.requests[1].turnstile_token, 'fresh-token');
+  assert.equal(ui.warnings.length, 2);
+  assert.equal(ui.element('#signup-status').textContent, 'Check your inbox before trying again.');
+});
+
+test('signup failure console warnings contain only allowlisted classifications despite malicious extra fields', async () => {
+  const privateEmail = 'synthetic-ui-test@example.invalid';
+  const privateToken = 'private-challenge-token';
+  const privateKey = 'private-provider-key';
+  const privateId = 'private-provider-contact-id';
+  for (const stage of ['turnstile_siteverify', 'mailerlite_lookup', 'mailerlite_upsert']) {
+    const diagnostic = {
+      stage, outcome: 'http_error', http_status: 401,
+      email: privateEmail, token: privateToken, key: privateKey, id: privateId,
+      request: { email: privateEmail, turnstile_token: privateToken },
+      response: { message: privateKey }, headers: { Authorization: `Bearer ${privateKey}` },
+      url: `https://example.invalid/subscribers/${privateEmail}`,
+    };
+    const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, error: 'provider_unavailable', message: 'Check your inbox before trying again.', diagnostic, email: privateEmail, key: privateKey }) }) });
+    await flush(); ui.load(); ui.widgets[0].options.callback(privateToken); await ui.submit();
+    assert.equal(ui.warnings.length, 1);
+    assert.equal(ui.warnings[0][0], 'CorkBot signup diagnostic');
+    assert.deepEqual(JSON.parse(JSON.stringify(ui.warnings[0][1])), { stage, outcome: 'http_error', http_status: 401 });
+    const serialized = JSON.stringify(ui.warnings);
+    for (const privateValue of [privateEmail, privateToken, privateKey, privateId]) assert.ok(!serialized.includes(privateValue));
+    assert.equal(ui.element('#signup-status').textContent, 'Check your inbox before trying again.');
+  }
+});
+
+test('signup console diagnostics support every controlled outcome and retain only valid numeric HTTP status', async () => {
+  const outcomes = ['http_error', 'transport_error', 'timeout', 'invalid_json', 'response_too_large', 'schema_error', 'unexpected_active', 'verification_failed'];
+  for (const outcome of outcomes) {
+    const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, error: 'verification_failed', message: 'Please try signup again.', diagnostic: { stage: 'turnstile_siteverify', outcome, http_status: 200 } }) }) });
+    await flush(); ui.load(); ui.widgets[0].options.callback('synthetic-token'); await ui.submit();
+    assert.deepEqual(JSON.parse(JSON.stringify(ui.warnings[0][1])), { stage: 'turnstile_siteverify', outcome, http_status: 200 });
+  }
+  for (const httpStatus of [undefined, '401', 'private-provider-key', {}, 99, 600, 401.5, 100, 599]) {
+    const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, error: 'provider_unavailable', message: 'Please try signup again.', diagnostic: { stage: 'mailerlite_lookup', outcome: 'transport_error', http_status: httpStatus } }) }) });
+    await flush(); ui.load(); ui.widgets[0].options.callback('synthetic-token'); await ui.submit();
+    const expected = { stage: 'mailerlite_lookup', outcome: 'transport_error' };
+    if (Number.isInteger(httpStatus) && httpStatus >= 100 && httpStatus <= 599) expected.http_status = httpStatus;
+    assert.deepEqual(JSON.parse(JSON.stringify(ui.warnings[0][1])), expected);
+  }
+});
+
+test('signup console stays silent for absent or invalid diagnostics, validation, suppression, and successful responses', async () => {
+  const diagnostic = { stage: 'mailerlite_lookup', outcome: 'http_error', http_status: 401 };
+  const cases = [
+    { ok: false, error: 'provider_unavailable' },
+    ...[null, 'private-provider-key', [], { ...diagnostic, stage: 'private-provider-key' }, { ...diagnostic, outcome: 'synthetic-ui-test@example.invalid' }].map(value => ({ ok: false, error: 'provider_unavailable', diagnostic: value })),
+    { ok: false, error: 'invalid_email', diagnostic },
+    { ok: false, error: 'consent_required', diagnostic },
+    { ok: false, error: 'signup_requires_provider_form', diagnostic },
+    { ok: true, next: 'confirm_email', diagnostic },
+    { ok: true, next: 'subscribed', diagnostic },
+  ];
+  for (const body of cases) {
+    const ui = fixture({ post: () => ({ ok: body.ok, json: async () => ({ message: 'Please try signup again.', ...body }) }) });
+    await flush(); ui.load(); ui.widgets[0].options.callback('synthetic-token'); await ui.submit();
+    assert.equal(ui.warnings.length, 0);
+  }
 });

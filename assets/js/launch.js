@@ -47,6 +47,18 @@
     status.textContent = text;
     status.dataset.error = String(error);
   };
+  const reportSignupDiagnostic = (body) => {
+    if (body?.ok !== false || !['provider_unavailable', 'verification_failed'].includes(body.error)) return;
+    const value = body.diagnostic;
+    if (!value || typeof value !== 'object' || Array.isArray(value)
+        || !['turnstile_siteverify', 'mailerlite_lookup', 'mailerlite_upsert'].includes(value.stage)
+        || !['http_error', 'transport_error', 'timeout', 'invalid_json', 'response_too_large', 'schema_error', 'unexpected_active', 'verification_failed'].includes(value.outcome)) return;
+    // Copy only controlled classifications. Never log the response, request,
+    // exception, email, credentials, or challenge token.
+    const safe = { stage: value.stage, outcome: value.outcome };
+    if (Number.isInteger(value.http_status) && value.http_status >= 100 && value.http_status <= 599) safe.http_status = value.http_status;
+    try { console.warn('CorkBot signup diagnostic', safe); } catch { /* Diagnostics must not affect signup recovery. */ }
+  };
   const requestJSON = async (url, options = {}) => {
     const { timeoutMs = 30000, ...requestOptions } = options;
     const controller = new AbortController();
@@ -226,6 +238,7 @@
         credentials: 'same-origin',
       });
       if (!response.ok || body?.ok !== true || !['confirm_email', 'subscribed'].includes(body.next)) {
+        reportSignupDiagnostic(body);
         const serverMessage = body?.message ?? body?.error;
         const safeError = typeof serverMessage === 'string' && serverMessage.trim() && serverMessage.length <= 300 && /\s/.test(serverMessage) ? serverMessage : 'Your signup couldn’t be completed. Please try again.';
         throw new Error(safeError);
