@@ -13,11 +13,19 @@
   const status = document.querySelector('#signup-status');
   const availability = document.querySelector('#signup-availability');
   const challenge = document.querySelector('#signup-turnstile');
+  const securityHelp = document.querySelector('#signup-security-help');
+  const securityNotice = document.querySelector('#signup-security-notice');
+  const securityRetry = document.querySelector('#signup-security-retry');
   let apiReady = false;
   let pending = false;
   let requiresChallenge = false;
   let challengeToken = '';
   let challengeId;
+  let challengeAttempt = 0;
+  let challengeTimer;
+  let scriptTimer;
+  let challengeScript;
+  let challengeSiteKey = '';
   let submissionMessage = false;
 
   const secureURL = (value) => {
@@ -31,6 +39,7 @@
   };
   const updateSubmit = () => {
     submit.disabled = pending || !apiReady || (requiresChallenge && !challengeToken);
+    securityRetry.disabled = pending || !apiReady;
   };
   const message = (text, error = false, fromSubmission = false) => {
     submissionMessage = fromSubmission;
@@ -57,47 +66,113 @@
     updateSubmit();
   };
 
+  const clearSecurityTimers = () => {
+    clearTimeout(scriptTimer);
+    clearTimeout(challengeTimer);
+  };
+  const showSecurityIssue = (text, code) => {
+    securityNotice.textContent = text;
+    securityHelp.hidden = false;
+    // Only the provider's fixed numeric error code is diagnostic data.
+    // Never expose the token, exception text, or provider response here.
+    const numericCode = typeof code === 'string' || (typeof code === 'number' && Number.isInteger(code)) ? String(code) : '';
+    if (/^\d{6}$/.test(numericCode)) securityHelp.dataset.turnstileCode = numericCode;
+    else delete securityHelp.dataset.turnstileCode;
+  };
+  const removeChallenge = () => {
+    if (challengeId !== undefined && window.turnstile) {
+      try { window.turnstile.remove(challengeId); } catch { /* Clear the local container below. */ }
+    }
+    challengeId = undefined;
+    challenge.replaceChildren();
+  };
   const configureChallenge = (siteKey) => {
+    challengeSiteKey = siteKey;
+    const attempt = ++challengeAttempt;
+    clearSecurityTimers();
+    challengeToken = '';
+    removeChallenge();
     requiresChallenge = true;
     challenge.hidden = false;
-    message('Preparing the security check…');
+    securityHelp.hidden = true;
+    delete securityHelp.dataset.turnstileCode;
+    if (!submissionMessage) message('Preparing the security check…');
     updateSubmit();
+    const current = () => attempt === challengeAttempt && apiReady && !form.hidden;
+    const failed = (text, code) => {
+      if (!current()) return;
+      clearSecurityTimers();
+      challengeToken = '';
+      if (!pending && !submissionMessage) message('');
+      showSecurityIssue(text, code);
+      updateSubmit();
+    };
+    const render = () => {
+      if (!current()) return;
+      try {
+        if (typeof window.turnstile?.ready !== 'function' || typeof window.turnstile?.render !== 'function') throw new Error('Not ready');
+        window.turnstile.ready(() => {
+          if (!current()) return;
+          clearTimeout(scriptTimer);
+          challengeTimer = setTimeout(() => {
+            if (current() && !challengeToken) {
+              if (!pending && !submissionMessage) message('');
+              showSecurityIssue('The security check is taking longer than expected. You can try it again below.');
+            }
+          }, 45000);
+          try {
+            challengeId = window.turnstile.render(challenge, {
+              sitekey: siteKey,
+              action: 'launch_signup',
+              theme: 'light',
+              size: 'flexible',
+              retry: 'never',
+              'refresh-timeout': 'manual',
+              'refresh-expired': 'manual',
+              callback: (token) => {
+                if (!current() || pending || typeof token !== 'string' || !token) return;
+                clearSecurityTimers();
+                challengeToken = token;
+                securityHelp.hidden = true;
+                delete securityHelp.dataset.turnstileCode;
+                if (!pending && !submissionMessage) message('');
+                updateSubmit();
+              },
+              'expired-callback': () => {
+                failed('The security check expired. Please try it again before sending your signup.');
+              },
+              'error-callback': (code) => {
+                failed('The security check couldn’t finish. Try it again below. If it keeps happening, try another browser.', code);
+                return false;
+              },
+              'timeout-callback': () => failed('The security check timed out. Please try it again below.'),
+              'unsupported-callback': () => failed('This browser couldn’t complete the security check. Please try another browser.'),
+            });
+          } catch {
+            failed('The security check couldn’t load. Please try it again below.');
+          }
+        });
+      } catch {
+        failed('The security check couldn’t load. Please try it again below.');
+      }
+    };
+    // Both loading the script and waiting for its API readiness are bounded.
+    scriptTimer = setTimeout(() => failed('The security check couldn’t load. Please try it again below.'), 15000);
+    if (typeof window.turnstile?.ready === 'function') return render();
+    challengeScript?.remove();
     const script = document.createElement('script');
+    challengeScript = script;
     script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
     script.async = true;
     script.defer = true;
-    script.addEventListener('load', () => {
-      try {
-        challengeId = window.turnstile.render(challenge, {
-          sitekey: siteKey,
-          action: 'launch_signup',
-          theme: 'light',
-          size: 'flexible',
-          callback: (token) => {
-            challengeToken = token;
-            if (!pending && !submissionMessage) message('');
-            updateSubmit();
-          },
-          'expired-callback': () => {
-            challengeToken = '';
-            if (!pending && !submissionMessage) message('Please complete the security check again.');
-            updateSubmit();
-          },
-          'error-callback': () => {
-            challengeToken = '';
-            if (!pending && !submissionMessage) message('The security check couldn’t load. Refresh the page to try again.', true);
-            updateSubmit();
-          },
-        });
-      } catch {
-        message('The security check couldn’t load. Refresh the page to try again.', true);
-      }
-    });
-    script.addEventListener('error', () => {
-      message('The security check couldn’t load. Refresh the page to try again.', true);
-    });
+    script.addEventListener('load', render);
+    script.addEventListener('error', () => failed('The security check couldn’t load. Please try it again below.'));
     document.head.append(script);
   };
+  securityRetry.addEventListener('click', () => {
+    if (pending || !apiReady) return;
+    configureChallenge(challengeSiteKey);
+  });
 
   const configureLinks = (config) => {
     const checkout = secureURL(config.vip_checkout_url);
@@ -178,12 +253,13 @@
       form.removeAttribute('aria-busy');
       if (requiresChallenge) {
         challengeToken = '';
-        if (challengeId !== undefined && window.turnstile) {
-          try {
-            window.turnstile.reset(challengeId);
-          } catch {
-            if (!submissionMessage) message('The security check needs a refresh before another attempt.', true);
-          }
+        if (apiReady && !form.hidden) {
+          configureChallenge(challengeSiteKey);
+        } else {
+          ++challengeAttempt;
+          clearSecurityTimers();
+          removeChallenge();
+          securityHelp.hidden = true;
         }
       }
       updateSubmit();

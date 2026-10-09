@@ -16,8 +16,8 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" as="image" href="/assets/img/dev-preview-02-plotting-orientation.jpg" fetchpriority="high" />
-    <link rel="stylesheet" href="/assets/css/launch.css?v=20261009" />
-    <script src="/assets/js/launch.js?v=20261009" defer></script>
+    <link rel="stylesheet" href="/assets/css/launch.css?v=20261009-security-recovery" />
+    <script src="/assets/js/launch.js?v=20261009-security-recovery" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -54,6 +54,10 @@
               <div class="honeypot" aria-hidden="true"><label for="signup-website">Website</label><input id="signup-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
               <label class="consent-label" for="signup-consent"><input id="signup-consent" name="consent" type="checkbox" required /><span>Email me CorkBot product updates and launch news. I can unsubscribe anytime. <a href="/launch-privacy">Privacy notice</a>.</span></label>
               <div id="signup-turnstile" class="turnstile-container" hidden></div>
+              <div class="security-help" id="signup-security-help" hidden>
+                <p id="signup-security-notice" role="status" aria-live="polite"></p>
+                <button class="text-link security-retry" id="signup-security-retry" type="button">Try the security check again</button>
+              </div>
               <p class="form-status" id="signup-status" role="status" aria-live="polite" aria-atomic="true"></p>
             </form>
 

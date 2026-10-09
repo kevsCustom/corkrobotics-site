@@ -59,6 +59,9 @@ h3{font-size:24px;letter-spacing:-.028em;line-height:1.22}
 .consent-label a{color:var(--ink)}
 .honeypot{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 .turnstile-container{margin-top:16px;max-width:100%}
+.security-help{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.5}
+.security-retry{padding:0;border:0;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;font:inherit}
+.security-retry:disabled{cursor:wait;color:var(--muted)}
 .form-status{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5}
 .form-status:empty{margin-top:0}
 .form-status[data-error="true"]{color:#8a3225}
