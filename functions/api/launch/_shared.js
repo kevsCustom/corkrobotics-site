@@ -7,6 +7,8 @@ const TOTAL_PROVIDER_BUDGET_MS = 20000;
 const TURNSTILE_ACTION = 'launch_signup';
 const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
 const CONSENT_VERSION = 'corkbot-launch-2026-10-09';
+const DIAGNOSTIC_STAGES = ['turnstile_siteverify', 'mailerlite_lookup', 'mailerlite_upsert'];
+const DIAGNOSTIC_OUTCOMES = ['http_error', 'transport_error', 'timeout', 'invalid_json', 'response_too_large', 'schema_error', 'unexpected_active', 'verification_failed'];
 const ERRORS = {
   method_not_allowed: [405, 'This request method is not supported.'],
   origin_not_allowed: [403, 'Please sign up from the CorkBot launch page.'],
@@ -24,7 +26,24 @@ const ERRORS = {
 };
 
 class SignupError extends Error {
-  constructor(code) { super(code); this.code = code; }
+  constructor(code, diagnostic) {
+    super(code);
+    this.code = code;
+    this.diagnostic = safeDiagnostic(diagnostic);
+  }
+}
+
+function safeDiagnostic(value) {
+  // Never serialize provider data or exceptions. These fixed classifications
+  // describe only the failing service step and its HTTP result.
+  if (!DIAGNOSTIC_STAGES.includes(value?.stage) || !DIAGNOSTIC_OUTCOMES.includes(value?.outcome)) return null;
+  const result = { stage: value.stage, outcome: value.outcome };
+  if (Number.isInteger(value.http_status) && value.http_status >= 100 && value.http_status <= 599) result.http_status = value.http_status;
+  return result;
+}
+
+function providerFailure(stage, outcome, httpStatus) {
+  return new SignupError('provider_unavailable', { stage, outcome, http_status: httpStatus });
 }
 
 export function jsonResponse(body, status = 200, extraHeaders = {}) {
@@ -40,9 +59,12 @@ export function jsonResponse(body, status = 200, extraHeaders = {}) {
   });
 }
 
-function errorResponse(code, headers) {
+function errorResponse(code, headers, diagnostic) {
   const [status, message] = ERRORS[code] || ERRORS.provider_unavailable;
-  return jsonResponse({ ok: false, error: code, message }, status, headers);
+  const body = { ok: false, error: code, message };
+  const safe = safeDiagnostic(diagnostic);
+  if (safe && ['provider_unavailable', 'verification_failed'].includes(code)) body.diagnostic = safe;
+  return jsonResponse(body, status, headers);
 }
 
 function setting(env, name, max = 8192) {
@@ -212,20 +234,30 @@ async function signupInput(request) {
   return { email: normalizedEmail, source, token: input.turnstile_token || '' };
 }
 
-async function remoteRequest(url, options, fetchImpl, deadline) {
+async function remoteRequest(url, options, fetchImpl, deadline, stage) {
   const remaining = deadline - Date.now();
-  if (remaining <= 0) throw new SignupError('provider_unavailable');
+  if (remaining <= 0) throw providerFailure(stage, 'timeout');
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Math.min(PROVIDER_TIMEOUT_MS, remaining));
+  let httpStatus;
   try {
     const response = await fetchImpl(url, { ...options, signal: controller.signal, redirect: 'error' });
+    httpStatus = response.status;
     if (!response.ok) {
       if (response.body) await response.body.cancel();
       return { status: response.status, data: null };
     }
-    const text = await boundedText(response.body, MAX_PROVIDER_BYTES, 'provider_unavailable');
-    return { status: response.status, data: text ? JSON.parse(text) : null };
-  } catch { throw new SignupError('provider_unavailable'); }
+    let text;
+    try { text = await boundedText(response.body, MAX_PROVIDER_BYTES, 'provider_unavailable'); }
+    catch (error) {
+      throw providerFailure(stage, controller.signal.aborted ? 'timeout' : error instanceof SignupError ? 'response_too_large' : 'transport_error', httpStatus);
+    }
+    try { return { status: response.status, data: text ? JSON.parse(text) : null }; }
+    catch { throw providerFailure(stage, 'invalid_json', httpStatus); }
+  } catch (error) {
+    if (error instanceof SignupError) throw error;
+    throw providerFailure(stage, controller.signal.aborted ? 'timeout' : 'transport_error', httpStatus);
+  }
   finally { clearTimeout(timer); }
 }
 
@@ -235,9 +267,12 @@ async function verifyTurnstile(request, config, token, fetchImpl) {
   const body = new URLSearchParams({ secret: config.secretKey, response: token });
   const ip = request.headers.get('CF-Connecting-IP');
   if (ip && /^[0-9a-fA-F:.]{3,45}$/.test(ip)) body.set('remoteip', ip);
-  const response = await remoteRequest('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body }, fetchImpl, config.deadline);
-  if (response.status !== 200 || response.data?.success !== true || response.data.hostname !== new URL(request.url).hostname
-      || response.data.action !== TURNSTILE_ACTION) throw new SignupError('verification_failed');
+  const stage = 'turnstile_siteverify';
+  const response = await remoteRequest('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body }, fetchImpl, config.deadline, stage);
+  if (response.status !== 200) throw new SignupError('verification_failed', { stage, outcome: 'http_error', http_status: response.status });
+  if (typeof response.data?.success !== 'boolean') throw new SignupError('verification_failed', { stage, outcome: 'schema_error', http_status: response.status });
+  if (response.data.success !== true || response.data.hostname !== new URL(request.url).hostname
+      || response.data.action !== TURNSTILE_ACTION) throw new SignupError('verification_failed', { stage, outcome: 'verification_failed', http_status: response.status });
 }
 
 function consentFields(input, uppercase) {
@@ -272,29 +307,29 @@ async function subscribeBrevo(input, config, fetchImpl) {
 }
 
 async function subscribeMailerLite(input, config, fetchImpl) {
-  const headers = { Authorization: `Bearer ${config.key}`, Accept: 'application/json' };
-  const existing = await remoteRequest(`https://connect.mailerlite.com/api/subscribers/${encodeURIComponent(input.email)}`, { headers }, fetchImpl, config.deadline);
+  const headers = { Authorization: `Bearer ${config.key}`, Accept: 'application/json', 'Content-Type': 'application/json' };
+  const existing = await remoteRequest(`https://connect.mailerlite.com/api/subscribers/${encodeURIComponent(input.email)}`, { headers }, fetchImpl, config.deadline, 'mailerlite_lookup');
   let previousStatus = null;
   if (existing.status === 200) {
     previousStatus = existing.data?.data?.status;
-    if (!['active', 'unconfirmed', 'unsubscribed', 'bounced', 'junk'].includes(previousStatus)) throw new SignupError('provider_unavailable');
+    if (!['active', 'unconfirmed', 'unsubscribed', 'bounced', 'junk'].includes(previousStatus)) throw providerFailure('mailerlite_lookup', 'schema_error', existing.status);
     if (['unsubscribed', 'bounced', 'junk'].includes(previousStatus)) throw new SignupError('signup_requires_provider_form');
-  } else if (existing.status !== 404) throw new SignupError('provider_unavailable');
+  } else if (existing.status !== 404) throw providerFailure('mailerlite_lookup', 'http_error', existing.status);
   // Omitting status/resubscribe preserves suppression and previous membership.
   // The API documents this groups upsert as additive, unlike PUT replacement.
   const body = { email: input.email, groups: [config.groupId] };
   if (config.storeFields) body.fields = consentFields(input, false);
   const created = await remoteRequest('https://connect.mailerlite.com/api/subscribers', {
     method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' }, body: JSON.stringify(body),
-  }, fetchImpl, config.deadline);
-  if (![200, 201].includes(created.status)) throw new SignupError('provider_unavailable');
+  }, fetchImpl, config.deadline, 'mailerlite_upsert');
+  if (![200, 201].includes(created.status)) throw providerFailure('mailerlite_upsert', 'http_error', created.status);
   const currentStatus = created.data?.data?.status;
   if (currentStatus === 'unconfirmed') return 'confirm_email';
   if (currentStatus === 'active' && previousStatus === 'active') return 'subscribed';
   if (['unsubscribed', 'bounced', 'junk'].includes(currentStatus)) throw new SignupError('signup_requires_provider_form');
   // A fresh active response contradicts the required API DOI setting. Do not
   // invent a confirmation email or claim a verified new subscription.
-  throw new SignupError('provider_unavailable');
+  throw providerFailure('mailerlite_upsert', currentStatus === 'active' ? 'unexpected_active' : 'schema_error', created.status);
 }
 
 export async function subscribeResponse(request, env = {}, fetchImpl = fetch) {
@@ -309,6 +344,6 @@ export async function subscribeResponse(request, env = {}, fetchImpl = fetch) {
     const next = config.provider === 'brevo' ? await subscribeBrevo(input, config, fetchImpl) : await subscribeMailerLite(input, config, fetchImpl);
     return jsonResponse({ ok: true, next });
   } catch (error) {
-    return errorResponse(error instanceof SignupError ? error.code : 'provider_unavailable');
+    return errorResponse(error instanceof SignupError ? error.code : 'provider_unavailable', undefined, error instanceof SignupError ? error.diagnostic : undefined);
   }
 }

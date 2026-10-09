@@ -29,6 +29,7 @@ function providerFetch(steps, verificationSteps = [{ status: 200, body: { succes
     const step = (isVerification ? verificationSteps : steps).shift();
     assert.ok(step, 'Unexpected provider request');
     if (step instanceof Error) throw step;
+    if (step instanceof Response) return step;
     return new Response(step.body === undefined ? null : JSON.stringify(step.body), { status: step.status, headers: { 'Content-Type': 'application/json' } });
   };
   return { calls, verificationCalls, fetch };
@@ -40,9 +41,9 @@ async function responseBody(response, expectedStatus) {
   assert.equal(response.headers.get('Access-Control-Allow-Origin'), null);
   const result = await response.json();
   const serialized = JSON.stringify(result);
-  assert.ok(!serialized.includes(email));
-  assert.ok(!serialized.includes(brevo.BREVO_API_KEY));
-  assert.ok(!serialized.includes(mailerlite.MAILERLITE_API_KEY));
+  for (const privateValue of [email, brevo.BREVO_API_KEY, mailerlite.MAILERLITE_API_KEY, turnstile.TURNSTILE_SECRET_KEY, input.turnstile_token, mailerlite.MAILERLITE_GROUP_ID]) {
+    assert.ok(!serialized.includes(privateValue), 'Response must omit contacts, private keys, tokens, and group IDs');
+  }
   return result;
 }
 
@@ -226,6 +227,8 @@ test('MailerLite fresh unconfirmed subscriber requests confirmation and does not
   const mock = providerFetch([{ status: 404 }, { status: 201, body: { data: { status: 'unconfirmed' } } }]);
   assert.equal((await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), 200)).next, 'confirm_email');
   assert.deepEqual(JSON.parse(mock.calls[1].options.body), { email, groups: [mailerlite.MAILERLITE_GROUP_ID] });
+  assert.equal(mock.calls[0].options.headers['Content-Type'], 'application/json');
+  assert.equal(mock.calls[0].options.headers.Accept, 'application/json');
 });
 
 test('MailerLite existing active subscriber stays active with additive groups; existing unconfirmed receives DOI', async () => {
@@ -281,6 +284,115 @@ test('Turnstile requires token and validates action and hostname before contacti
   await responseBody(await subscribeResponse(request({ ...input, turnstile_token: 'token' }), env, valid.fetch), 200);
   assert.equal(valid.verificationCalls[0].url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
   assert.equal(valid.verificationCalls[0].options.body.get('response'), 'token');
+});
+
+test('diagnostics distinguish Siteverify HTTP errors from MailerLite lookup and upsert HTTP errors without provider-body leakage', async () => {
+  const privatePayload = { email, id: mailerlite.MAILERLITE_GROUP_ID, message: mailerlite.MAILERLITE_API_KEY, token: input.turnstile_token, secret: turnstile.TURNSTILE_SECRET_KEY };
+  const cases = [
+    { mock: providerFetch([], [{ status: 503, body: privatePayload }]), status: 400, error: 'verification_failed', stage: 'turnstile_siteverify', http_status: 503 },
+    { mock: providerFetch([{ status: 401, body: privatePayload }]), status: 503, error: 'provider_unavailable', stage: 'mailerlite_lookup', http_status: 401 },
+    { mock: providerFetch([{ status: 404 }, { status: 422, body: privatePayload }]), status: 503, error: 'provider_unavailable', stage: 'mailerlite_upsert', http_status: 422 },
+  ];
+  for (const { mock, status, error, stage, http_status } of cases) {
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), status);
+    assert.equal(result.error, error);
+    assert.deepEqual(result.diagnostic, { stage, outcome: 'http_error', http_status });
+    assert.deepEqual(Object.keys(result).sort(), ['diagnostic', 'error', 'message', 'ok']);
+  }
+});
+
+test('diagnostics classify transport failures at each service step and ignore exception text and attached diagnostics', async () => {
+  const privateException = new Error(`${email} ${mailerlite.MAILERLITE_API_KEY} ${turnstile.TURNSTILE_SECRET_KEY} ${input.turnstile_token}`);
+  privateException.diagnostic = { stage: 'mailerlite_upsert', outcome: email, http_status: mailerlite.MAILERLITE_GROUP_ID, token: input.turnstile_token };
+  const cases = [
+    { mock: providerFetch([], [privateException]), stage: 'turnstile_siteverify' },
+    { mock: providerFetch([privateException]), stage: 'mailerlite_lookup' },
+    { mock: providerFetch([{ status: 404 }, privateException]), stage: 'mailerlite_upsert' },
+  ];
+  for (const { mock, stage } of cases) {
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), 503);
+    assert.deepEqual(result.diagnostic, { stage, outcome: 'transport_error' });
+    assert.match(result.message, /^We could not confirm signup right now\./);
+  }
+});
+
+test('diagnostics classify invalid JSON at each service step without returning malformed provider text', async () => {
+  const invalid = () => new Response(`invalid JSON for ${email} ${mailerlite.MAILERLITE_API_KEY}`, { status: 200 });
+  const cases = [
+    { mock: providerFetch([], [invalid()]), stage: 'turnstile_siteverify' },
+    { mock: providerFetch([invalid()]), stage: 'mailerlite_lookup' },
+    { mock: providerFetch([{ status: 404 }, invalid()]), stage: 'mailerlite_upsert' },
+  ];
+  for (const { mock, stage } of cases) {
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), 503);
+    assert.deepEqual(result.diagnostic, { stage, outcome: 'invalid_json', http_status: 200 });
+  }
+});
+
+test('diagnostics distinguish invalid provider schema from the unexpected active guard without echoing returned status', async () => {
+  const cases = [
+    { mock: providerFetch([], [{ status: 200, body: { success: email, secret: turnstile.TURNSTILE_SECRET_KEY } }]), status: 400, stage: 'turnstile_siteverify', outcome: 'schema_error', http_status: 200 },
+    { mock: providerFetch([{ status: 200, body: { data: { status: mailerlite.MAILERLITE_API_KEY, email } } }]), status: 503, stage: 'mailerlite_lookup', outcome: 'schema_error', http_status: 200 },
+    { mock: providerFetch([{ status: 404 }, { status: 201, body: { data: { status: email } } }]), status: 503, stage: 'mailerlite_upsert', outcome: 'schema_error', http_status: 201 },
+    { mock: providerFetch([{ status: 404 }, { status: 201, body: { data: { status: 'active', email } } }]), status: 503, stage: 'mailerlite_upsert', outcome: 'unexpected_active', http_status: 201 },
+    { mock: providerFetch([{ status: 200, body: { data: { status: 'unconfirmed' } } }, { status: 200, body: { data: { status: 'active' } } }]), status: 503, stage: 'mailerlite_upsert', outcome: 'unexpected_active', http_status: 200 },
+  ];
+  for (const { mock, status, stage, outcome, http_status } of cases) {
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), status);
+    assert.deepEqual(result.diagnostic, { stage, outcome, http_status });
+  }
+});
+
+test('diagnostics identify Siteverify rejection while preserving hostname and action verification', async () => {
+  for (const body of [
+    { success: false, 'error-codes': [email, turnstile.TURNSTILE_SECRET_KEY] },
+    { success: true, hostname: email, action: 'launch_signup' },
+    { success: true, hostname: 'corkrobotics.com', action: mailerlite.MAILERLITE_API_KEY },
+  ]) {
+    const mock = providerFetch([], [{ status: 200, body }]);
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), 400);
+    assert.equal(result.error, 'verification_failed');
+    assert.deepEqual(result.diagnostic, { stage: 'turnstile_siteverify', outcome: 'verification_failed', http_status: 200 });
+    assert.equal(mock.calls.length, 0);
+  }
+});
+
+test('diagnostics distinguish timeouts at each service step using only the controlled abort signal', async t => {
+  t.mock.timers.enable({ apis: ['Date', 'setTimeout'], now: Date.parse('2026-10-09T00:00:00Z') });
+  for (const stage of ['turnstile_siteverify', 'mailerlite_lookup', 'mailerlite_upsert']) {
+    const fetch = async (url, options) => {
+      const step = url.includes('/siteverify') ? 'turnstile_siteverify' : options.method === 'POST' ? 'mailerlite_upsert' : 'mailerlite_lookup';
+      if (step === stage) {
+        t.mock.timers.tick(8000);
+        options.signal.throwIfAborted();
+      }
+      if (step === 'turnstile_siteverify') return new Response(JSON.stringify({ success: true, hostname: 'corkrobotics.com', action: 'launch_signup' }));
+      if (step === 'mailerlite_lookup') return new Response(null, { status: 404 });
+      return new Response(JSON.stringify({ data: { status: 'unconfirmed' } }), { status: 201 });
+    };
+    const result = await responseBody(await subscribeResponse(request(), mailerlite, fetch), 503);
+    assert.deepEqual(result.diagnostic, { stage, outcome: 'timeout' });
+  }
+});
+
+test('diagnostics preserve the bounded provider response limit without returning oversized body content', async () => {
+  const oversized = new Response(JSON.stringify({ email, secret: mailerlite.MAILERLITE_API_KEY, padding: 'x'.repeat(65536) }), { status: 200 });
+  const mock = providerFetch([oversized]);
+  const result = await responseBody(await subscribeResponse(request(), mailerlite, mock.fetch), 503);
+  assert.deepEqual(result.diagnostic, { stage: 'mailerlite_lookup', outcome: 'response_too_large', http_status: 200 });
+  assert.equal(mock.calls.length, 1);
+});
+
+test('diagnostics are absent from validation, suppression, and successful signup responses', async () => {
+  const invalid = providerFetch([]);
+  const invalidResult = await responseBody(await subscribeResponse(request({ ...input, consent: false }), mailerlite, invalid.fetch), 400);
+  assert.equal(invalidResult.diagnostic, undefined);
+  const suppressed = providerFetch([{ status: 200, body: { data: { status: 'unsubscribed' } } }]);
+  const suppressedResult = await responseBody(await subscribeResponse(request(), mailerlite, suppressed.fetch), 409);
+  assert.equal(suppressedResult.diagnostic, undefined);
+  assert.equal(suppressed.calls.length, 1);
+  const success = providerFetch([{ status: 404 }, { status: 201, body: { data: { status: 'unconfirmed' } } }]);
+  assert.deepEqual(await responseBody(await subscribeResponse(request(), mailerlite, success.fetch), 200), { ok: true, next: 'confirm_email' });
 });
 
 test('hosted form capture only works on provider; API does not invent a successful signup', async () => {
