@@ -53,21 +53,23 @@ test('build refuses source symlinks and requires the site and invocation route f
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('temporary browser check is published only to the exact launch feature preview and removed by later non-preview builds', async () => {
-  const root = await fixture({ 'challenge-check.html': '<html>Browser check</html>' });
+test('temporary browser checks are published only to the exact launch feature preview and removed by later non-preview builds', async () => {
+  const pages = { 'challenge-check.html': '<html>Browser check</html>', 'challenge-check-explicit.html': '<html>Explicit browser check</html>' };
+  const root = await fixture(pages);
   try {
     const preview = await buildLaunchPages(root, { branch: 'codex/corkbot-launch-funnel' });
-    assert.equal(await readFile(resolve(preview.directory, 'challenge-check.html'), 'utf8'), '<html>Browser check</html>');
+    for (const [page, body] of Object.entries(pages)) assert.equal(await readFile(resolve(preview.directory, page), 'utf8'), body);
     for (const branch of ['', 'main', 'production', 'codex/other-preview', 'codex/corkbot-launch-funnel-copy']) {
       const output = await buildLaunchPages(root, { branch });
-      await assert.rejects(lstat(resolve(output.directory, 'challenge-check.html')), { code: 'ENOENT' });
+      for (const page of Object.keys(pages)) await assert.rejects(lstat(resolve(output.directory, page)), { code: 'ENOENT' });
       assert.equal(await readFile(resolve(output.directory, 'index.html'), 'utf8'), '<html>Existing site</html>');
     }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test('build reads the Cloudflare branch environment and excludes the temporary check when it is unset', async () => {
-  const root = await fixture({ 'challenge-check.html': 'browser check' });
+  const pages = { 'challenge-check.html': 'browser check', 'challenge-check-explicit.html': 'explicit browser check' };
+  const root = await fixture(pages);
   const script = `import { buildLaunchPages } from ${JSON.stringify(new URL('./build-launch-pages.mjs', import.meta.url).href)}; await buildLaunchPages(process.argv[1]);`;
   try {
     for (const branch of [undefined, 'codex/corkbot-launch-funnel', 'main']) {
@@ -76,15 +78,15 @@ test('build reads the Cloudflare branch environment and excludes the temporary c
       else env.CF_PAGES_BRANCH = branch;
       execFileSync(process.execPath, ['--input-type=module', '-e', script, root], { env });
       if (branch === 'codex/corkbot-launch-funnel') {
-        assert.equal(await readFile(resolve(root, 'dist/challenge-check.html'), 'utf8'), 'browser check');
+        for (const [page, body] of Object.entries(pages)) assert.equal(await readFile(resolve(root, 'dist', page), 'utf8'), body);
       } else {
-        await assert.rejects(lstat(resolve(root, 'dist/challenge-check.html')), { code: 'ENOENT' });
+        for (const page of Object.keys(pages)) await assert.rejects(lstat(resolve(root, 'dist', page)), { code: 'ENOENT' });
       }
     }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('temporary check uses the canonical implicit widget without signup requests or token handling', async () => {
+test('temporary implicit check uses the canonical widget without signup requests or token handling', async () => {
   const html = await readFile(fileURLToPath(new URL('../challenge-check.html', import.meta.url)), 'utf8');
   assert.match(html, /<script src="https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js" async defer><\/script>/);
   assert.match(html, /class="cf-turnstile"/);
@@ -101,5 +103,34 @@ test('temporary check uses the canonical implicit widget without signup requests
   assert.equal(status.textContent, 'Browser verified.');
   assert.equal(JSON.stringify(context).includes('PRIVATE_TEST_TOKEN'), false);
   context.onChallengeCheckExpired();
+  assert.equal(status.textContent, 'Checking your browser…');
+});
+
+test('temporary explicit check renders after the container with only the required key, action, and token-ignoring status callbacks', async () => {
+  const html = await readFile(fileURLToPath(new URL('../challenge-check-explicit.html', import.meta.url)), 'utf8');
+  assert.match(html, /<script src="https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?onload=onExplicitChallengeLoaded&amp;render=explicit" async defer><\/script>/);
+  assert.match(html, /<div id="challenge-widget"><\/div>/);
+  assert.doesNotMatch(html, /class="cf-turnstile"|<form\b|<input\b|\/api\/|fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|console\.|turnstile\.(?:reset|execute|ready)|data-(?:retry|timeout|size|refresh)/);
+  assert.ok(html.indexOf('id="challenge-widget"') < html.indexOf('function onExplicitChallengeLoaded'));
+  const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+  assert.equal(scripts.length, 1);
+  const status = { textContent: 'Checking your browser…' };
+  let options;
+  let renders = 0;
+  const context = {
+    document: { getElementById: (id) => { assert.equal(id, 'challenge-status'); return status; } },
+    window: { turnstile: { render: (selector, value) => { assert.equal(selector, '#challenge-widget'); options = value; renders++; } } },
+  };
+  runInNewContext(scripts[0], context);
+  context.onExplicitChallengeLoaded();
+  assert.equal(renders, 1);
+  assert.deepEqual(Object.keys(options).sort(), ['action', 'callback', 'expired-callback', 'sitekey']);
+  assert.equal(options.sitekey, '0x4AAAAAAFSduqvXzwc75pqD');
+  assert.equal(options.action, 'launch_signup');
+  assert.equal(options.callback.length, 0);
+  options.callback('PRIVATE_TEST_TOKEN');
+  assert.equal(status.textContent, 'Browser verified.');
+  assert.equal(JSON.stringify(context).includes('PRIVATE_TEST_TOKEN'), false);
+  options['expired-callback']();
   assert.equal(status.textContent, 'Checking your browser…');
 });

@@ -44,8 +44,8 @@ export async function buildLaunchPages(sourceRoot, { branch = process.env.CF_PAG
       count++;
     }
   }
-  // Keep this temporary browser-isolation page out of production and other previews.
-  const previewFiles = branch === 'codex/corkbot-launch-funnel' ? ['challenge-check.html'] : [];
+  // Keep these temporary browser-isolation pages out of production and other previews.
+  const previewFiles = branch === 'codex/corkbot-launch-funnel' ? ['challenge-check.html', 'challenge-check-explicit.html'] : [];
   for (const name of [...PUBLIC_FILES, ...PUBLIC_DIRECTORIES, ...previewFiles]) await copy(resolve(root, name), resolve(output, name));
   return { directory: output, files: count };
 }
