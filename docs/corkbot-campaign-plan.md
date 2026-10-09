@@ -1,6 +1,6 @@
 # CorkBot prelaunch campaign working plan
 
-Prepared October 9, 2026. Kevin approved building the signup page and a proposed $5 refundable VIP reservation. The mailing-list provider, product price, campaign date, final offer, and payment account remain undecided or unconfigured.
+Prepared October 9, 2026. Kevin approved building the signup page, chose MailerLite for the launch list, and selected a proposed $5 refundable VIP reservation. MailerLite account setup, product price, campaign date, final offer, and payment account remain pending.
 
 ## Funnel and ownership
 
@@ -8,7 +8,9 @@ Use one destination: `https://corkrobotics.com/launch`, once the reviewed page i
 
 Cloudflare hosts the page. The selected mailing-list service manages subscriber records, confirmation, campaigns, unsubscribes, and export. Google Workspace continues to run the company inboxes; no mailbox migration is required. Stripe would separately manage reservation payments and refunds. No separate Cloudflare subscriber database is needed for this version. Implementation and account configuration are documented in [launch-setup.md](launch-setup.md).
 
-MailerLite is the recommended first provider. Its native forms are the simplest account setup; the implementation also supports a custom form after API confirmation behavior is verified. Brevo is an alternative with an explicit confirmation API. Both require real-inbox acceptance before public activation. Google Workspace mail merge is a viable manually managed alternative on eligible plans, but website collection and confirmation would still need their own system; that alternative is not implemented here.
+MailerLite is the chosen provider. Keep the page's custom email form by connecting the MailerLite API after its confirmation setting and Turnstile are verified. A verified native hosted form is available as a simpler fallback. Both need real-inbox acceptance before public activation. Keep Google Workspace for the company inboxes and replies.
+
+Start with MailerLite Free for setup: 250 active subscribers and 2,500 monthly emails. Upgrade before the custom signup reaches the subscriber limit, because API additions and campaigns pause above it. Comfort starts at $12/month USD; the actual cost depends on the subscriber tier. No paid subscription has been purchased. The [MailerLite launch workbook](mailerlite-launch-workbook.md) contains account settings and the initial email drafts.
 
 ## The proposed $5 offer
 
@@ -35,7 +37,7 @@ Lead with a real result, then show CorkBot making it. Shoot the finished drawing
 
 ## Preparation and four-week push
 
-Before the push: choose the provider, verify inbox confirmation/unsubscribe, replace the placeholder, define the launch package/price, and test every signup route. Set the final date after campaign readiness and Kickstarter review. Late November remains the target; Thanksgiving on November 26 and Black Friday on November 27 create potential audience and advertising competition, so avoid committing to those dates without considering the audience.
+Before the push: finish MailerLite account setup, verify inbox confirmation/unsubscribe, replace the placeholder, define the launch package/price, and test every signup route. Set the final date after campaign readiness and Kickstarter review. Late November remains the target; Thanksgiving on November 26 and Black Friday on November 27 create potential audience and advertising competition, so avoid committing to those dates without considering the audience.
 
 1. **Week one:** introduce the product with its strongest real demonstration. Send a welcome after confirmation explaining what updates subscribers will receive.
 2. **Week two:** show practical use cases, setup, and development progress. Send one useful product update and invite questions.

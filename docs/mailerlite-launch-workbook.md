@@ -4,7 +4,7 @@ Prepared October 9, 2026. MailerLite is selected; account connection and real-in
 
 ## 1. Set the sender and company account
 
-- [ ] Create or sign into the company-owned [MailerLite account](https://accounts.mailerlite.com/), complete its approval steps with the real business/website details, and enter the company's actual footer mailing address.
+- [ ] Create or sign into the company-owned [MailerLite account](https://accounts.mailerlite.com/), complete its business profile and inbox verification with the real company/website details, check any account-specific review or sending restrictions, and enter the company's actual footer mailing address.
 - [ ] Set **From name:** `Kevin at Cork Robotics`; **From address:** `kevin@corkrobotics.com`.
 - [ ] Use `kevin@corkrobotics.com` as Reply-to initially. Switch to the support mailbox only after Kevin confirms its complete address and verifies that incoming replies reach a monitored inbox. Do not infer a complete address from `support@`.
 - [ ] In Account settings → Domains, add/verify the sender and authenticate `corkrobotics.com` using the exact records MailerLite supplies. Add its DKIM/domain-verification records and reconcile its SPF requirement with the existing record. Preserve Google Workspace MX records and existing Google authentication records: Workspace continues hosting the company's inboxes. Check authentication in MailerLite before sending. [Domain authentication](https://www.mailerlite.com/help/how-to-verify-and-authenticate-your-domain)

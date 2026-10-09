@@ -2,6 +2,8 @@
 
 Prepared October 9, 2026. This is implementation and account-setup guidance. No provider account, live subscriber, payment, refund, or cloud deployment was created by this work.
 
+**Current decision:** Kevin chose MailerLite on October 9. Use its custom API mode for the page's existing email form after verification, or its verified hosted form as a fallback. Start on Free for setup; do not purchase a paid plan without an explicit budget. See [the MailerLite launch workbook](mailerlite-launch-workbook.md) for the concrete account settings and first email drafts.
+
 ## Where records live
 
 The website stays on the existing Cloudflare Pages project. Two scoped Pages Functions validate launch signup requests and call the chosen email provider. Brevo or MailerLite owns the subscriber records, confirmation flow, campaign sending, export, and unsubscribe status. This implementation creates no local database, D1 table, KV subscriber store, or browser email storage.
