@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CorkBot explicit browser check</title>
+  <style>
+    body { margin: 3rem auto; padding: 0 1rem; max-width: 36rem; font: 1rem/1.5 system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Browser check (explicit)</h1>
+    <p>This temporary check helps us investigate the signup security check. It does not sign you up or send an email.</p>
+    <p id="challenge-status" role="status" aria-live="polite">Checking your browser…</p>
+    <div id="challenge-widget"></div>
+    <noscript>Please enable JavaScript to load the browser check.</noscript>
+  </main>
+  <script>
+    function onExplicitChallengeLoaded() {
+      window.turnstile.render('#challenge-widget', {
+        sitekey: '0x4AAAAAAFSduqvXzwc75pqD',
+        action: 'launch_signup',
+        callback: () => {
+          document.getElementById('challenge-status').textContent = 'Browser verified.';
+        },
+        'expired-callback': () => {
+          document.getElementById('challenge-status').textContent = 'Checking your browser…';
+        },
+      });
+    }
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onExplicitChallengeLoaded&amp;render=explicit" async defer></script>
+</body>
+</html>
