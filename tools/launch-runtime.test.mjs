@@ -10,7 +10,7 @@ const config = await fetch(new URL('/api/launch/config', base));
 assert.equal(config.status, 200);
 const settings = await config.json();
 assert.equal(settings.signup_available, false, 'Refusing to test submission against a configured provider');
-assert.equal(settings.vip_available, false, 'Refusing to test against a live reservation offer');
+assert.equal(settings.vip_available, false, 'The retired reservation offer must remain unavailable');
 
 function post(body, headers = {}) {
   return fetch(new URL('/api/launch/subscribe', base), {
@@ -19,10 +19,9 @@ function post(body, headers = {}) {
 }
 const input = { email: 'offline-runtime-test@example.invalid', consent: true, website: '', source: { utm_source: 'runtime-test' } };
 
-test('Cloudflare runtime config accurately advertises disabled capture/payment', () => {
+test('Cloudflare runtime config disables unconfigured capture and omits retired payment fields', () => {
   assert.equal(settings.signup_mode, 'unavailable');
-  assert.equal(settings.vip_checkout_url, null);
-  assert.equal(settings.vip_amount, 5);
+  assert.deepEqual(Object.keys(settings).filter(key => /vip|reservation|checkout|currency|amount/.test(key)), ['vip_available']);
   assert.equal(config.headers.get('Cache-Control'), 'no-store');
 });
 

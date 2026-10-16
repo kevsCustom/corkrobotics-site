@@ -1,6 +1,6 @@
 # CorkBot MailerLite launch workbook
 
-Prepared October 9, 2026. MailerLite is selected; account connection and real-inbox acceptance remain pending. The site already has the signup adapter. VIP reservations remain closed. The campaign date, launch package price, VIP access window, capacity, and refund deadline are not final.
+Prepared October 9, 2026. MailerLite is selected; account connection and real-inbox acceptance remain pending. The site already has the signup adapter. The launch list is free. The proposed paid reservation was removed on October 16, 2026; optional apparel support is a separate concept with no checkout configured here.
 
 ## 1. Set the sender and company account
 
@@ -32,7 +32,6 @@ The preferred finished flow is **corkrobotics.com/launch → email + consent →
 | `TURNSTILE_SITE_KEY` | Public key for the real site widget |
 | `TURNSTILE_SECRET_KEY` | Secret: matching widget secret |
 | `SIGNUP_STORE_FIELDS` | `true` only after the fields below exist; otherwise leave unset |
-| `VIP_ENABLED` | `false` |
 
 The adapter requires the Turnstile key pair. It accepts a new subscriber only as `unconfirmed`; an unexpected fresh `active` response returns a safe error. It preserves existing active/group membership and never forces an unsubscribed, bounced, or junk address to become active. [API setup](https://developers.mailerlite.com/getting-started), [subscriber API](https://developers.mailerlite.com/api/subscribers), [DOI settings and existing subscriber behavior](https://www.mailerlite.com/help/how-to-use-double-opt-in-when-collecting-subscribers)
 
@@ -57,7 +56,7 @@ Create the following **text** custom fields in MailerLite before enabling `SIGNU
 
 Email and group membership use MailerLite's built-in subscriber records. The adapter does not send IP or a claimed opt-in time. Its optional fields describe the latest applicable request, not a complete acquisition history. Without that setting, campaign fields are not retained by this adapter.
 
-Create one welcome automation using the launch-group trigger. Use the welcome draft below, retain MailerLite's unsubscribe/company footer, and verify the message sends **after confirmation**, only to active subscribers. Avoid enabling re-entry unless repeated welcome messages are intentional. Start subsequent campaign emails with useful product updates; announce dates, pricing, and reservation terms only after they are finalized.
+Create one welcome automation using the launch-group trigger. Use the welcome draft below, retain MailerLite's unsubscribe/company footer, and verify the message sends **after confirmation**, only to active subscribers. Avoid enabling re-entry unless repeated welcome messages are intentional. Start subsequent campaign emails with useful product updates; announce campaign dates and package details only after they are finalized and approved for release.
 
 ## 4. Draft messages
 
@@ -95,14 +94,14 @@ CorkBot is a compact, modular robot in development for drawing, making, and hand
 
 The launch date, final configuration, and price are still being finalized. I'll share those details before the campaign opens so you can decide whether CorkBot fits what you want to make.
 
-We're also preparing an optional refundable $5 VIP reservation. Reservations aren't open yet; the benefit, access window, and refund terms will be published before we accept payments. Joining this email list is free and doesn't reserve a unit or commit you to buy.
+Joining this email list is free. It doesn't reserve a unit or commit you to buy.
 
 I'd love to hear what you'd use CorkBot for. You can reply directly to this email.
 
 Kevin
 Cork Robotics
 
-**Editor instruction:** Send as `Kevin at Cork Robotics <kevin@corkrobotics.com>` with the verified Reply-to. Keep MailerLite's unsubscribe and real company-address footer. Do not add a payment button while reservations are closed.
+**Editor instruction:** Send as `Kevin at Cork Robotics <kevin@corkrobotics.com>` with the verified Reply-to. Keep MailerLite's unsubscribe and real company-address footer. Keep the free launch-list welcome focused on product updates; no reservation or payment button is offered.
 
 ## 5. Controlled live-inbox acceptance
 
@@ -114,22 +113,14 @@ Use operator-controlled test inboxes; preserve existing customer records. Record
 - [ ] Unsubscribe, then repeat the API signup with that test address. Verify it remains suppressed and the page shows an honest error. The provider's own form may offer a separate re-consent flow; do not force API reactivation.
 - [ ] With controlled fixtures, verify an existing active member retains its other groups, and an existing unconfirmed subscriber gets the expected confirmation flow.
 - [ ] For the custom API, verify a real Turnstile token works once; replay, missing token, and wrong action/hostname fail. A retry must get a fresh token. On a timeout, check the inbox before resubmitting.
-- [ ] Verify both normal and hosted-form modes keep VIP checkout hidden. Confirm public config reveals no secret or subscriber data.
+- [ ] Verify normal and hosted-form modes offer free signup without payment. Confirm the public config has no checkout or payment fields and reveals no secret or subscriber data.
 
-## 6. Prepare Stripe separately; keep checkout closed
+## 6. Keep apparel support separate
 
-The $5 amount is selected. The final reward price, dedicated access window/capacity, refund deadline, cancellation contact/process, delayed or canceled launch handling, and whether VIP eligibility survives a refund remain to be accepted and published. The proposed refund-at-launch approach is not an automated promise in the site.
+The proposed paid reservation has been withdrawn. The free launch list remains the primary action. A signup does not guarantee a unit, launch price, or delivery priority.
 
-**Existing Stripe account:** Kevin confirmed he already uses Stripe in MarketApp. Read-only review of MarketApp's September 25 launch records identifies the legal operator as CORK ROBOTICS LLC, with Cork Robotics as the shared public company name and Trade Den product/session branding. Those records document prior live activation; the current dashboard has not been verified. Use the existing company account for a separate CorkBot product and Payment Link. Do not copy MarketApp's secret, reuse its credit/subscription price IDs, or route reservations through its app-specific checkout/webhook. The CorkBot website needs only the public Payment Link. Check the new checkout's receipt, support links, and branding against CorkBot's final terms before activating it. MarketApp billing remains unchanged.
+Kevin is considering two Cork Robotics hoodie options as optional support. No apparel purchase link is configured in this site. Before adding one, confirm the real product pages, prices, sizes, fulfillment regions, shipping costs, dispatch expectations, and return policy. A hoodie purchase is a merchandise order and does not create a CorkBot reservation or automatically subscribe the buyer to this launch list. Offer the same explicit email consent and confirmation process separately.
 
-In the company's **Stripe test environment**, prepare a product named **CorkBot VIP reservation** with a **one-time $5 USD base price**, quantity one, no recurring charge, and customer email capture. Create a hosted Payment Link, inspect its mobile/desktop checkout and actual amount/currency, and test a successful payment, a declined payment, receipt behavior, and a full dashboard refund using Stripe's documented test payment details. Never use a real card for this test. [Payment Link setup](https://docs.stripe.com/payment-links/create), [post-payment/refund workflow](https://docs.stripe.com/payment-links/post-payment), [test payments](https://docs.stripe.com/testing)
+Keep product and mailing records separate. Do not reuse MarketApp billing products, subscriptions, webhooks, or payment records for a merchandise flow. This site has no apparel checkout or payment-verification endpoint; add only the reviewed store destination once ready.
 
-Before live activation:
-
-- [ ] Accept and publish the final benefit, reward price/window/capacity, refund/cancellation deadline and launch-change policy. Include a monitored contact method and the distinction from a Kickstarter pledge.
-- [ ] Verify an actual live Payment Link in the company Stripe account matches those terms and the $5 USD base price. Test checkout currency presentation; do not assume every visitor sees the same local-currency amount.
-- [ ] Define who processes cancellations and the promised launch/deadline refunds. Track payments by Stripe payment ID, maintain sufficient refund balance, and check final refund status. Payment clicks and thank-you visits do not prove payment.
-- [ ] Configure `VIP_CHECKOUT_URL`, `VIP_BENEFIT`, same-origin `VIP_TERMS_URL`, and exact UTC `VIP_REFUND_DEADLINE`; only then set `VIP_ENABLED=true` through the reviewed account workflow. Test links are deliberately rejected by public config.
-- [ ] Keep marketing consent separate from payment. Stripe records payments/refunds; MailerLite records mailing consent. The site implements no payment webhook, automatic refund, or credit against a future Kickstarter pledge.
-
-Use [launch-setup.md](launch-setup.md) for the complete environment, public build, deployment, and refund-management reference. This workbook creates no accounts, secrets, DNS changes, emails, payments, or refunds.
+Use [launch-setup.md](launch-setup.md) for the environment, public build, and deployment reference. This workbook creates no accounts, secrets, DNS changes, emails, purchases, or refunds.

@@ -121,41 +121,17 @@ function providerConfiguration(request, env) {
   return null;
 }
 
-function vipConfiguration(request, env, now) {
-  const enabled = setting(env, 'VIP_ENABLED', 5) === 'true';
-  const checkout = httpsUrl(setting(env, 'VIP_CHECKOUT_URL', 2048));
-  const benefit = setting(env, 'VIP_BENEFIT', 400);
-  const terms = httpsUrl(setting(env, 'VIP_TERMS_URL', 2048), new URL(request.url).origin);
-  const deadline = setting(env, 'VIP_REFUND_DEADLINE', 40);
-  const validDeadline = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(deadline)
-    && Number.isFinite(Date.parse(deadline)) && Date.parse(deadline) > now
-    && new Date(deadline).toISOString().replace('.000Z', 'Z') === deadline.replace('.000Z', 'Z');
-  const validBenefit = benefit.length >= 20 && !/placeholder|\btbd\b|to be decided/i.test(benefit);
-  const validCheckout = checkout?.hostname === 'buy.stripe.com' && /^\/[A-Za-z0-9_]+$/.test(checkout.pathname)
-    && !checkout.pathname.startsWith('/test_') && !checkout.search;
-  return enabled && validCheckout && validBenefit && terms && validDeadline ? {
-    checkout: checkout.href, benefit, terms: terms.href, deadline,
-  } : null;
-}
-
-export function publicConfig(request, env = {}, now = Date.now()) {
+export function publicConfig(request, env = {}) {
   const signup = providerConfiguration(request, env);
-  const vip = vipConfiguration(request, env, now);
   const result = {
     signup_available: Boolean(signup),
     signup_mode: signup?.mode || 'unavailable',
-    vip_available: Boolean(vip),
-    vip_amount: 5,
-    vip_checkout_url: vip?.checkout || null,
-    vip_benefit: vip?.benefit || null,
+    // Compatibility for previously cached clients. Reservations are retired;
+    // no environment setting may restore a checkout or payment offer.
+    vip_available: false,
   };
   if (signup?.mode === 'hosted') result.signup_url = signup.formUrl;
   if (signup?.mode === 'api' && signup.siteKey) result.turnstile_site_key = signup.siteKey;
-  if (vip) {
-    result.reservation_terms_url = vip.terms;
-    result.vip_refund_deadline = vip.deadline;
-    result.vip_currency = 'USD';
-  }
   const kickstarter = httpsUrl(setting(env, 'KICKSTARTER_URL', 2048));
   if (kickstarter && ['kickstarter.com', 'www.kickstarter.com'].includes(kickstarter.hostname)
       && kickstarter.pathname.startsWith('/projects/')) result.kickstarter_url = kickstarter.href;

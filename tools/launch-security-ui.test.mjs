@@ -11,7 +11,7 @@ const deferred = () => {
   const promise = new Promise(done => { resolve = done; });
   return { promise, resolve };
 };
-function fixture({ sdkCallbackImmediately = true, renderError = false, post } = {}) {
+function fixture({ sdkCallbackImmediately = true, renderError = false, post, config = {} } = {}) {
   const elements = new Map();
   const element = selector => {
     if (!elements.has(selector)) elements.set(selector, {
@@ -41,7 +41,7 @@ function fixture({ sdkCallbackImmediately = true, renderError = false, post } = 
       } },
     },
     fetch: async (url, options) => {
-      if (url.endsWith('/config')) return { ok: true, json: async () => ({ signup_available: true, signup_mode: 'api', turnstile_site_key: 'synthetic-site-key' }) };
+      if (url.endsWith('/config')) return { ok: true, json: async () => ({ signup_available: true, signup_mode: 'api', turnstile_site_key: 'synthetic-site-key', ...config }) };
       requests.push(JSON.parse(options.body));
       return post ? post() : { ok: true, json: async () => ({ ok: true, next: 'confirm_email' }) };
     },
@@ -68,6 +68,7 @@ function fixture({ sdkCallbackImmediately = true, renderError = false, post } = 
   };
   return {
     element, scripts, widgets, removed, loaded, warnings, timers, requests, load,
+    queriedSelectors: () => [...elements.keys()],
     get readyCalls() { return readyCalls; },
     fire(delay) {
       const matches = [...timers].filter(([, timer]) => timer.delay === delay);
@@ -78,6 +79,21 @@ function fixture({ sdkCallbackImmediately = true, renderError = false, post } = 
     submit: () => element('#launch-signup').listeners.submit({ preventDefault() {} }),
   };
 }
+
+test('a cached legacy payment config cannot expose checkout or interfere with free signup', async () => {
+  const ui = fixture({ config: {
+    vip_available: true, vip_checkout_url: 'https://buy.stripe.com/oldOffer', vip_amount: 5,
+    vip_benefit: 'Legacy reservation benefit', reservation_terms_url: 'https://corkrobotics.com/reservation-terms',
+    vip_refund_deadline: '2099-12-01T00:00:00Z',
+  } });
+  await flush(); ui.load();
+  assert.equal(ui.element('#launch-signup').hidden, false);
+  ui.widgets[0].options.callback('synthetic-token');
+  await ui.submit();
+  assert.equal(ui.requests.length, 1);
+  assert.equal(ui.element('#signup-success').hidden, false);
+  assert.deepEqual(ui.queriedSelectors().filter(selector => /vip|checkout|reservation/.test(selector)), []);
+});
 
 test('a stalled script offers recovery and retired script callbacks cannot render a widget', async () => {
   const ui = fixture(); await flush();

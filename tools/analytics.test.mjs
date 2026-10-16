@@ -290,6 +290,7 @@ test('legitimate HTML, index and trailing-slash aliases map to fixed public rout
     ['/index.html', '/', 'CorkBot — A modular robot by Cork Robotics'],
     ['/downloads.html', '/downloads', 'Software & downloads — Cork Robotics'],
     ['/gallery/', '/gallery', 'Concept gallery — Cork Robotics'],
+    ['/reservation-terms.html', '/reservation-terms', 'CorkBot launch list — Cork Robotics'],
     ['/marketapp/downloads/index.html', '/marketapp/downloads', 'Download MarketApp Bull Pen — Cork Robotics'],
     ['/marketapp/privacy/index', '/marketapp/privacy', 'MarketApp Privacy Policy — Cork Robotics'],
   ]) {
