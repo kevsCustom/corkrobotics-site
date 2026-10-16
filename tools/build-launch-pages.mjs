@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 export const PUBLIC_FILES = [
   'index.html', '404.html', 'downloads.html', 'gallery.html',
-  'launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html',
+  'launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html',
   '_headers', '_redirects', '_routes.json', 'robots.txt',
   'favicon.ico', 'favicon.svg', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png',
   'apple-touch-icon.png', 'm14.bin',

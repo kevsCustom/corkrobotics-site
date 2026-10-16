@@ -91,6 +91,9 @@ h3{font-size:24px;letter-spacing:-.028em;line-height:1.22}
 .faq-list details[open] summary>span{transform:rotate(45deg)}
 .faq-list details>p{color:var(--muted);font-size:14px;margin-bottom:22px;padding-right:28px}
 .kickstarter-follow{border-top:1px solid var(--line);padding-block:24px;display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:14px}
+.apparel-preview-link{border-top:1px solid var(--line);padding-block:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:var(--muted)}
+.apparel-preview-link .text-link{color:var(--ink);font-size:13px}
+@media(max-width:720px){.apparel-preview-link{align-items:flex-start;flex-direction:column;gap:3px}}
 .launch-footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:11px}
 .footer-row{display:flex;justify-content:space-between;align-items:center;gap:24px}
 .footer-row nav{display:flex;gap:28px;flex-wrap:wrap}

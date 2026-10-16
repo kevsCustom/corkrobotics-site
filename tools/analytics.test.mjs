@@ -291,6 +291,7 @@ test('legitimate HTML, index and trailing-slash aliases map to fixed public rout
     ['/downloads.html', '/downloads', 'Software & downloads — Cork Robotics'],
     ['/gallery/', '/gallery', 'Concept gallery — Cork Robotics'],
     ['/reservation-terms.html', '/reservation-terms', 'CorkBot launch list — Cork Robotics'],
+    ['/support.html', '/support', 'Cork Robotics apparel — Cork Robotics'],
     ['/marketapp/downloads/index.html', '/marketapp/downloads', 'Download MarketApp Bull Pen — Cork Robotics'],
     ['/marketapp/privacy/index', '/marketapp/privacy', 'MarketApp Privacy Policy — Cork Robotics'],
   ]) {
@@ -334,7 +335,7 @@ test('all shipped HTML includes shared assets in order, and the public build inc
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 11);
+  assert.equal(pages.length, 12);
   for (const path of pages) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);
