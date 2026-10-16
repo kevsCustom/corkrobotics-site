@@ -21,6 +21,7 @@
     '/launch-privacy': 'Website and launch email privacy — Cork Robotics',
     '/thank-you': 'Follow the CorkBot build — Cork Robotics',
     '/reservation-terms': 'CorkBot launch list — Cork Robotics',
+    '/support': 'Cork Robotics apparel — Cork Robotics',
     '/marketapp/downloads': 'Download MarketApp Bull Pen — Cork Robotics',
     '/marketapp/privacy': 'MarketApp Privacy Policy — Cork Robotics',
     '/marketapp/terms': 'MarketApp Terms of Use — Cork Robotics',
