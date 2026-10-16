@@ -1,6 +1,6 @@
-# CorkBot launch signup and $5 VIP setup
+# CorkBot free launch signup setup
 
-Prepared October 9, 2026. This is implementation and account-setup guidance. No provider account, live subscriber, payment, refund, or cloud deployment was created by this work.
+Prepared October 9, 2026; reservation retirement updated October 16, 2026. This is implementation and account-setup guidance. No provider account, live subscriber, payment, refund, or cloud deployment was created by this work.
 
 **Current decision:** Kevin chose MailerLite on October 9. Use its custom API mode for the page's existing email form after verification, or its verified hosted form as a fallback. Start on Free for setup; do not purchase a paid plan without an explicit budget. See [the MailerLite launch workbook](mailerlite-launch-workbook.md) for the concrete account settings and first email drafts.
 
@@ -12,7 +12,7 @@ Cloudflare processes email submissions in transit. No application request loggin
 
 If `SIGNUP_STORE_FIELDS=true`, the provider also receives the consent version, signup time, and supplied campaign attribution fields. Create those fields in the provider before enabling this setting. If it is false or unset, only email/list or group membership and the provider's confirmation records are stored by this code; campaign source attribution is not retained by the email provider. No storage-retention deadline is enforced in the application; choose and disclose retention in the company policy and provider settings.
 
-Stripe separately owns hosted checkout, reservation receipts, and payment/refund records. The website neither handles card details nor verifies payment success. Visiting the thank-you page or returning from Stripe does not establish a paid reservation. Confirm that status in Stripe.
+The launch list is free. This website has no reservation checkout or payment capture. Any future apparel shop is a separate purchase flow with its own order records and explicit terms; buying apparel must not automatically subscribe someone to marketing emails.
 
 **Google Workspace remains the company inbox service.** Eligible Gmail/Workspace accounts can use mail merge for a manually managed launch list, but that is a separate operating workflow and is not an implemented signup adapter here. The recommended arrangement keeps Workspace for personal/company correspondence and uses Brevo or MailerLite for confirmation, subscriber status, unsubscribe handling, and launch sequences. Connecting the email provider does not require changing Google Workspace MX records or moving the company's inboxes. Add only the chosen provider's verified sender-authentication DNS records; preserve existing Google records and merge SPF requirements correctly rather than creating conflicting SPF records. Account setup must verify the actual provider instructions before any DNS edit.
 
@@ -88,24 +88,15 @@ Create these as text/string fields before setting `SIGNUP_STORE_FIELDS=true`. Us
 
 Only four bounded campaign-source strings are accepted. Unknown fields, control characters, overlong bodies, missing consent, wrong content types, cross-origin requests, and filled honeypots fail before provider calls. Existing Brevo launch-list members are not mutated for attribution, so these fields represent the last applicable signup request rather than a complete acquisition-history database.
 
-## $5 refundable VIP reservation
+## Free launch list and separate apparel support
 
-The public config fixes the proposed reservation at **$5 USD**. Checkout is hidden until every required setting is valid. No live checkout was configured. The company must finish the reward price, access window/capacity, refund deadline, cancellation process, delayed/canceled-launch handling, and customer contact method before activating it. The proposed approach is to refund at launch while retaining the defined VIP eligibility; that behavior is performed by the company in Stripe, not automated by this website.
+The proposed paid reservation has been removed. The public page offers free email signup with confirmation and does not reserve a unit or promise a particular launch price. The public config retains only an inert `vip_available:false` compatibility field. Previous reservation environment variables are ignored and cannot reactivate a checkout. They are no longer part of setup.
 
-Create a **one-time $5 USD** Stripe Payment Link with fixed quantity, the final benefit, clear refund terms, and a customer email. Publish matching reservation terms on this site. Enable receipts and refund notifications as appropriate. A paid reservation is separate from a Kickstarter pledge; Stripe does not deduct it from a future Kickstarter payment. Do not promise an early-bird discount or slot until the Kickstarter reward and capacity are defined.
+Two Cork Robotics hoodie options are being considered as an optional way to support the company. No store destination or apparel checkout has been configured in this website. Publish a shop link only after the actual products, prices, shipping, and return terms are ready. Apparel should be sold as apparel; do not describe a hoodie purchase as a CorkBot reservation, pledge credit, guaranteed price, or shipping priority unless a separate offer has been defined and accepted. Keep email signup free and primary.
 
-| Name | Type | Value/meaning |
-| --- | --- | --- |
-| `VIP_ENABLED` | Variable | `true` only after the company approves and verifies the final live offer |
-| `VIP_CHECKOUT_URL` | Variable | Actual live HTTPS `buy.stripe.com` Payment Link; test links are rejected |
-| `VIP_BENEFIT` | Variable | Concrete benefit shown to the visitor, matching the published terms |
-| `VIP_TERMS_URL` | Variable | Same-origin HTTPS URL, e.g. `https://corkrobotics.com/reservation-terms` |
-| `VIP_REFUND_DEADLINE` | Variable | Exact future UTC time, e.g. a final agreed `YYYY-MM-DDTHH:mm:ssZ` |
-| `KICKSTARTER_URL` | Variable | Optional real HTTPS Kickstarter project/prelaunch URL |
+The existing `/reservation-terms` route remains as a neutral notice pointing visitors to the free list, so previously shared links do not promote the withdrawn offer. The launch page no longer links to it.
 
-The backend can validate URL/config shape; it cannot verify a Payment Link's real amount, account ownership, reward promise, or successful payment. Verify these in the Stripe dashboard and by inspecting the actual checkout before setting `VIP_ENABLED=true`. Once the configured refund deadline has passed, config stops advertising VIP checkout. The Stripe Payment Link remains active until the company deactivates it separately.
-
-**Manual payment/refund operations:** maintain an access-restricted reservation ledger using Stripe's payment IDs/customer emails. Do not copy that ledger into source or public artifacts. On an individual cancellation, locate the exact successful payment in Stripe and issue a full refund to its original payment method. At launch or the contractual refund deadline, identify outstanding CorkBot reservation payments and process the promised full refunds; dashboard bulk full refunds are available. Check final refund status rather than treating a request as completed. Retain eligibility separately according to the final terms. Processing fees may remain a company cost, and Stripe needs sufficient available balance for refunds. Handle failed/pending refunds and customer support through the dashboard. Marketing consent remains independent of paying; do not auto-add reservation buyers to the launch mailing list without consent.
+`KICKSTARTER_URL` remains an optional setting for the actual HTTPS Kickstarter project or prelaunch URL. Only real `kickstarter.com` or `www.kickstarter.com` project URLs are published.
 
 ## Safe Pages build and deployment
 
@@ -139,11 +130,9 @@ Cloudflare runtime validation used **Wrangler 4.149.0**, pinned in a temporary t
 node --test tools/launch-runtime.test.mjs
 ```
 
-The runtime test refuses a configured provider or active VIP checkout and only targets localhost. It checks disabled config, safe non-success submission, validation errors, unchanged static content, and absence of exposed function source. It does not send mail or charge a card.
+The runtime test refuses a configured provider and only targets localhost; it also verifies that the retired reservation offer is unavailable and has no payment fields. It checks disabled config, safe non-success submission, validation errors, unchanged static content, and absence of exposed function source. It does not send mail or charge a card.
 
 After provider setup/deployment, perform a real-inbox acceptance with the operator's test inbox: signup → DOI receipt → click confirmation → correct list/group membership → welcome email → unsubscribe → repeat API attempt preserves suppression. For MailerLite, verify a truly fresh inbox returns `unconfirmed` before confirmation. Test prior active/unconfirmed and suppressed states without modifying existing customer records. For Brevo, include launch-list-specific unsubscribe and confirm Consent Groups are not in use. For Turnstile, verify a fresh real token is accepted once, replay is rejected, hostname/action mismatch is rejected, and retry receives a new token. Those live checks remain pending until the accounts are configured.
-
-Before live VIP activation, inspect the final checkout amount/currency and displayed terms; complete Stripe test-mode payment/refund checks through its dashboard. A successful test does not activate this site's live checkout. Real charges/refunds require the company's final live offer and operator-controlled Stripe workflow. No automatic refund scheduler, webhook, payment-verification endpoint, or Kickstarter credit integration exists in this implementation.
 
 ## Verified primary sources
 
@@ -155,4 +144,3 @@ Before live VIP activation, inspect the final checkout amount/currency and displ
 - [Gmail mail merge](https://support.google.com/mail/answer/12921167?hl=en) and [MailerLite sender-domain authentication](https://www.mailerlite.com/help/how-to-verify-and-authenticate-your-domain): manually operated mail merge is available for eligible accounts; company inbox hosting and marketing sender authentication are separate.
 - [Cloudflare Pages Functions placement](https://developers.cloudflare.com/pages/functions/get-started/), [routing](https://developers.cloudflare.com/pages/functions/routing/), [bindings](https://developers.cloudflare.com/pages/functions/bindings/), and [local development](https://developers.cloudflare.com/pages/functions/local-development/): root functions, scoped invocation, secrets, and runtime verification.
 - [Turnstile server-side validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/): server verification, five-minute token validity, and single-use tokens.
-- [Stripe Payment Links](https://docs.stripe.com/payment-links) and [refunds](https://docs.stripe.com/refunds): hosted checkout, dashboard operations, full-refund processing, balance and fees.

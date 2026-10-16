@@ -49,7 +49,7 @@ async function responseBody(response, expectedStatus) {
 
 test('unconfigured public config disables capture and VIP without leaking values', () => {
   assert.deepEqual(publicConfig(request(), {}), {
-    signup_available: false, signup_mode: 'unavailable', vip_available: false, vip_amount: 5, vip_checkout_url: null, vip_benefit: null,
+    signup_available: false, signup_mode: 'unavailable', vip_available: false,
   });
   const config = publicConfig(request(), brevo);
   assert.equal(config.signup_available, true);
@@ -88,25 +88,22 @@ test('partial or invalid Turnstile configuration disables signup instead of bypa
   assert.ok(!JSON.stringify(config).includes(turnstile.TURNSTILE_SECRET_KEY));
 });
 
-test('VIP requires live enable, valid live Stripe link, concrete benefit, same-origin terms and future deadline', () => {
+test('retired VIP environment settings never reactivate checkout or expose payment fields', () => {
   const vip = {
     VIP_ENABLED: 'true', VIP_CHECKOUT_URL: 'https://buy.stripe.com/validLiveLink',
     VIP_BENEFIT: 'Access to the defined launch VIP reward through the published launch window.',
     VIP_TERMS_URL: `${origin}/reservation-terms`, VIP_REFUND_DEADLINE: '2026-12-01T00:00:00Z',
   };
-  const now = Date.parse('2026-10-09T00:00:00Z');
-  assert.equal(publicConfig(request(), vip, now).vip_available, true);
-  assert.equal(publicConfig(request(), vip, now).vip_amount, 5);
-  for (const change of [
-    { VIP_ENABLED: 'false' }, { VIP_CHECKOUT_URL: 'https://example.com/pay' },
-    { VIP_CHECKOUT_URL: 'https://buy.stripe.com.evil.example/link' }, { VIP_CHECKOUT_URL: 'https://buy.stripe.com/test_link' },
-    { VIP_BENEFIT: 'TBD placeholder benefit for buyers' }, { VIP_TERMS_URL: 'https://other.example/terms' },
-    { VIP_REFUND_DEADLINE: '2026-11-31T00:00:00Z' }, { VIP_REFUND_DEADLINE: '2026-10-01T00:00:00Z' },
-  ]) {
-    const config = publicConfig(request(), { ...vip, ...change }, now);
+  for (const env of [{}, brevo, mailerlite, {
+    SIGNUP_PROVIDER: 'mailerlite_form', MAILERLITE_FORM_URL: 'https://preview.mailerlite.io/forms/123/456/share',
+    MAILERLITE_FORM_DOI_VERIFIED: 'true',
+  }]) {
+    const baseline = publicConfig(request(), env);
+    const config = publicConfig(request(), { ...env, ...vip });
+    assert.deepEqual(config, baseline, 'old payment configuration cannot change signup or add an offer');
     assert.equal(config.vip_available, false);
-    assert.equal(config.vip_checkout_url, null);
-    assert.equal(config.vip_benefit, null);
+    assert.deepEqual(Object.keys(config).filter(key => /vip|reservation|checkout|currency|amount/.test(key)), ['vip_available']);
+    assert.ok(!JSON.stringify(config).includes('stripe.com'));
   }
 });
 

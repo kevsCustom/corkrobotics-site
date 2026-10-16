@@ -179,24 +179,6 @@
   });
 
   const configureLinks = (config) => {
-    const checkout = secureURL(config.vip_checkout_url);
-    const terms = secureURL(config.reservation_terms_url);
-    const refundDeadline = typeof config.vip_refund_deadline === 'string' ? config.vip_refund_deadline.trim() : '';
-    const benefit = typeof config.vip_benefit === 'string' ? config.vip_benefit.trim() : '';
-    const amount = Number(config.vip_amount);
-    if (config.vip_available === true && checkout && terms && refundDeadline && benefit && Number.isFinite(amount) && amount > 0) {
-      document.querySelector('#vip-status').textContent = 'Optional VIP reservation';
-      document.querySelector('#vip-description').textContent = `A refundable $${amount} VIP reservation. ${benefit}`;
-      document.querySelector('#vip-details').textContent = 'Read the offer and refund terms before reserving. Your Kickstarter pledge is made separately.';
-      const link = document.querySelector('#vip-checkout-link');
-      link.href = checkout.href;
-      link.hidden = false;
-      document.querySelector('#vip-join-link').hidden = true;
-      document.querySelector('#vip-draft-terms').hidden = true;
-      document.querySelector('#vip-terms-link').href = terms.href;
-      document.querySelector('#vip-refund-deadline').textContent = `Refund deadline: ${refundDeadline}`;
-      document.querySelector('#vip-terms').hidden = false;
-    }
     const kickstarter = secureURL(config.kickstarter_url);
     if (kickstarter && ['kickstarter.com', 'www.kickstarter.com'].includes(kickstarter.hostname) && kickstarter.pathname.startsWith('/projects/')) {
       document.querySelector('#kickstarter-link').href = kickstarter.href;
