@@ -18,7 +18,7 @@ async function fixture(files) {
 test('public build preserves legacy and launch assets while excluding backend, secrets, tools and generated products', async () => {
   const root = await fixture({
     'launch.html': 'launch', 'launch-privacy.html': 'privacy', 'thank-you.html': 'thanks', 'reservation-terms.html': 'terms', 'support.html': 'support preview',
-    '_headers': 'headers', '_redirects': 'redirects',
+    '_headers': 'headers', '_redirects': 'redirects', 'robots.txt': 'User-agent: *\nAllow: /\nSitemap: https://corkrobotics.com/sitemap.xml\n', 'sitemap.xml': '<?xml version="1.0"?><urlset />',
     'assets/css/product.css': 'css', 'assets/media/film.mp4': 'movie', 'js/main.js': 'js',
     'marketapp/downloads/latest.json': 'market manifest', 'marketapp/downloads/MarketApp.zip': 'binary',
     'updates/firmware/latest.json': 'firmware manifest', 'releases/firmware/image.bin': 'firmware', 'm14.bin': 'legacy firmware',
@@ -27,7 +27,7 @@ test('public build preserves legacy and launch assets while excluding backend, s
   });
   try {
     const output = await buildLaunchPages(root);
-    for (const path of ['launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html', '_routes.json', '_headers', '_redirects', 'assets/css/product.css', 'assets/media/film.mp4', 'js/main.js', 'marketapp/downloads/latest.json', 'marketapp/downloads/MarketApp.zip', 'updates/firmware/latest.json', 'releases/firmware/image.bin', 'm14.bin']) {
+    for (const path of ['launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html', '_routes.json', '_headers', '_redirects', 'robots.txt', 'sitemap.xml', 'assets/css/product.css', 'assets/media/film.mp4', 'js/main.js', 'marketapp/downloads/latest.json', 'marketapp/downloads/MarketApp.zip', 'updates/firmware/latest.json', 'releases/firmware/image.bin', 'm14.bin']) {
       assert.deepEqual(await readFile(resolve(output.directory, path)), await readFile(resolve(root, path)));
     }
     for (const path of ['functions/api/launch/subscribe.js', 'docs/setup.md', 'tools/tests.mjs', '.dev.vars', 'assets/.env', 'assets/node_modules/private.js', 'assets/build/compiler.bin', 'package.json']) {

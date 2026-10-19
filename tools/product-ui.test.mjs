@@ -140,6 +140,59 @@ test("blocked autoplay retains an honest play control and does not retry while s
   assert.equal(page.button.hidden, false);
 });
 
+
+test("concept modal pauses when the photo-only page is hidden or left", async () => {
+  const link = events({
+    dataset: { film: "mobile" },
+    href: "/assets/media/corkbot/mobile-film-hd.mp4",
+  });
+  const film = events({ paused: true });
+  film.play = () => {
+    film.paused = false;
+    return Promise.resolve();
+  };
+  film.pause = () => { film.paused = true; };
+  film.setAttribute = () => {};
+  const close = events();
+  const nodes = {
+    ".full-film": film,
+    "#film-title": {},
+    ".film-original": {},
+    ".film-error a": {},
+    ".film-error": {},
+    ".dialog-close": close,
+  };
+  const dialog = events({
+    querySelector: (selector) => nodes[selector],
+    showModal: () => { dialog.open = true; },
+  });
+  const document = events({
+    hidden: false,
+    body: { classList: { add: () => {} } },
+    querySelector: (selector) => selector === ".film-dialog" ? dialog : null,
+    querySelectorAll: (selector) => selector === "[data-film]" ? [link] : [],
+  });
+  const window = events({ matchMedia: () => events({ matches: false }) });
+  vm.runInNewContext(productSource, { document, window, navigator: {} });
+  const play = async () => {
+    link.emit("click", { preventDefault: () => {} });
+    await flush();
+    assert.equal(film.paused, false);
+  };
+  await play();
+  document.hidden = true;
+  document.emit("visibilitychange");
+  assert.equal(film.paused, true);
+  document.hidden = false;
+  document.emit("visibilitychange");
+  assert.equal(film.paused, true, "returning to the tab must not restart the film");
+  await play();
+  window.emit("pagehide");
+  assert.equal(film.paused, true);
+  window.emit("pageshow");
+  assert.equal(film.paused, true, "restoring the page must not restart the film");
+});
+
 async function downloads({ firmware, desktop, firmwareError = false }) {
   const roots = {
     firmwareDownloads: { innerHTML: "" },
