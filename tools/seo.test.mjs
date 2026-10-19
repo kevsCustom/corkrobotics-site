@@ -83,8 +83,9 @@ test('temporary apparel, confirmation, privacy and retired reservation pages sta
   }
 });
 
-test('campaign sharing images use real public files at stable production URLs', async () => {
-  for (const file of ['index.html', 'launch.html', ...contentPaths.map((path) => `${path.slice(1)}.html`)]) {
+test('indexable page sharing images use real public files at stable production URLs', async () => {
+  for (const url of await sitemapUrls()) {
+    const file = fileFor(url);
     const html = await read(file);
     for (const field of ['og:image', 'twitter:image']) {
       const imageValues = meta(html, field);
@@ -102,9 +103,10 @@ test('campaign sharing images use real public files at stable production URLs', 
   }
 });
 
-test('workflow and audience navigation resolves to published pages and real anchors without JavaScript', async () => {
-  for (const path of contentPaths) {
-    const html = await read(`${path.slice(1)}.html`);
+test('all indexable page navigation and media resolve to published targets without JavaScript', async () => {
+  for (const url of await sitemapUrls()) {
+    const path = url.pathname;
+    const html = await read(fileFor(url));
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${path} needs one primary heading`);
     for (const { href } of tags(html, 'a')) {
       assert.ok(href && !/^(?:javascript|data):/i.test(href), `${path} has an invalid navigation link`);
@@ -112,6 +114,10 @@ test('workflow and audience navigation resolves to published pages and real anch
       const url = new URL(href, `${origin}${path}`);
       if (url.origin !== origin) { assert.equal(url.protocol, 'https:'); continue; }
       const target = await publishedTarget(url.pathname);
+      if (target.endsWith('.html')) {
+        const targetCanonical = canonical(await read(target))[0];
+        if (targetCanonical) assert.equal(url.pathname, new URL(targetCanonical).pathname, `${path} links through an avoidable HTML or trailing-slash redirect: ${href}`);
+      }
       if (url.hash) {
         const targetHtml = await read(target);
         const ids = [...targetHtml.matchAll(/\bid\s*=\s*(["'])(.*?)\1/g)].map((match) => match[2]);
@@ -121,6 +127,7 @@ test('workflow and audience navigation resolves to published pages and real anch
     for (const { href, rel } of tags(head(html), 'link')) {
       if (href?.startsWith('/') && !href.startsWith('//') && /stylesheet|icon|preload/.test(rel)) await publishedTarget(new URL(href, origin).pathname);
     }
+    for (const { src } of tags(html, 'img')) if (src) await publishedTarget(new URL(src, origin).pathname);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
     assert.ok(main, `${path} needs crawlable main content`);
     for (const image of tags(main, 'img')) {
@@ -134,6 +141,7 @@ test('workflow and audience navigation resolves to published pages and real anch
       if (!srcset) continue;
       for (const candidate of srcset.split(',')) await publishedTarget(new URL(candidate.trim().split(/\s+/)[0], origin).pathname);
     }
+    for (const { poster } of tags(main, 'video')) if (poster) await publishedTarget(new URL(poster, origin).pathname);
   }
 });
 
@@ -143,6 +151,8 @@ test('site structured data parses and agrees with page identity, public logo and
     const html = await read(fileFor(new URL(url)));
     const blocks = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
     if (path === '/') assert.ok(blocks.length, 'Homepage organization and website identity must remain present');
+    const breadcrumb = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/g)].find((match) => attributes(match[1]).class?.split(/\s+/).includes('guide-breadcrumb'));
+    let breadcrumbCount = 0;
     for (const [, source] of blocks) {
       const data = JSON.parse(source);
       assert.match(data['@context'], /^https:\/\/schema\.org\/?$/);
@@ -162,8 +172,14 @@ test('site structured data parses and agrees with page identity, public logo and
           assert.ok(node.name?.trim());
         }
         if (node['@type'] === 'BreadcrumbList') {
+          breadcrumbCount++;
+          assert.ok(breadcrumb, `${path} breadcrumb data needs visible navigation`);
           const items = node.itemListElement;
+          const visible = [...breadcrumb[2].matchAll(/<(a|span)\b([^>]*)>([\s\S]*?)<\/\1>/g)]
+            .filter((match) => match[1] === 'a' || attributes(match[2])['aria-current'] === 'page')
+            .map((match) => ({ name: match[3].replace(/<[^>]+>/g, '').trim(), href: attributes(match[2]).href }));
           assert.ok(Array.isArray(items) && items.length > 1);
+          assert.deepEqual(items.map((item) => item.name), visible.map((item) => item.name));
           assert.deepEqual(items.map((item) => item.position), items.map((_, index) => index + 1));
           for (const [index, item] of items.entries()) {
             assert.ok(item.name?.trim());
@@ -171,11 +187,18 @@ test('site structured data parses and agrees with page identity, public logo and
             const destination = new URL(typeof item.item === 'string' ? item.item : item.item?.['@id']);
             assert.equal(destination.origin, origin);
             await publishedTarget(destination.pathname);
+            if (visible[index].href) assert.equal(destination.href, new URL(visible[index].href, url).href);
+            if (destination.hash) {
+              const destinationHtml = await read(await publishedTarget(destination.pathname));
+              const ids = [...destinationHtml.matchAll(/\bid\s*=\s*(["'])(.*?)\1/g)].map((match) => match[2]);
+              assert.ok(ids.includes(decodeURIComponent(destination.hash.slice(1))));
+            }
           }
           const last = items.at(-1).item;
           if (last) assert.equal(typeof last === 'string' ? last : last['@id'], url);
         }
       }
     }
+    if (contentPaths.includes(path)) assert.equal(breadcrumbCount, 1, `${path} must describe its visible breadcrumb trail exactly once`);
   }
 });
