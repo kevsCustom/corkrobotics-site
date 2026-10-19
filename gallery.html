@@ -11,15 +11,25 @@
     />
     <meta property="og:title" content="CorkBot concept gallery — Cork Robotics" />
     <meta property="og:description" content="Explore CorkBot concept renders of the core robot, planned tools, and bases. These design concepts are in development; final features and availability may change." />
+    <meta property="og:site_name" content="Cork Robotics" />
+    <meta property="og:image" content="https://corkrobotics.com/assets/img/corkbot/corkbot-social.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CorkBot with its drawing arm extended over a black work mat" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CorkBot concept gallery — Cork Robotics" />
+    <meta name="twitter:description" content="Explore CorkBot concept renders of the core robot, planned tools, and bases. These design concepts are in development; final features and availability may change." />
+    <meta name="twitter:image" content="https://corkrobotics.com/assets/img/corkbot/corkbot-social.jpg" />
+    <meta name="twitter:image:alt" content="CorkBot with its drawing arm extended over a black work mat" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://corkrobotics.com/gallery" />
     <link rel="canonical" href="https://corkrobotics.com/gallery" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="/assets/css/product.css?v=20260917" />
+    <link rel="stylesheet" href="/assets/css/product.css?v=20261018-seo-complete" />
     <link rel="stylesheet" href="/assets/css/gallery.css?v=20260917" />
-    <script src="/assets/js/product.js?v=20260917" defer></script>
+    <script src="/assets/js/product.js?v=20261018-photos" defer></script>
     <script src="/assets/js/gallery.js?v=20260917" defer></script>
     <link rel="stylesheet" href="/assets/css/analytics.css?v=20261011" />
     <script src="/assets/js/analytics-config.js?v=20261011" defer></script>
@@ -30,7 +40,7 @@
     <header class="site-header">
       <div class="shell header-row">
         <a class="wordmark" href="/" aria-label="Cork Robotics home"
-          ><img src="/assets/img/logo.png" alt="" width="29" height="32" /><span
+          ><img src="/assets/img/logo-nav.png" alt="" width="29" height="32" /><span
             >Cork Robotics</span
           ></a
         >
@@ -45,12 +55,11 @@
         </button>
         <nav id="site-nav" class="site-nav" aria-label="Main navigation">
           <a href="/#corkbot">CorkBot</a>
-          <a href="/#modules">Modules</a>
-          <a href="/gallery.html" aria-current="page">Gallery</a>
-          <a href="/downloads.html">Downloads</a>
-          <a class="nav-contact" href="mailto:hello@corkrobotics.com"
-            >Get in touch <span aria-hidden="true">↗</span></a
-          >
+          <a href="/how-it-works">How it works</a>
+          <a href="/#uses">Ways to use it</a>
+          <a href="/gallery" aria-current="page">Gallery</a>
+          <a href="/downloads">Downloads</a>
+          <a class="nav-launch" href="/launch#signup">Free launch updates <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
@@ -67,7 +76,7 @@
             bases that bring them together.
           </p>
           <a class="text-link" href="/#modules"
-            >See CorkBot in motion <span aria-hidden="true">↗</span></a
+            >Watch the simulated module film <span aria-hidden="true">↗</span></a
           >
         </div>
       </section>
@@ -86,7 +95,9 @@
             data-gallery-image
             aria-label="Enlarge Core assembly"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-01-core-exploded-480.webp 480w, /assets/img/gallery/dev-preview-01-core-exploded-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-01-core-exploded.jpg"
               alt="Exploded render of CorkBot’s core robot assembly"
               width="1540"
@@ -94,6 +105,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta"><span>Core robot</span><span>01</span></div>
@@ -107,7 +119,9 @@
             data-gallery-image
             aria-label="Enlarge Drawing configuration"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-02-plotting-orientation-480.webp 480w, /assets/img/gallery/dev-preview-02-plotting-orientation-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-02-plotting-orientation.jpg"
               alt="CorkBot fitted with the pen tool in drawing configuration"
               width="1702"
@@ -115,6 +129,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta"><span>Core robot</span><span>02</span></div>
@@ -128,7 +143,9 @@
             data-gallery-image
             aria-label="Enlarge Folded configuration"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-03-folded-travel-480.webp 480w, /assets/img/gallery/dev-preview-03-folded-travel-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-03-folded-travel.jpg"
               alt="CorkBot folded down for transport"
               width="1390"
@@ -136,6 +153,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta"><span>Core robot</span><span>03</span></div>
@@ -149,7 +167,9 @@
             data-gallery-image
             aria-label="Enlarge Three-axis gripper"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-04-gripper-system-480.webp 480w, /assets/img/gallery/dev-preview-04-gripper-system-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-04-gripper-system.jpg"
               alt="Three-axis gripper tool head with its matching motor mount module"
               width="1204"
@@ -157,6 +177,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -172,7 +193,9 @@
             data-gallery-image
             aria-label="Enlarge Horizontal gripper setup"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-05-gripper-horizontal-480.webp 480w, /assets/img/gallery/dev-preview-05-gripper-horizontal-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-05-gripper-horizontal.jpg"
               alt="CorkBot in a horizontal orientation with the three-axis gripper"
               width="1448"
@@ -180,6 +203,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -195,7 +219,9 @@
             data-gallery-image
             aria-label="Enlarge Vertical gripper setup"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-06-gripper-vertical-480.webp 480w, /assets/img/gallery/dev-preview-06-gripper-vertical-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-06-gripper-vertical.jpg"
               alt="CorkBot upright with the three-axis gripper attached"
               width="1034"
@@ -203,6 +229,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -220,7 +247,9 @@
             data-gallery-image
             aria-label="Enlarge Mobile base"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-07-mobility-submodule-480.webp 480w, /assets/img/gallery/dev-preview-07-mobility-submodule-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-07-mobility-submodule.jpg"
               alt="Standalone four-wheel mobile base concept"
               width="1860"
@@ -228,6 +257,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -243,7 +273,9 @@
             data-gallery-image
             aria-label="Enlarge Mobile gripper setup"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-08-mobile-gripper-480.webp 480w, /assets/img/gallery/dev-preview-08-mobile-gripper-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-08-mobile-gripper.jpg"
               alt="CorkBot with the gripper mounted on the mobile base"
               width="1462"
@@ -251,6 +283,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -266,7 +299,9 @@
             data-gallery-image
             aria-label="Enlarge Rotating base"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-09-rotating-base-480.webp 480w, /assets/img/gallery/dev-preview-09-rotating-base-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-09-rotating-base.jpg"
               alt="Standalone rotating base module concept"
               width="1448"
@@ -274,6 +309,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -289,7 +325,9 @@
             data-gallery-image
             aria-label="Enlarge Rotating gripper setup"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-10-rotating-base-mounted-480.webp 480w, /assets/img/gallery/dev-preview-10-rotating-base-mounted-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-10-rotating-base-mounted.jpg"
               alt="CorkBot and its three-axis gripper on the rotating base"
               width="1122"
@@ -297,6 +335,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -312,7 +351,9 @@
             data-gallery-image
             aria-label="Enlarge Paper feeder"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-11-paper-feed-480.webp 480w, /assets/img/gallery/dev-preview-11-paper-feed-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-11-paper-feed.jpg"
               alt="Standalone automated paper feeder module concept"
               width="1996"
@@ -320,6 +361,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -337,7 +379,9 @@
             data-gallery-image
             aria-label="Enlarge Paper-feed drawing setup"
           >
-            <img
+            <picture>
+              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-12-paper-feed-mounted-480.webp 480w, /assets/img/gallery/dev-preview-12-paper-feed-mounted-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
+              <img
               src="/assets/img/dev-preview-12-paper-feed-mounted.jpg"
               alt="CorkBot mounted on the proposed automated paper feeder"
               width="1608"
@@ -345,6 +389,7 @@
               loading="lazy"
               decoding="async"
             />
+            </picture>
             <span class="gallery-enlarge" aria-hidden="true">↗</span>
           </a>
           <div class="gallery-meta">
@@ -375,7 +420,7 @@
         <div class="footer-top">
           <a class="wordmark" href="/" aria-label="Cork Robotics home"
             ><img
-              src="/assets/img/logo.png"
+              src="/assets/img/logo-nav.png"
               alt=""
               width="29"
               height="32"
@@ -385,13 +430,19 @@
         <div class="footer-bottom">
           <span>© <span data-year>2026</span> Cork Robotics</span>
           <nav aria-label="Footer navigation">
-            <a href="/downloads.html">Downloads</a
-            ><a href="mailto:support@corkrobotics.com">Support</a
-            ><a href="/marketapp/downloads">MarketApp</a
-            ><a href="/marketapp/privacy">MarketApp privacy</a>
+            <a href="/how-it-works">How it works</a>
+            <a href="/#uses">Ways to use CorkBot</a>
+            <a href="/gallery">Concept gallery</a>
+            <a href="/downloads">Downloads</a>
+            <a href="/launch#signup">Free launch updates</a>
+            <a href="/launch-privacy">Privacy notice</a>
+            <a href="mailto:support@corkrobotics.com">Contact support</a>
           </nav>
           <a href="#main">Back to top ↑</a>
         </div>
+        <nav class="footer-secondary" aria-label="Other Cork Robotics software">
+          <span>Other software</span><a href="/marketapp/downloads">MarketApp</a><a href="/marketapp/privacy">MarketApp privacy</a><a href="/marketapp/terms">MarketApp terms</a>
+        </nav>
       </div>
     </footer>
 

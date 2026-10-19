@@ -7,7 +7,7 @@
     <title>CorkBot portable drawing robot with phone AI — Cork Robotics</title>
     <meta
       name="description"
-      content="Meet CorkBot, a compact, battery-powered robot for drawing and making. Prepare jobs with the phone app’s AI, review the result, and approve the plot."
+      content="Meet CorkBot, a compact, battery-powered robot for drawing and making. Prepare jobs with the phone app’s AI, review the prepared plot, and accept it to begin."
     />
     <meta property="og:title" content="CorkBot portable drawing robot with phone AI — Cork Robotics" />
     <meta
@@ -42,7 +42,7 @@
       type="image/webp"
       fetchpriority="high"
     />
-    <link rel="stylesheet" href="/assets/css/product.css?v=20261018-audience-pages" />
+    <link rel="stylesheet" href="/assets/css/product.css?v=20261018-seo-complete" />
     <script src="/assets/js/product.js?v=20261018-photos" defer></script>
     <script type="application/ld+json">
       {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://corkrobotics.com/#organization","name":"Cork Robotics","url":"https://corkrobotics.com/","logo":"https://corkrobotics.com/assets/img/logo.png"},{"@type":"WebSite","@id":"https://corkrobotics.com/#website","url":"https://corkrobotics.com/","name":"Cork Robotics","publisher":{"@id":"https://corkrobotics.com/#organization"}}]}
@@ -56,7 +56,7 @@
     <header class="site-header">
       <div class="shell header-row">
         <a class="wordmark" href="/" aria-label="Cork Robotics home"
-          ><img src="/assets/img/logo.png" alt="" width="29" height="32" /><span
+          ><img src="/assets/img/logo-nav.png" alt="" width="29" height="32" /><span
             >Cork Robotics</span
           ></a
         >
@@ -71,13 +71,11 @@
         </button>
         <nav id="site-nav" class="site-nav" aria-label="Main navigation">
           <a href="#corkbot">CorkBot</a>
-          <a href="#modules">Modules</a>
+          <a href="/how-it-works">How it works</a>
+          <a href="#uses">Ways to use it</a>
           <a href="/gallery">Gallery</a>
           <a href="/downloads">Downloads</a>
-          <a href="/launch">Join the launch list</a>
-          <a class="nav-contact" href="mailto:hello@corkrobotics.com"
-            >Get in touch <span aria-hidden="true">↗</span></a
-          >
+          <a class="nav-launch" href="/launch#signup">Free launch updates <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
@@ -223,10 +221,12 @@
               data-film="mobile"
               aria-label="Watch the simulated CorkBot on wheels concept film, 20 seconds"
               ><img
-                src="/assets/media/corkbot/mobile-poster.webp"
+                src="/assets/media/corkbot/mobile-poster-1024.webp"
+                srcset="/assets/media/corkbot/mobile-poster-640.webp 640w, /assets/media/corkbot/mobile-poster-1024.webp 1024w, /assets/media/corkbot/mobile-poster.webp 1920w"
+                sizes="(max-width: 760px) 100vw, 90vw"
                 alt="Simulated CorkBot mobile-base concept with a rotating module and gripper"
-                width="1600"
-                height="900"
+                width="1920"
+                height="1080"
                 loading="lazy"
               /><span class="play-disc" aria-hidden="true">▶</span></a
             >
@@ -362,6 +362,7 @@
               Tell us about a project you have in mind or a task you’d like help
               with. A few words are enough.
             </p>
+            <p class="project-status">CorkBot is in development at Cork Robotics. We’re targeting December 8, 2026 on Kickstarter, with the final package and pricing shared before the campaign opens. <a href="/launch#signup">Get launch updates</a> or <a href="mailto:hello@corkrobotics.com">contact us</a> with a question.</p>
           </div>
           <a
             class="contact-link"
@@ -377,7 +378,7 @@
         <div class="footer-top">
           <a class="wordmark" href="/" aria-label="Cork Robotics home"
             ><img
-              src="/assets/img/logo.png"
+              src="/assets/img/logo-nav.png"
               alt=""
               width="29"
               height="32"
@@ -387,14 +388,19 @@
         <div class="footer-bottom">
           <span>© <span data-year>2026</span> Cork Robotics</span>
           <nav aria-label="Footer navigation">
-            <a href="/downloads">Downloads</a
-            ><a href="mailto:support@corkrobotics.com">Support</a
-            ><a href="/marketapp/downloads">MarketApp</a
-            ><a href="/marketapp/privacy">MarketApp privacy</a>
-            ><a href="/marketapp/terms">MarketApp terms</a>
+            <a href="/how-it-works">How it works</a>
+            <a href="/#uses">Ways to use CorkBot</a>
+            <a href="/gallery">Concept gallery</a>
+            <a href="/downloads">Downloads</a>
+            <a href="/launch#signup">Free launch updates</a>
+            <a href="/launch-privacy">Privacy notice</a>
+            <a href="mailto:support@corkrobotics.com">Contact support</a>
           </nav>
           <a href="#main">Back to top ↑</a>
         </div>
+        <nav class="footer-secondary" aria-label="Other Cork Robotics software">
+          <span>Other software</span><a href="/marketapp/downloads">MarketApp</a><a href="/marketapp/privacy">MarketApp privacy</a><a href="/marketapp/terms">MarketApp terms</a>
+        </nav>
       </div>
     </footer>
 
