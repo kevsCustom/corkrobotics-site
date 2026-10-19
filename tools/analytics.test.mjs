@@ -304,6 +304,30 @@ test('legitimate HTML, index and trailing-slash aliases map to fixed public rout
   }
 });
 
+test('new public workflow and audience routes preserve fixed titles while dropping private URL values', async () => {
+  for (const path of ['/how-it-works', '/uses/business-customization', '/uses/art-and-making', '/uses/robotics-learning']) {
+    const html = await readFile(new URL(`..${path}.html`, import.meta.url), 'utf8');
+    const fixedTitle = html.match(/<title>([^<]+)<\/title>/)?.[1];
+    assert.ok(fixedTitle);
+    for (const alias of [path, `${path}.html`, `${path}/`]) {
+      const ui = fixture({ url: `https://corkrobotics.com${alias}?utm_source=google&utm_campaign=person%40example.invalid&email=person%40example.invalid&token=PRIVATE_TOKEN#SECRET`,
+        title: 'DYNAMIC_PRIVATE_TITLE', cookies: { cork_analytics_consent: 'accepted' } });
+      ui.loaded();
+      const events = ui.commands().filter(([command]) => command === 'event');
+      assert.equal(events.length, 1);
+      assert.equal(events[0][1], 'page_view');
+      assert.equal(events[0][2].page_location, `https://corkrobotics.com${path}?utm_source=google`);
+      assert.equal(events[0][2].page_title, fixedTitle);
+      assert.doesNotMatch(JSON.stringify(ui.commands()), /person%40example|person@example|PRIVATE_TOKEN|SECRET|DYNAMIC_PRIVATE_TITLE/);
+    }
+    for (const cookies of [{ cork_analytics_consent: 'declined' }, { cork_analytics_consent: 'accepted', cork_analytics_optout: '1' }]) {
+      const excluded = fixture({ url: `https://corkrobotics.com${path}`, cookies });
+      assert.equal(excluded.scripts.length, 0);
+      assert.equal(excluded.window.dataLayer, undefined);
+    }
+  }
+});
+
 test('preferences reopen with keyboard focus and Escape returns focus without changing consent', () => {
   const ui = fixture({ cookies: { cork_analytics_consent: 'declined' }, loading: true });
   assert.equal(ui.panel(), undefined);
@@ -335,10 +359,11 @@ test('all shipped HTML includes shared assets in order, and the public build inc
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 12);
+  assert.equal(pages.length, 16);
   for (const path of pages) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);
+    assert.match(html, /analytics\.js\?v=20261018-audience-pages" defer/, path);
     assert.match(html, /analytics-config\.js\?v=20261011" defer/);
     assert.ok(html.indexOf('analytics-config.js') < html.indexOf('analytics.js'), path);
     assert.match(html, /\/assets\/css\/analytics\.css\?v=20261011/);

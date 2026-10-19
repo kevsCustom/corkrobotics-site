@@ -540,6 +540,37 @@ button[hidden],
   margin-top: 10px;
   max-width: 45ch;
 }
+.portability-layout {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: clamp(32px, 6vw, 90px);
+  align-items: center;
+}
+.portability-layout picture { display: block; background: #fff; }
+.portability-layout img { aspect-ratio: 1024/683; object-fit: contain; }
+.portability-copy h3 { font-size: clamp(28px, 3vw, 42px); }
+.portability-copy p { max-width: 40ch; color: var(--muted); margin-top: 20px; }
+.portability-copy .text-link { margin-top: 20px; }
+.uses-section { border-top: 1px solid var(--line); }
+.uses-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.use-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: clamp(24px, 2.7vw, 40px);
+  background: #eeeee8;
+  border: 1px solid var(--line);
+  text-decoration: none;
+}
+.use-card .mini-label { color: var(--muted); }
+.use-card h3 { margin-top: 28px; font-size: clamp(24px, 2.2vw, 32px); max-width: 17ch; }
+.use-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 18px; margin-bottom: 32px; }
+.use-card-link { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; margin-top: auto; font-size: 13px; }
+.use-card-link > span { font-size: 20px; }
+.use-card:hover { background: #e6e9df; }
+.use-card:hover .use-card-link { text-decoration: underline; text-underline-offset: 5px; }
+.workflow-links { display: flex; flex-wrap: wrap; gap: 0 26px; }
 .development-note {
   font-size: 12px;
   color: var(--muted);
@@ -1128,6 +1159,14 @@ button[hidden],
     grid-template-columns: 1fr;
     gap: 36px;
   }
+  .portability-layout { grid-template-columns: 1fr; gap: 28px; }
+  .portability-copy p { font-size: 15px; max-width: 45ch; }
+  .uses-grid { grid-template-columns: 1fr; gap: 18px; }
+  .use-card { padding: 26px; }
+  .use-card h3 { margin-top: 20px; max-width: none; font-size: 28px; }
+  .use-card p { max-width: 44ch; margin-bottom: 16px; }
+  .workflow-links { display: block; }
+
   .configuration-title {
     margin-top: 18px;
   }
