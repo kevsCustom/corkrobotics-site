@@ -1,4 +1,4 @@
-/* Motion is progressive enhancement. Posters, film links and navigation work without JS. */
+/* Concept film playback is progressive enhancement; photos and links work without JS. */
 (() => {
   document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = new Date().getFullYear();
@@ -55,6 +55,7 @@
       : "▶";
   };
   const startPreview = async () => {
+    if (!preview) return;
     const token = ++loadToken;
     if (!preview.src) preview.src = preview.dataset.previewSrc;
     try {
@@ -118,26 +119,26 @@
     }
     reducedMotion.addEventListener("change", syncPreview);
     connection?.addEventListener?.("change", syncPreview);
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) film?.pause();
-      syncPreview();
-    });
-    window.addEventListener("pagehide", () => {
-      stopPreview();
-      film?.pause();
-    });
-    window.addEventListener("pageshow", syncPreview);
   }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) film?.pause();
+    syncPreview();
+  });
+  window.addEventListener("pagehide", () => {
+    stopPreview();
+    film?.pause();
+  });
+  window.addEventListener("pageshow", syncPreview);
 
   if (!dialog || !film || typeof dialog.showModal !== "function") return;
   const films = {
     mobile: {
-      title: "CorkBot in motion",
+      title: "Mobile base concept",
       poster: "/assets/media/corkbot/mobile-poster.webp",
       original: "/assets/media/corkbot/mobile-film-4k.mp4",
     },
     gripper: {
-      title: "Rotating base + three-axis gripper",
+      title: "Rotating base + three-axis gripper concept",
       poster: "/assets/media/corkbot/gripper-poster.webp",
       original: "/assets/media/corkbot/gripper-film-4k.mp4",
     },

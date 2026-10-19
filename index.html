@@ -4,21 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f4f0" />
-    <title>CorkBot — A modular robot by Cork Robotics</title>
+    <title>CorkBot portable drawing robot with phone AI — Cork Robotics</title>
     <meta
       name="description"
-      content="Meet CorkBot, a compact robot with interchangeable tools and bases. Explore drawing, a three-axis gripper, and mobile configurations in development."
+      content="Meet CorkBot, a compact, battery-powered robot for drawing and making. Prepare jobs with the phone app’s AI, review the result, and approve the plot."
     />
-    <meta property="og:title" content="Meet CorkBot — Cork Robotics" />
+    <meta property="og:title" content="CorkBot portable drawing robot with phone AI — Cork Robotics" />
     <meta
       property="og:description"
-      content="A compact robot. Interchangeable tools. Explore CorkBot in motion."
+      content="A portable robot for drawing and making. Battery power, a phone app with AI, and a plot you review before it starts."
     />
     <meta
       property="og:image"
-      content="https://corkrobotics.com/assets/media/corkbot/mobile-poster.webp"
+      content="https://corkrobotics.com/assets/img/corkbot/corkbot-social.jpg"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CorkBot with its drawing arm extended over a black work mat" />
+    <meta property="og:site_name" content="Cork Robotics" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CorkBot portable drawing robot with phone AI — Cork Robotics" />
+    <meta name="twitter:description" content="A portable, battery-powered robot for drawing and making. Ask the phone app’s AI, review the prepared plot, and accept it to begin." />
+    <meta name="twitter:image" content="https://corkrobotics.com/assets/img/corkbot/corkbot-social.jpg" />
+    <meta name="twitter:image:alt" content="CorkBot with its drawing arm extended over a black work mat" />
     <meta property="og:url" content="https://corkrobotics.com/" />
     <link rel="canonical" href="https://corkrobotics.com/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -27,11 +36,17 @@
     <link
       rel="preload"
       as="image"
-      href="/assets/media/corkbot/mobile-poster.webp"
+      href="/assets/img/corkbot/corkbot-hero-1534.webp"
+      imagesrcset="/assets/img/corkbot/corkbot-hero-640.webp 640w, /assets/img/corkbot/corkbot-hero-1024.webp 1024w, /assets/img/corkbot/corkbot-hero-1534.webp 1534w"
+      imagesizes="(max-width: 760px) 100vw, 90vw"
+      type="image/webp"
       fetchpriority="high"
     />
-    <link rel="stylesheet" href="/assets/css/product.css?v=20260917" />
-    <script src="/assets/js/product.js?v=20260917" defer></script>
+    <link rel="stylesheet" href="/assets/css/product.css?v=20261018-photos" />
+    <script src="/assets/js/product.js?v=20261018-photos" defer></script>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://corkrobotics.com/#organization","name":"Cork Robotics","url":"https://corkrobotics.com/","logo":"https://corkrobotics.com/assets/img/logo.png"},{"@type":"WebSite","@id":"https://corkrobotics.com/#website","url":"https://corkrobotics.com/","name":"Cork Robotics","publisher":{"@id":"https://corkrobotics.com/#organization"}}]}
+    </script>
     <link rel="stylesheet" href="/assets/css/analytics.css?v=20261011" />
     <script src="/assets/js/analytics-config.js?v=20261011" defer></script>
     <script src="/assets/js/analytics.js?v=20261011" defer></script>
@@ -57,9 +72,9 @@
         <nav id="site-nav" class="site-nav" aria-label="Main navigation">
           <a href="#corkbot">CorkBot</a>
           <a href="#modules">Modules</a>
-          <a href="/gallery.html">Gallery</a>
-          <a href="/downloads.html">Downloads</a>
-          <a href="/launch">Launch updates</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/downloads">Downloads</a>
+          <a href="/launch">Join the launch list</a>
           <a class="nav-contact" href="mailto:hello@corkrobotics.com"
             >Get in touch <span aria-hidden="true">↗</span></a
           >
@@ -72,66 +87,31 @@
         <div class="hero-intro">
           <div>
             <p class="eyebrow">
-              <span class="status-dot" aria-hidden="true"></span> Compact.
-              Modular. CorkBot.
+              <span class="status-dot" aria-hidden="true"></span> Portable.
+              Battery powered. CorkBot.
             </p>
-            <h1 id="hero-title">Meet CorkBot.</h1>
+            <h1 id="hero-title">Meet CorkBot. <span>A portable drawing robot.</span></h1>
           </div>
           <div class="hero-summary">
             <p>
-              A compact robot with interchangeable tools and bases. For drawing,
-              making, and hands-on exploration.
+              A portable robot for drawing, making, and hands-on exploration.
+              Take it in its case. Power it by battery or plug it in.
+              Prepare your next project with the phone app’s AI.
             </p>
-            <a class="text-link" href="#corkbot"
-              >Explore the robot <span aria-hidden="true">↓</span></a
+            <a class="launch-button" href="/launch"
+              >Join the free launch list <span aria-hidden="true">↗</span></a
             >
-            <a class="text-link" href="/launch"
-              >Get launch updates <span aria-hidden="true">↗</span></a
+            <a class="text-link" href="#corkbot"
+              >Explore CorkBot <span aria-hidden="true">↓</span></a
             >
           </div>
         </div>
-        <figure class="hero-film">
-          <div class="film-frame">
-            <video
-              id="hero-preview"
-              class="preview-video"
-              muted
-              loop
-              playsinline
-              preload="none"
-              poster="/assets/media/corkbot/mobile-poster.webp"
-              width="1600"
-              height="900"
-              aria-label="Simulated CorkBot with a mobile base, rotating module, and gripper picking up and moving a screw"
-              aria-describedby="hero-caption"
-              data-preview-src="/assets/media/corkbot/mobile-preview.mp4"
-            ></video>
-          </div>
-          <figcaption id="hero-caption" class="film-caption">
-            <div>
-              <span class="caption-title">CorkBot in motion</span
-              ><span class="caption-note"
-                >Simulated demonstration · Modules in development</span
-              >
-            </div>
-            <div class="film-actions">
-              <button
-                class="motion-toggle"
-                type="button"
-                aria-controls="hero-preview"
-                hidden
-              >
-                <span class="motion-symbol" aria-hidden="true">▶</span
-                ><span data-motion-label>Play preview</span></button
-              ><a
-                class="text-link"
-                href="/assets/media/corkbot/mobile-film-hd.mp4"
-                data-film="mobile"
-                >Watch film <span class="film-duration">0:20</span
-                ><span aria-hidden="true">↗</span></a
-              >
-            </div>
-          </figcaption>
+        <figure class="hero-photo">
+          <picture>
+            <source type="image/webp" srcset="/assets/img/corkbot/corkbot-hero-640.webp 640w, /assets/img/corkbot/corkbot-hero-1024.webp 1024w, /assets/img/corkbot/corkbot-hero-1534.webp 1534w" sizes="(max-width: 760px) 100vw, 90vw" />
+            <img src="/assets/img/corkbot/corkbot-hero-1534.jpg" srcset="/assets/img/corkbot/corkbot-hero-640.jpg 640w, /assets/img/corkbot/corkbot-hero-1024.jpg 1024w, /assets/img/corkbot/corkbot-hero-1534.jpg 1534w" sizes="(max-width: 760px) 100vw, 90vw" alt="CorkBot with its drawing arm extended over a black work mat" width="1534" height="1025" fetchpriority="high" />
+          </picture>
+          <figcaption class="photo-caption"><span>CorkBot / Pen configuration</span><span>Current prototype · Studio photograph</span></figcaption>
         </figure>
       </section>
 
@@ -145,26 +125,24 @@
           <h2 id="intro-title">Start with a pen.<br />Take it from there.</h2>
           <div class="intro-text">
             <p>
-              CorkBot brings robotic motion to your desk. The pen tool turns it
-              into a drawing machine; interchangeable attachments open up new
-              ways to work with objects.
+              CorkBot brings robotic motion to wherever you make things.
+              Its folding arm and carry handle keep it compact between projects,
+              ready to travel in its case.
             </p>
             <p>
-              We’re developing the tools and bases around one compact robotic
-              core, so each configuration builds on the same machine.
+              Start with the pen tool and a drawing. The integrated battery
+              gives you a portable setup, with plug-in power when you want it.
+              More tools and bases are in development around the same core.
             </p>
           </div>
         </div>
         <div class="core-layout">
           <figure class="core-image">
-            <img
-              src="/assets/img/dev-preview-02-plotting-orientation.jpg"
-              alt="CorkBot core with its pen tool attached, shown in drawing configuration"
-              width="1702"
-              height="1054"
-              loading="lazy"
-            />
-            <figcaption>Core robot · Pen configuration</figcaption>
+            <picture>
+              <source type="image/webp" srcset="/assets/img/corkbot/corkbot-carry-640.webp 640w, /assets/img/corkbot/corkbot-carry-1024.webp 1024w" sizes="(max-width: 760px) 90vw, 52vw" />
+              <img src="/assets/img/corkbot/corkbot-carry-1024.jpg" srcset="/assets/img/corkbot/corkbot-carry-640.jpg 640w, /assets/img/corkbot/corkbot-carry-1024.jpg 1024w" sizes="(max-width: 760px) 90vw, 52vw" alt="A hand lifting folded CorkBot by its carry handle" width="1024" height="684" loading="lazy" />
+            </picture>
+            <figcaption>Compact enough to carry · Current prototype</figcaption>
           </figure>
           <div class="core-details">
             <h3>A small footprint.<br />A useful working area.</h3>
@@ -206,8 +184,9 @@
               <h2 id="module-title">A closer look<br />at the movement.</h2>
             </div>
             <p class="section-description">
-              A rotating base and three-axis gripper extend the core’s movement.
-              Watch the assembly reach, grasp, turn, and place a small part.
+              Explore the roadmap through simulated films of a rotating base,
+              three-axis gripper, and mobile base. These planned modules are
+              in development.
             </p>
           </div>
           <figure class="detail-film">
@@ -215,10 +194,10 @@
               class="film-poster-link"
               href="/assets/media/corkbot/gripper-film-hd.mp4"
               data-film="gripper"
-              aria-label="Watch the rotating base and gripper film, 10 seconds"
+              aria-label="Watch the simulated rotating base and gripper concept film, 10 seconds"
               ><img
                 src="/assets/media/corkbot/gripper-poster.webp"
-                alt="Close view of CorkBot’s three-axis gripper placing a screw upright on a workbench fixture"
+                alt="Simulated concept of CorkBot’s planned gripper placing a screw upright on a fixture"
                 width="1600"
                 height="900"
                 loading="lazy"
@@ -262,9 +241,10 @@
               <span class="detail-number">03 /</span>
               <h3>Move between tasks</h3>
               <p>
-                The mobile base adds forward travel and turning, as shown in the
-                opening film.
+                A mobile-base concept explores forward travel and turning
+                between tasks.
               </p>
+              <a class="text-link" href="/assets/media/corkbot/mobile-film-hd.mp4" data-film="mobile">Watch the simulated concept <span aria-hidden="true">↗</span></a>
             </article>
           </div>
         </div>
@@ -280,20 +260,18 @@
             <h2 id="config-title">Built around the task.</h2>
           </div>
           <p class="section-description">
-            Different attachments. The same robotic core. Explore a selection of
-            planned configurations.
+            The current prototype folds down between projects, with more ways
+            to make in development. See it alongside a planned attachment.
           </p>
         </div>
         <div class="configuration-grid">
           <article>
             <figure>
-              <img
-                src="/assets/img/dev-preview-03-folded-travel.jpg"
-                alt="CorkBot folded down into its compact travel position"
-                width="1702"
-                height="1054"
-                loading="lazy"
-              />
+              <picture>
+                <source type="image/webp" srcset="/assets/img/corkbot/corkbot-folded-640.webp 640w, /assets/img/corkbot/corkbot-folded-1024.webp 1024w" sizes="(max-width: 760px) 90vw, 44vw" />
+                <img src="/assets/img/corkbot/corkbot-folded-1024.jpg" srcset="/assets/img/corkbot/corkbot-folded-640.jpg 640w, /assets/img/corkbot/corkbot-folded-1024.jpg 1024w" sizes="(max-width: 760px) 90vw, 44vw" alt="CorkBot folded into a compact shape, with the pen and camera visible" width="1024" height="683" loading="lazy" />
+              </picture>
+              <figcaption class="configuration-caption">Current prototype · Studio photograph</figcaption>
             </figure>
             <div class="configuration-title">
               <h3>Fold it. Bring it.</h3>
@@ -310,6 +288,7 @@
                 height="1054"
                 loading="lazy"
               />
+              <figcaption class="configuration-caption">Paper-feed concept · Development render</figcaption>
             </figure>
             <div class="configuration-title">
               <h3>Keep drawing.</h3>
@@ -323,38 +302,34 @@
             <h3>Explore all 12 concept renders.</h3>
             <p>The core robot, planned tools, and base configurations.</p>
           </div>
-          <a class="text-link" href="/gallery.html"
+          <a class="text-link" href="/gallery"
             >View the gallery <span aria-hidden="true">↗</span></a
           >
         </div>
         <p class="development-note">
-          Further development of the planned modules depends on funding. These
-          renders show design concepts; final features and availability may
-          change.
+          The paper feeder, rotating base, gripper, and mobile base are planned
+          modules. Further development depends on funding; concept renders and
+          simulated films show the roadmap. Final features and availability may change.
         </p>
       </section>
 
       <section id="software" class="software-section">
         <div class="shell software-layout">
-          <p class="eyebrow">CorkBot Studio</p>
+          <p class="eyebrow">Phone app + AI</p>
           <div>
-            <h2>From an idea<br />to a path.</h2>
-            <p>
-              Prepare drawings, preview movement, and work with your robot from
-              the desktop.
-            </p>
-            <a class="text-link" href="/downloads.html"
-              >Software &amp; downloads <span aria-hidden="true">↗</span></a
-            >
+            <h2>Ask. Review.<br />Make.</h2>
+            <p>One request starts the preparation. You approve the plot before CorkBot gets to work.</p>
+            <ol class="workflow-steps">
+              <li><h3>Ask for the job.</h3><p>“Use my saved logo on these six boxes.”</p></li>
+              <li><h3>Let the AI prepare it.</h3><p>The phone app retrieves your artwork, scans and meshes the surfaces, then places the drawing.</p></li>
+              <li><h3>Review and accept.</h3><p>Check the prepared plot in the app and accept it. Then CorkBot begins.</p></li>
+            </ol>
+            <a class="text-link" href="/launch">Follow the launch <span aria-hidden="true">↗</span></a>
           </div>
           <div class="software-aside">
-            <span class="mini-label">For your CorkBot</span>
-            <p>
-              Find available software and firmware, or get help with your setup.
-            </p>
-            <a class="text-link" href="mailto:support@corkrobotics.com"
-              >Contact support <span aria-hidden="true">↗</span></a
-            >
+            <span class="mini-label">CorkBot Studio</span>
+            <p>Prefer working from your desktop? Prepare drawings, preview paths, and work with your robot in CorkBot Studio.</p>
+            <a class="text-link" href="/downloads">Software &amp; downloads <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
@@ -399,7 +374,7 @@
         <div class="footer-bottom">
           <span>© <span data-year>2026</span> Cork Robotics</span>
           <nav aria-label="Footer navigation">
-            <a href="/downloads.html">Downloads</a
+            <a href="/downloads">Downloads</a
             ><a href="mailto:support@corkrobotics.com">Support</a
             ><a href="/marketapp/downloads">MarketApp</a
             ><a href="/marketapp/privacy">MarketApp privacy</a>
