@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5f4f0" />
+    <meta name="theme-color" content="#101315" />
     <title>CorkBot: Portable Pen Plotter &amp; Drawing Robot | Cork Robotics</title>
     <meta
       name="description"
@@ -36,8 +36,8 @@
     <link
       rel="preload"
       as="image"
-      href="/assets/img/corkbot/corkbot-hero-1534.webp"
-      imagesrcset="/assets/img/corkbot/corkbot-hero-640.webp 640w, /assets/img/corkbot/corkbot-hero-1024.webp 1024w, /assets/img/corkbot/corkbot-hero-1534.webp 1534w"
+      href="/assets/img/corkbot/corkbot-dark-1534.webp"
+      imagesrcset="/assets/img/corkbot/corkbot-dark-768.webp 768w, /assets/img/corkbot/corkbot-dark-1534.webp 1534w"
       imagesizes="(max-width: 760px) 100vw, 90vw"
       type="image/webp"
       fetchpriority="high"
@@ -50,8 +50,10 @@
     <link rel="stylesheet" href="/assets/css/analytics.css?v=20261011" />
     <script src="/assets/js/analytics-config.js?v=20261011" defer></script>
     <script src="/assets/js/analytics.js?v=20261018-audience-pages" defer></script>
+    <link rel="stylesheet" href="/assets/css/design.css?v=20261022" />
+    <script src="/assets/js/design.js?v=20261022" defer></script>
   </head>
-  <body>
+  <body class="product-home">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="shell header-row">
@@ -72,10 +74,8 @@
         <nav id="site-nav" class="site-nav" aria-label="Main navigation">
           <a href="#corkbot">CorkBot</a>
           <a href="/how-it-works">How it works</a>
-          <a href="#uses">Ways to use it</a>
           <a href="/gallery">Gallery</a>
-          <a href="/downloads">Downloads</a>
-          <a class="nav-launch" href="/launch#signup">Free launch updates <span aria-hidden="true">↗</span></a>
+          <a class="nav-launch" href="/launch#signup">Launch updates <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
@@ -84,32 +84,20 @@
       <section class="hero shell" aria-labelledby="hero-title">
         <div class="hero-intro">
           <div>
-            <p class="eyebrow">
-              <span class="status-dot" aria-hidden="true"></span> Portable.
-              Battery powered. CorkBot.
-            </p>
-            <h1 id="hero-title">Meet CorkBot. <span>A portable drawing robot.</span></h1>
+            <h1 id="hero-title">CorkBot.</h1>
+            <p class="hero-tagline">A portable drawing robot.</p>
           </div>
           <div class="hero-summary">
-            <p>
-              In its current pen configuration, CorkBot works as a portable pen
-              plotter. Take it in its case, use battery or plug-in power, and let
-              the phone app’s AI prepare a plot for you to review and accept.
-            </p>
-            <a class="launch-button" href="/launch"
-              >Join the free launch list <span aria-hidden="true">↗</span></a
-            >
-            <a class="text-link" href="#corkbot"
-              >Explore CorkBot <span aria-hidden="true">↓</span></a
-            >
+            <p>Make room for an idea. A folding arm, a pen, and a workspace wherever you take it.</p>
+            <a class="launch-button" href="/launch#signup">Get free launch updates <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <figure class="hero-photo">
           <picture>
-            <source type="image/webp" srcset="/assets/img/corkbot/corkbot-hero-640.webp 640w, /assets/img/corkbot/corkbot-hero-1024.webp 1024w, /assets/img/corkbot/corkbot-hero-1534.webp 1534w" sizes="(max-width: 760px) 100vw, 90vw" />
-            <img src="/assets/img/corkbot/corkbot-hero-1534.jpg" srcset="/assets/img/corkbot/corkbot-hero-640.jpg 640w, /assets/img/corkbot/corkbot-hero-1024.jpg 1024w, /assets/img/corkbot/corkbot-hero-1534.jpg 1534w" sizes="(max-width: 760px) 100vw, 90vw" alt="CorkBot with its drawing arm extended over a black work mat" width="1534" height="1025" fetchpriority="high" />
+            <source type="image/webp" srcset="/assets/img/corkbot/corkbot-dark-768.webp 768w, /assets/img/corkbot/corkbot-dark-1534.webp 1534w" sizes="100vw" />
+            <img src="/assets/img/corkbot/corkbot-dark-1534.webp" alt="CorkBot with its drawing arm extended over a black work mat, with a digitally restyled studio background" width="1534" height="1024" fetchpriority="high" />
           </picture>
-          <figcaption class="photo-caption"><span>CorkBot / Pen configuration</span><span>Current prototype · Studio photograph</span></figcaption>
+          <figcaption class="photo-caption"><span>Current pen prototype · Background digitally restyled</span><a href="#corkbot">Explore the robot <span aria-hidden="true">↓</span></a></figcaption>
         </figure>
       </section>
 
@@ -118,14 +106,13 @@
         class="section shell introduction"
         aria-labelledby="intro-title"
       >
-        <p class="eyebrow section-label">The robot</p>
         <div class="introduction-body">
-          <h2 id="intro-title">Start with a pen.<br />Take it from there.</h2>
+          <h2 id="intro-title">From an idea<br />to a real line.</h2>
           <div class="intro-text">
             <p>
-              A pen plotter guides a physical pen along prepared drawing paths.
-              CorkBot brings that process to your workspace in a compact robot
-              with a folding arm, carry handle and transport case.
+              In its current pen configuration, CorkBot is a portable pen plotter:
+              it guides a physical pen along prepared drawing paths. A folding
+              arm, carry handle and transport case keep it ready for the next workspace.
             </p>
             <p>
               Start with the pen tool and a drawing. The integrated battery
@@ -135,15 +122,20 @@
           </div>
         </div>
         <div class="core-layout">
-          <figure class="core-image">
+          <figure class="core-image" id="product-views">
             <picture>
               <source type="image/webp" srcset="/assets/img/corkbot/corkbot-carry-640.webp 640w, /assets/img/corkbot/corkbot-carry-1024.webp 1024w" sizes="(max-width: 760px) 90vw, 52vw" />
               <img src="/assets/img/corkbot/corkbot-carry-1024.jpg" srcset="/assets/img/corkbot/corkbot-carry-640.jpg 640w, /assets/img/corkbot/corkbot-carry-1024.jpg 1024w" sizes="(max-width: 760px) 90vw, 52vw" alt="A hand lifting folded CorkBot by its carry handle" width="1024" height="684" loading="lazy" />
             </picture>
-            <figcaption>Compact enough to carry · Current prototype</figcaption>
+            <figcaption id="product-view-caption" aria-live="polite">Compact enough to carry · Current prototype</figcaption>
+            <div class="product-view-controls" role="group" aria-label="Explore prototype photographs" hidden>
+              <button type="button" data-product-view="carry" aria-pressed="true">Carry</button>
+              <button type="button" data-product-view="folded" aria-pressed="false">Folded</button>
+              <button type="button" data-product-view="hero" aria-pressed="false">Drawing</button>
+            </div>
           </figure>
           <div class="core-details">
-            <h3>A small footprint.<br />A useful working area.</h3>
+            <h3>Made for your desk.</h3>
             <p>
               Designed for the workbench, with an aluminum structure, integrated
               battery, and a shared mounting interface for tools.
@@ -170,12 +162,35 @@
         </div>
       </section>
 
+      <section id="software" class="software-section">
+        <div class="shell software-layout">
+          <div>
+            <h2>Ask. Review.<br />Make.</h2>
+            <p>One request starts the preparation. You approve the plot before CorkBot gets to work.</p>
+            <ol class="workflow-steps">
+              <li><h3>Ask for the job.</h3><p>“Use my saved logo on these six boxes.”</p></li>
+              <li><h3>Let the AI prepare it.</h3><p>The phone app retrieves your artwork, scans and meshes the surfaces, then places the drawing.</p></li>
+              <li><h3>Review and accept.</h3><p>Check the prepared plot in the app and accept it. Then CorkBot begins.</p></li>
+            </ol>
+            <div class="workflow-links">
+              <a class="text-link" href="/how-it-works">See the full phone workflow <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="/launch">Join the free launch list <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="software-aside">
+            <span class="mini-label">CorkBot Studio</span>
+            <p>Prefer working from your desktop? Prepare drawings, preview paths, and work with your robot in CorkBot Studio.</p>
+            <a class="text-link" href="/downloads">Software &amp; downloads <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
       <section id="uses" class="section shell uses-section" aria-labelledby="uses-title">
         <div class="section-heading">
-          <div><p class="eyebrow">Your next project</p><h2 id="uses-title">Where will you start?</h2></div>
+          <div><h2 id="uses-title">Where will you start?</h2></div>
           <p class="section-description">Explore CorkBot through the work you want to make, the ideas you want to try, and the robotics you want to understand.</p>
         </div>
-        <div class="uses-grid">
+        <div class="uses-layout"><figure class="uses-photo"><img src="/assets/img/corkbot/corkbot-upright-1024.webp" alt="CorkBot upright with its pen tool fitted" width="1024" height="684" loading="lazy" /><figcaption>Pen configuration · Current prototype</figcaption></figure><div class="uses-grid">
           <a class="use-card" href="/uses/business-customization">
             <span class="mini-label">Business customization</span>
             <h3>Make a small batch yours.</h3>
@@ -194,7 +209,7 @@
             <p>Look at the scan, surface mesh, artwork placement, and approval steps behind CorkBot’s phone workflow.</p>
             <span class="use-card-link">Explore robotics learning <span aria-hidden="true">↗</span></span>
           </a>
-        </div>
+        </div></div>
       </section>
 
       <section
@@ -205,8 +220,7 @@
         <div class="shell section">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Tools &amp; modules</p>
-              <h2 id="module-title">A closer look<br />at the movement.</h2>
+              <h2 id="module-title">More ways to move.</h2>
             </div>
             <p class="section-description">
               Explore the roadmap through simulated films of a rotating base,
@@ -249,7 +263,6 @@
           </figure>
           <div class="module-notes">
             <article>
-              <span class="detail-number">01 /</span>
               <h3>Reach &amp; rotate</h3>
               <p>
                 The rotating base changes the direction of the arm around a
@@ -257,7 +270,6 @@
               </p>
             </article>
             <article>
-              <span class="detail-number">02 /</span>
               <h3>Grip &amp; position</h3>
               <p>
                 The three-axis gripper changes the orientation of a part as the
@@ -266,7 +278,6 @@
               <a class="text-link" href="/assets/media/corkbot/gripper-film-hd.mp4" data-film="gripper">Watch the gripper concept <span aria-hidden="true">↗</span></a>
             </article>
             <article>
-              <span class="detail-number">03 /</span>
               <h3>Move between tasks</h3>
               <p>
                 A mobile-base concept explores forward travel and turning
@@ -284,8 +295,7 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Built to travel</p>
-            <h2 id="config-title">A desktop robot you can take with you.</h2>
+            <h2 id="config-title">Ready for the next stop.</h2>
           </div>
           <p class="section-description">
             Use the current pen configuration on a stable work surface, then
@@ -324,40 +334,15 @@
         </p>
       </section>
 
-      <section id="software" class="software-section">
-        <div class="shell software-layout">
-          <p class="eyebrow">Phone app + AI</p>
-          <div>
-            <h2>Ask. Review.<br />Make.</h2>
-            <p>One request starts the preparation. You approve the plot before CorkBot gets to work.</p>
-            <ol class="workflow-steps">
-              <li><h3>Ask for the job.</h3><p>“Use my saved logo on these six boxes.”</p></li>
-              <li><h3>Let the AI prepare it.</h3><p>The phone app retrieves your artwork, scans and meshes the surfaces, then places the drawing.</p></li>
-              <li><h3>Review and accept.</h3><p>Check the prepared plot in the app and accept it. Then CorkBot begins.</p></li>
-            </ol>
-            <div class="workflow-links">
-              <a class="text-link" href="/how-it-works">See the full phone workflow <span aria-hidden="true">↗</span></a>
-              <a class="text-link" href="/launch">Join the free launch list <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-          <div class="software-aside">
-            <span class="mini-label">CorkBot Studio</span>
-            <p>Prefer working from your desktop? Prepare drawings, preview paths, and work with your robot in CorkBot Studio.</p>
-            <a class="text-link" href="/downloads">Software &amp; downloads <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-      </section>
-
       <section
         class="contact-section shell"
         id="attachment-ideas"
         aria-labelledby="attachment-ideas-title"
       >
-        <p class="eyebrow">Your ideas</p>
         <div class="contact-row">
           <div class="contact-copy">
             <h2 id="attachment-ideas-title">
-              What would you want<br />your CorkBot to do?
+              What will you make?
             </h2>
             <p>
               Tell us about a project you have in mind or a task you’d like help
@@ -376,6 +361,7 @@
 
     <footer class="site-footer">
       <div class="shell">
+        <p class="footer-monument" aria-hidden="true">Cork Robotics</p>
         <div class="footer-top">
           <a class="wordmark" href="/" aria-label="Cork Robotics home"
             ><img
@@ -393,7 +379,7 @@
             <a href="/#uses">Ways to use CorkBot</a>
             <a href="/gallery">Concept gallery</a>
             <a href="/downloads">Downloads</a>
-            <a href="/launch#signup">Free launch updates</a>
+              <a href="/launch#signup">Free launch updates</a>
             <a href="/launch-privacy">Privacy notice</a>
             <a href="mailto:support@corkrobotics.com">Contact support</a>
             <a href="https://www.youtube.com/@CorkRobotics">YouTube</a>

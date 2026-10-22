@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-22",
+  "status": "Local design preview; not deployed",
+  "direction": "Mostly dark and cinematic, closer to SpaceX (explicit operator preference)",
+  "principle": "Give the actual CorkBot prototype visual priority; explain the current drawing workflow before the future module roadmap.",
+  "visual_system": {
+    "font": "Self-hosted Manrope, regular and semibold, SIL Open Font License",
+    "ground": "#101315",
+    "ink": "#f4f5f3",
+    "muted": "#b5bdbf",
+    "surfaces": [
+      "#1c2225",
+      "#080b0d"
+    ],
+    "interaction": "Short transform-based entrances, native scroll, reduced-motion support, no content hidden before JavaScript"
+  },
+  "scope": [
+    "Homepage composition and copy editing",
+    "Shared visual system on 12 CorkBot HTML pages",
+    "Progressive-enhancement prototype photo selector",
+    "Responsive QA tool excluded from publication"
+  ],
+  "preserve": [
+    "Existing signup markup and double-opt-in logic",
+    "Analytics consent and configuration",
+    "Canonical URLs, structured data and audience guides",
+    "Release/download contracts and MarketApp pages",
+    "Original product photographs and original concept films"
+  ],
+  "imagery": {
+    "hero": "assets/img/corkbot/corkbot-dark-1534.webp",
+    "mobile_hero": "assets/img/corkbot/corkbot-dark-768.webp",
+    "source": "assets/img/corkbot/corkbot-hero-1534.webp",
+    "method": "Built-in ImageGen background restyle, not a new photograph. Caption and alt text identify the restyle. Original source remains in the Drawing photo selector.",
+    "prompt": "Use case: precise-object-edit. Edit target: supplied photograph of the real CorkBot pen drawing robot on its black mat. Asset: cinematic website hero background, landscape 1536x1024. Change ONLY the white studio background to a near-black charcoal studio cyclorama (#101315) with restrained soft studio light. Remove the branding printed in the empty upper left background only. CRITICAL: keep the entire actual robot, all its exact parts, screws, cables, holes, slots, arm, pen, mat, silhouettes, proportions, perspective and pose unchanged. Do not redesign or hallucinate any component, and do not remove or add any hardware. The robot must remain completely visible, with enough neutral rim light to distinguish its black edges against charcoal. Keep full object and mat in frame; preserve composition. Background dark throughout with no bright white areas. No added text, labels, graphics, starfield, smoke, floor patterns, neon or futuristic effects. Photographic understated precision industrial equipment studio image."
+  },
+  "resources_reviewed": [
+    "https://www.tasteskill.dev",
+    "https://www.designlang.app",
+    "https://reactbits.dev",
+    "https://github.com/greensock/gsap-skills",
+    "https://github.com/microsoft/playwright-cli",
+    "https://github.com/pbakaus/impeccable",
+    "https://transitions.dev"
+  ],
+  "reference_sites": [
+    "https://www.spacex.com",
+    "https://www.tesla.com",
+    "https://clonerobotics.com",
+    "https://www.unitree.com"
+  ],
+  "implementation_choices": [
+    "Keep existing plain HTML/CSS/JS stack",
+    "No React or animation runtime added",
+    "Taste guidance downloaded locally and adapted to operator direction; not all opinionated prescriptions adopted",
+    "Browser QA used the available computer-use browser, not a newly installed Playwright CLI"
+  ],
+  "validation": {
+    "offline_tests": "87 passed (84 existing, 3 new photo-viewer tests)",
+    "build": "153 public files; local review tool and docs excluded",
+    "responsive": "Eight principal pages measured at 390, 768 and 1440 CSS pixels; final no horizontal overflow or broken sourced images",
+    "interactions": "Mobile menu opens and closes via keyboard; real photo switching; film dialog opens, plays locally and closes",
+    "preservation": "Launch form markup byte-identical; signup, analytics, routing, headers and release files unchanged",
+    "limitations": [
+      "No live signup submitted",
+      "No hosted deployment or field performance measurement",
+      "Full Pages runtime was not started: the separate runtime suite is inappropriate against the simple dev preview (3/5 passed; its cache-header and 404-routing assertions require Pages). Offline suite passes independently.",
+      "Browser viewport override had no effect; fixed-width same-origin preview iframe used to verify actual responsive layout instead."
+    ]
+  }
+}
