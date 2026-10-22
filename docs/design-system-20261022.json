@@ -12,7 +12,7 @@
       "#1c2225",
       "#080b0d"
     ],
-    "interaction": "Short transform-based entrances, native scroll, reduced-motion support, no content hidden before JavaScript"
+    "interaction": "Full-screen product stage; native scroll-linked hero depth where supported; staggered text and image entrances; reduced-motion support; content remains visible without JavaScript."
   },
   "scope": [
     "Homepage composition and copy editing",
@@ -67,5 +67,22 @@
       "Full Pages runtime was not started: the separate runtime suite is inappropriate against the simple dev preview (3/5 passed; its cache-header and 404-routing assertions require Pages). Offline suite passes independently.",
       "Browser viewport override had no effect; fixed-width same-origin preview iframe used to verify actual responsive layout instead."
     ]
+  },
+  "cinematic_followup": {
+    "request": "Push the darker direction further with a cinematic full-screen hero and subtle scroll animations.",
+    "changes": [
+      "Overlay navigation, full-viewport hero and outlined launch CTA",
+      "Dedicated phone and portrait-tablet image framing",
+      "Gentle 5.5% zoom and 9% vertical image shift across the first viewport of scrolling",
+      "Slower staggered text entrances and restrained image-frame entrances",
+      "Native CSS scroll timeline, with static fallback in browsers lacking support; all motion disabled by reduced-motion preference"
+    ],
+    "validation": {
+      "offline_tests": "87 passed",
+      "build": "153 public assets",
+      "browser": "Homepage verified at 390x844, 768x900, 1280x720 and 1440x900; no horizontal overflow; visible launch CTA and loaded hero. Mobile menu opens/closes with keyboard. Explore link settles with introduction at 100px top. Scroll at 396px produces scale 1.03025 and translation 32.076px; image and text reveals observed.",
+      "reduced_motion": "CSS media-query fallback reviewed; existing reduced-motion photo control test passes. OS preference was not changed."
+    },
+    "status": "Local preview only; no push or deployment"
   }
 }
