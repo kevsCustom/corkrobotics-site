@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-22",
+  "status": "Local preview only; not published",
+  "request": "Extend the approved cinematic homepage treatment across the other CorkBot pages.",
+  "pages": [
+    "how-it-works",
+    "uses/art-and-making",
+    "uses/business-customization",
+    "uses/robotics-learning",
+    "launch",
+    "gallery",
+    "downloads",
+    "support",
+    "thank-you",
+    "launch-privacy",
+    "reservation-terms",
+    "404.html"
+  ],
+  "design": [
+    "Large editorial headlines and dark product scenes on the four guides; existing homepage image assets reused.",
+    "Full-width chapter backgrounds, a sticky workflow introduction on tall desktop screens, six clear workflow steps and generous closing calls to action.",
+    "Two-column concept gallery with larger unaltered renders, gentle hover zoom and the existing accessible viewer.",
+    "Product imagery beside the launch signup panel, readable releases, restrained apparel placeholders, and quiet policy/confirmation layouts.",
+    "Shared large footer wordmark, outline buttons, and consistent responsive typography."
+  ],
+  "motion": [
+    "Optional one-time section entrances through the existing IntersectionObserver.",
+    "Native CSS view-timeline image depth, only where supported; no scroll interception or new dependencies.",
+    "Reduced-motion CSS disables animation and transitions. Sticky workflow disabled on phones, short screens, and with reduced motion.",
+    "Forms, downloads and policy paragraphs are not reveal targets; content stays visible without JavaScript."
+  ],
+  "copy": [
+    "Guide headlines: Ask. Review. Make.; Make your mark.; Your artwork. At work.; Explore the motion.",
+    "Gallery headline: More ways to move. Concept status remains explicit.",
+    "Removed old prototype/studio-photo captions from guide and launch imagery in line with operator direction.",
+    "Launch FAQ now says photographs show the design to expect, with small refinements continuing; package details and future-module status remain clear."
+  ],
+  "preservation": [
+    "Signup form byte-identical to previous commit.",
+    "Privacy, reservation notice and thank-you main content byte-identical.",
+    "No changes to API handlers, analytics, gallery/menu logic, download targets, release manifests, redirects or headers.",
+    "Homepage layout and separate MarketApp product pages unchanged."
+  ],
+  "validation": {
+    "offlineTests": 87,
+    "publicAssets": 159,
+    "responsiveCases": 60,
+    "widths": [
+      320,
+      390,
+      768,
+      844,
+      1440
+    ],
+    "overflow": 0,
+    "brokenLoadedImages": 0,
+    "headings": "All page titles at most two lines across the 60 cases.",
+    "browserInteractions": [
+      "Gallery open, next render, Escape close and focus restoration",
+      "Phone menu open and Escape close",
+      "Guide FAQ disclosure",
+      "Firmware release details and download hrefs"
+    ],
+    "signup": "Offline static fixture inspected at 320/390/768/1440; real form retained, network scripts removed, no submission. Live preview correctly reports signup unavailable.",
+    "reducedMotion": "Existing reduced-motion automated checks pass; CSS source guard reviewed. OS preference not changed.",
+    "limitations": "Visual QA uses a fixed-size iframe. Local static server does not emulate Cloudflare Pages runtime routing/cache behavior; this is not a deployment or live subscription test."
+  },
+  "evidenceDirectory": "/Users/kevincorsmeier/Documents/GitHub/drawBot/output/corkrobotics_design_20261022",
+  "preview": "http://127.0.0.1:8788/tools/design-review.html"
+}

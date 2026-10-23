@@ -15,7 +15,7 @@
         observer.unobserve(entry.target);
       }
     }, {threshold: .12});
-    document.querySelectorAll('.product-home .introduction-body > *, .product-home .core-layout > *, .product-home .software-layout > *, .product-home .workflow-steps li, .product-home .section-heading > *, .product-home .use-card, .product-home .detail-film, .product-home .module-notes > *, .product-home .portability-layout > *, .product-home .contact-row > *').forEach(el => observer.observe(el));
+    document.querySelectorAll('.product-home .introduction-body > *, .product-home .core-layout > *, .product-home .software-layout > *, .product-home .workflow-steps li, .product-home .section-heading > *, .product-home .use-card, .product-home .detail-film, .product-home .module-notes > *, .product-home .portability-layout > *, .product-home .contact-row > *, .cinematic-page .guide-section > :not(.workflow-steps), .cinematic-page .workflow-steps li, .cinematic-page .guide-cta > *, .cinematic-page .gallery-card, .cinematic-page .feature-list article, .cinematic-page .support-design, .cinematic-page .support-launch > *').forEach(el => observer.observe(el));
   }
   preference.addEventListener('change', stopMotion);
   const figure = document.querySelector('#product-views');
