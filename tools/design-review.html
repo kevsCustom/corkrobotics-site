@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cork Robotics — responsive review</title>
+<style>
+body{margin:0;background:#30363a;color:white;font:14px Arial}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 20px}
+button,select{font:inherit;padding:8px 12px}
+iframe{display:block;border:0;margin:0 auto;background:#101315}
+a{color:white}
+</style>
+<header>
+<strong>Local design review</strong>
+<button data-width="390" data-height="844">Phone</button>
+<button data-width="768" data-height="900">Tablet</button>
+<button data-width="1440" data-height="900">Desktop</button>
+<button data-width="320" data-height="568">Compact</button>
+<button data-width="844" data-height="390">Landscape</button>
+<select aria-label="Page">
+<option value="/">Home</option><option value="/launch">Launch signup</option>
+<option value="/how-it-works">How it works</option><option value="/gallery">Gallery</option>
+<option value="/downloads">Downloads</option><option value="/uses/art-and-making">Art and making</option>
+<option value="/uses/business-customization">Business</option><option value="/uses/robotics-learning">Learning</option>
+<option value="/support">Apparel</option><option value="/thank-you">Thank you</option><option value="/launch-privacy">Privacy</option><option value="/reservation-terms">Reservation notice</option><option value="/404.html">404</option>
+</select>
+<select aria-label="Homepage section">
+<option value="main">Hero</option><option value="corkbot">Robot</option><option value="software">Workflow</option>
+<option value="uses">Uses</option><option value="modules">Concept film</option><option value="portability">Portability</option>
+<option value="attachment-ideas">Contact</option>
+</select>
+<a href="/">Open full preview</a>
+</header>
+<iframe title="Website preview" src="/" width="390" height="844"></iframe>
+<script>
+const frame=document.querySelector('iframe');
+const page=document.querySelector('[aria-label="Page"]');
+const section=document.querySelector('[aria-label="Homepage section"]');
+document.querySelectorAll('[data-width]').forEach(button=>button.onclick=()=>{
+ frame.width=button.dataset.width;frame.height=button.dataset.height;
+});
+page.onchange=()=>{frame.src=page.value;section.value='main';section.disabled=page.value!=='/'};
+section.onchange=()=>{frame.src='/#'+section.value};
+</script>
+</html>

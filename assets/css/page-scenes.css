@@ -1,0 +1,206 @@
+/* The CorkBot story continues beyond the homepage. Shared rhythm, tailored layouts. */
+.cinematic-page{--page-title:clamp(64px,7.8vw,112px);--page-heading:clamp(36px,4.3vw,62px)}
+.cinematic-page h1{line-height:1.02;letter-spacing:-.06em}
+.cinematic-page .launch-header .header-row{min-height:88px}
+.cinematic-page .launch-footer{background:var(--dark);border:0;padding-block:72px 28px}
+.cinematic-page .footer-row{border-top:1px solid var(--line);padding-top:28px;align-items:flex-start;gap:36px}
+.cinematic-page .footer-row>span{font-size:12px;white-space:nowrap;padding-top:14px;color:var(--muted)}
+.cinematic-page .footer-row nav{justify-content:flex-end;gap:0 28px;max-width:940px}
+.cinematic-page .footer-row a{color:var(--muted);font-size:12px}
+.cinematic-page .footer-row a:hover{color:var(--ink)}
+.cinematic-page .button,.cinematic-page .btn:not([aria-disabled=true]){background:transparent;color:var(--ink);border:1px solid #b7c2bd}
+.cinematic-page .button:hover,.cinematic-page .btn:not([aria-disabled=true]):hover{background:var(--ink);color:var(--paper)}
+.cinematic-page .button:disabled{border-color:var(--line);color:var(--muted);background:#22292c}
+.cinematic-page .text-link{gap:24px}
+.cinematic-page .text-link>span,.cinematic-page .guide-related a>span{transition:transform .3s var(--ease)}
+.cinematic-page .text-link:hover>span,.cinematic-page .guide-related a:hover>span{transform:translate(3px,-3px)}
+
+/* Product stories: a generous photographic opening and full-width chapter changes. */
+.cinematic-page .guide-main{width:100%;max-width:none;padding-inline:var(--gutter)}
+.cinematic-page .guide-breadcrumb{padding-block:16px;color:#a3adad}
+.cinematic-page .guide-hero{position:relative;isolation:isolate;grid-template-columns:1fr 1.15fr;gap:0;min-height:min(740px,calc(100svh - 150px));padding-block:44px 88px}
+.cinematic-page .guide-hero>div{position:relative;z-index:1;padding-right:20px}
+.cinematic-page .guide-hero h1{font-size:var(--page-title);max-width:11ch}
+.cinematic-page .guide-intro{max-width:45ch;font-size:16px;line-height:1.8;margin-top:28px}
+.cinematic-page .guide-photo{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;margin-right:calc(-1 * var(--gutter));min-width:0}
+.cinematic-page .guide-photo picture{position:relative;display:block;background:var(--paper);overflow:hidden}
+.cinematic-page .guide-photo picture::after,.cinematic-page .hero-image::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,var(--paper),transparent 16%,transparent 90%,var(--paper)),linear-gradient(0deg,var(--paper),transparent 16%,transparent 90%,var(--paper))}
+.cinematic-page .guide-photo img{width:100%;height:auto;aspect-ratio:1.15;object-fit:cover;object-position:center;background:var(--paper)}
+.cinematic-page .guide-photo figcaption{border:0;position:absolute;bottom:0;right:var(--gutter);font-size:11px;padding:0;color:var(--muted);text-align:right}
+.cinematic-page .guide-section{padding-block:var(--section);grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,8vw,120px)}
+.cinematic-page .guide-section:nth-of-type(even){background:var(--dark);margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter)}
+.cinematic-page .guide-section h2{font-size:var(--page-heading);line-height:1.12;max-width:17ch}
+.cinematic-page .guide-prose{max-width:58ch}
+.cinematic-page .guide-prose p,.cinematic-page .guide-checklist{line-height:1.85;font-size:16px}
+.cinematic-page .guide-workflow{display:grid;align-items:start}
+.cinematic-page .workflow-story{position:sticky;top:64px}
+.cinematic-page .guide-request{background:none;border-left:1px solid #768b80;padding:4px 0 4px 24px;margin:36px 0 0}
+.cinematic-page .guide-request p{font-size:clamp(22px,2.2vw,32px);max-width:26ch;line-height:1.45}
+.cinematic-page .guide-request cite{margin-top:18px}
+.cinematic-page .workflow-steps{grid-template-columns:1fr;margin:0;gap:0}
+.cinematic-page .workflow-steps li{position:relative;padding:28px 0 28px 54px;border-top:1px solid var(--line)}
+.cinematic-page .workflow-steps li>span{position:absolute;left:0;top:37px;font-size:12px;font-variant-numeric:tabular-nums}
+.cinematic-page .workflow-steps h3{margin:0;font-size:30px}
+.cinematic-page .workflow-steps p{max-width:43ch;margin-top:12px}
+.cinematic-page .guide-cta{margin:0;padding:var(--section) 0;background:none;border-top:1px solid var(--line);gap:clamp(36px,8vw,120px)}
+.cinematic-page .guide-cta h2{font-size:var(--page-heading);line-height:1.1;max-width:12ch}
+.cinematic-page .guide-cta>div:last-child{justify-self:start}
+.cinematic-page .guide-cta>div:last-child>p{font-size:12px;margin-top:20px}
+.cinematic-page .guide-related{padding-block:0 64px;gap:20px 36px}
+.cinematic-page .faq-list summary{padding-block:24px;font-size:16px;line-height:1.5}
+
+/* Launch: the product and signup share the opening screen. Inputs stay static. */
+.cinematic-page .launch-hero{grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);column-gap:clamp(48px,8vw,120px);row-gap:20px;padding-block:64px 100px;align-items:start}
+.cinematic-page .hero-copy{grid-column:1;grid-row:1}
+.cinematic-page .hero-copy h1{font-size:clamp(54px,5.5vw,80px)}
+.cinematic-page .hero-copy>.eyebrow{line-height:1.6}
+.cinematic-page .hero-description{max-width:43ch;font-size:16px;line-height:1.8;margin-top:28px}
+.cinematic-page .hero-figure{grid-column:1;grid-row:2;margin:0}
+.cinematic-page .hero-image{position:relative;background:var(--paper);min-height:0;overflow:hidden}
+.cinematic-page .hero-image img{aspect-ratio:1.6;width:100%;height:auto;object-fit:cover;background:var(--paper)}
+.cinematic-page .hero-figure figcaption{font-size:11px;padding-top:12px}
+.cinematic-page .signup-panel{grid-column:2;grid-row:1 / span 2;align-self:center;background:var(--dark);padding:clamp(26px,3.2vw,48px);max-width:none;margin:0;border-top:1px solid #56665d}
+.cinematic-page .signup-panel h2{font-size:32px;line-height:1.15;max-width:13ch}
+.cinematic-page .email-row{flex-direction:column}
+.cinematic-page .email-row .button{justify-content:space-between}
+.cinematic-page .signup-description{margin-top:18px;line-height:1.7}
+.cinematic-page .possibilities,.cinematic-page .faq-section,.cinematic-page .launch-explore{padding-block:var(--section);gap:clamp(36px,8vw,120px)}
+.cinematic-page .possibilities h2,.cinematic-page .faq-section h2,.cinematic-page .launch-explore h2{font-size:var(--page-heading);line-height:1.1;max-width:15ch}
+.cinematic-page .feature-list article{padding-block:28px}
+.cinematic-page .feature-list h3{font-size:28px}
+.cinematic-page .launch-audiences a{font-size:clamp(20px,2vw,28px);padding-block:28px;letter-spacing:-.025em}
+
+/* Gallery: larger studies, quieter labels, room to inspect the designs. */
+.cinematic-page .gallery-hero,.cinematic-page .download-hero,.cinematic-page .support-intro{padding-block:clamp(64px,8vw,112px) 72px;grid-template-columns:1.2fr 1fr;gap:clamp(40px,8vw,120px)}
+.cinematic-page .gallery-hero h1,.cinematic-page .download-hero h1,.cinematic-page .support-intro h1{font-size:var(--page-title)}
+.cinematic-page .gallery-intro,.cinematic-page .download-hero .lead{font-size:17px;line-height:1.8;max-width:40ch}
+.cinematic-page .gallery-funding{padding:24px 0;background:none;border-block:1px solid var(--line);margin-bottom:56px;align-items:start}
+.cinematic-page .gallery-funding p{max-width:70ch}
+.cinematic-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:80px 36px;padding-bottom:var(--section)}
+.cinematic-page .gallery-image-link{overflow:hidden}
+.cinematic-page .gallery-image-link img{transition:transform .8s var(--ease)}
+.cinematic-page .gallery-image-link:hover img{transform:scale(1.025)}
+.cinematic-page .gallery-enlarge{width:44px;height:44px;border-radius:0;right:18px;bottom:18px}
+.cinematic-page .gallery-meta{margin-top:24px;font-size:11px}
+.cinematic-page .gallery-card h2{font-size:clamp(26px,2.6vw,38px);margin-top:12px}
+.cinematic-page .gallery-card p{font-size:15px;line-height:1.8;max-width:52ch}
+.cinematic-page .image-dialog{background:var(--dark)}
+
+/* Tools and reference pages use the same scale without getting in the way. */
+.cinematic-page .download-content{padding-bottom:var(--section)}
+.cinematic-page .download-section{margin:0;padding-block:60px 28px}
+.cinematic-page .download-heading{margin-bottom:36px}
+.cinematic-page .download-heading h2{font-size:clamp(32px,3.5vw,48px)}
+.cinematic-page .release-card{padding:36px;background:var(--dark);border-top:1px solid var(--line)}
+.cinematic-page .release-card h3{font-size:28px}
+.cinematic-page .release-empty{background:var(--dark);padding:36px;border-top:1px solid var(--line)}
+.cinematic-page .status-pill{color:var(--accent);text-transform:none;letter-spacing:0}
+.cinematic-page .download-aside{margin-top:64px;padding-top:40px;gap:36px}
+.cinematic-page .download-aside h2{font-size:28px}
+.cinematic-page .support-designs{gap:36px}
+.cinematic-page .support-photo-placeholder{width:100%;min-width:0;background:var(--dark);border:0;aspect-ratio:1.25;min-height:300px}
+.cinematic-page .support-photo-placeholder::before{border:1px solid #303b36;inset:24px}
+.cinematic-page .support-placeholder-label{font-size:11px;text-transform:none;letter-spacing:0}
+.cinematic-page .support-launch h2{font-size:var(--page-heading);line-height:1.1}
+.cinematic-page .privacy-main{max-width:1000px;padding-block:clamp(60px,8vw,112px) var(--section)}
+.cinematic-page .privacy-main h1{font-size:clamp(52px,6vw,86px);margin-block:28px 36px}
+.cinematic-page .privacy-main>p{max-width:64ch}
+.cinematic-page .privacy-intro{font-size:18px;line-height:1.8}
+.cinematic-page .privacy-main section{max-width:720px;padding-top:36px;margin-top:36px;border-top:1px solid var(--line)}
+.cinematic-page .privacy-main section h2{font-size:28px;line-height:1.3;max-width:32ch}
+.cinematic-page .privacy-main section p,.cinematic-page .privacy-main li{font-size:16px;line-height:1.85}
+.cinematic-page .privacy-main>.text-link{margin-top:40px}
+.cinematic-page .confirmation-main{min-height:calc(100svh - 88px);max-width:1100px}
+.cinematic-page .confirmation-main h1{font-size:clamp(48px,6vw,86px)}
+.cinematic-page .confirmation-help{font-size:13px;line-height:1.8;margin-top:28px}
+.cinematic-page .error-main{min-height:calc(85svh - 88px);padding-block:clamp(80px,12vw,180px)}
+.cinematic-page .error-main h1{font-size:var(--page-title);margin-block:24px}
+.cinematic-page .error-main>p:not(.eyebrow){color:var(--muted);line-height:1.8;max-width:44ch}
+.cinematic-page .error-main .button{margin-top:36px}
+
+@media(max-width:1000px){
+ .cinematic-page{--page-title:clamp(60px,8vw,80px)}
+ .cinematic-page .guide-hero{grid-template-columns:1fr 1fr;min-height:620px}
+ .cinematic-page .guide-hero h1{font-size:clamp(56px,7.6vw,76px)}
+ .cinematic-page .guide-photo img{aspect-ratio:.8;object-fit:contain}
+ .cinematic-page .gallery-funding{gap:28px;flex-direction:column}
+ .cinematic-page .launch-hero{column-gap:36px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .cinematic-page .signup-panel{padding:28px}
+ .cinematic-page .hero-copy h1{font-size:54px}
+ .cinematic-page .footer-row{flex-direction:column;gap:12px}
+ .cinematic-page .footer-row nav{justify-content:flex-start}
+}
+@media(max-width:760px){
+ .cinematic-page{--page-title:clamp(50px,12.8vw,80px);--page-heading:clamp(32px,8.6vw,46px);--section:80px}
+ .cinematic-page .launch-header .header-row{min-height:80px}
+ .cinematic-page .guide-breadcrumb{font-size:10px;padding-block:12px}
+ .cinematic-page .guide-hero{display:flex;flex-direction:column;align-items:stretch;padding-block:28px 48px;min-height:0}
+ .cinematic-page .guide-hero>div{padding:0}
+ .cinematic-page .guide-hero h1{font-size:var(--page-title);max-width:13ch}
+ .cinematic-page .guide-intro{font-size:15px;line-height:1.8;max-width:52ch;margin-top:24px}
+ .cinematic-page .guide-photo{margin:24px calc(-1 * var(--gutter)) 0}
+ .cinematic-page .guide-photo img{aspect-ratio:1.4;object-fit:contain}
+ .cinematic-page .guide-photo figcaption{position:static;margin:12px var(--gutter) 0;text-align:left;font-size:10px}
+ .cinematic-page .guide-section{grid-template-columns:1fr;gap:28px}
+ .cinematic-page .guide-section h2{max-width:20ch}
+ .cinematic-page .guide-prose p,.cinematic-page .guide-checklist{font-size:15px}
+ .cinematic-page .workflow-story{position:static}
+ .cinematic-page .guide-request{margin-top:28px}
+ .cinematic-page .workflow-steps{margin-top:16px}
+ .cinematic-page .workflow-steps li{padding:24px 0 24px 44px}
+ .cinematic-page .workflow-steps li>span{top:30px}
+ .cinematic-page .workflow-steps h3{font-size:27px}
+ .cinematic-page .guide-cta{grid-template-columns:1fr;gap:28px}
+ .cinematic-page .guide-related{gap:0;padding-bottom:48px}
+ .cinematic-page .guide-related a{font-size:13px;gap:16px}
+ .cinematic-page .launch-hero{display:flex;flex-direction:column;gap:32px;padding-block:40px 64px}
+ .cinematic-page .hero-copy h1{font-size:clamp(46px,11.4vw,76px)}
+ .cinematic-page .hero-description{font-size:15px;margin-top:24px}
+ .cinematic-page .hero-copy{order:0}.cinematic-page .hero-figure{order:1;width:100%;margin-top:-8px}.cinematic-page .signup-panel{order:2;width:100%;padding:28px 24px;scroll-margin-top:24px}
+ .cinematic-page .hero-image img{aspect-ratio:1.6}
+ .cinematic-page .signup-panel h2{font-size:30px;max-width:none}
+ .cinematic-page .possibilities,.cinematic-page .faq-section,.cinematic-page .launch-explore{grid-template-columns:1fr;gap:32px}
+ .cinematic-page .feature-list h3{font-size:25px}
+ .cinematic-page .faq-list summary{font-size:15px;padding-block:22px}
+ .cinematic-page .gallery-hero,.cinematic-page .download-hero,.cinematic-page .support-intro{grid-template-columns:1fr;gap:28px;padding-block:48px}
+ .cinematic-page .gallery-hero h1,.cinematic-page .download-hero h1{margin-top:20px}
+ .cinematic-page .gallery-intro,.cinematic-page .download-hero .lead{font-size:16px}
+ .cinematic-page .gallery-funding{margin-bottom:36px;font-size:13px;gap:16px}
+ .cinematic-page .gallery-grid{grid-template-columns:1fr;gap:48px}
+ .cinematic-page .gallery-card h2{font-size:28px}
+ .cinematic-page .gallery-meta{margin-top:20px}
+ .cinematic-page .download-section{padding-block:40px 24px}
+ .cinematic-page .release-card,.cinematic-page .release-empty{padding:26px 22px}
+ .cinematic-page .download-aside{margin-top:48px;gap:24px;flex-direction:column}
+ .cinematic-page .download-aside h2{font-size:26px}
+ .cinematic-page .support-designs{gap:32px}
+ .cinematic-page .support-photo-placeholder{min-height:270px}
+ .cinematic-page .support-photo-placeholder::before{inset:18px}
+ .cinematic-page .support-photo-index{top:30px;left:30px}
+ .cinematic-page .privacy-main h1{font-size:clamp(44px,11vw,68px);line-height:1.08}
+ .cinematic-page .privacy-main{padding-top:48px}
+ .cinematic-page .privacy-intro{font-size:16px}
+ .cinematic-page .privacy-main section{padding-top:28px;margin-top:28px}
+ .cinematic-page .privacy-main section h2{font-size:25px}
+ .cinematic-page .privacy-main section p,.cinematic-page .privacy-main li{font-size:15px}
+ .cinematic-page .confirmation-main h1{font-size:clamp(36px,9.3vw,60px)}
+ .cinematic-page .launch-footer{padding-top:48px}
+ .cinematic-page .footer-row{padding-top:20px}
+ .cinematic-page .footer-row nav{gap:0 22px}
+}
+@media(max-height:680px){.cinematic-page .workflow-story{position:static}}
+@media(max-width:360px){
+ .cinematic-page .confirmation-main h1{font-size:32px}
+ .cinematic-page.reading-page .privacy-main h1{font-size:40px}
+}
+@media(prefers-reduced-motion:no-preference){
+ .cinematic-page .guide-hero h1,.cinematic-page .hero-copy h1,.cinematic-page .gallery-hero h1,.cinematic-page .support-intro h1{animation:title-arrive 1.1s var(--ease) both}
+ .cinematic-page .guide-photo img,.cinematic-page .hero-image img{animation:hero-arrive 1.8s var(--ease) both}
+ .cinematic-page .reveal-in{animation-duration:1s}
+ .cinematic-page .gallery-card.reveal-in{animation-name:frame-arrive}
+ @supports(animation-timeline:view()){
+  .cinematic-page .guide-photo picture{animation:story-image-depth linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  @keyframes story-image-depth{from{transform:translateY(0)}to{transform:translateY(28px)}}
+ }
+}
+@media(prefers-reduced-motion:reduce){.cinematic-page .workflow-story{position:static}}
