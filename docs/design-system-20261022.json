@@ -84,5 +84,11 @@
       "reduced_motion": "CSS media-query fallback reviewed; existing reduced-motion photo control test passes. OS preference was not changed."
     },
     "status": "Local preview only; no push or deployment"
+  },
+  "homepage_scenes_followup": {
+    "notes": "docs/homepage-scenes-20261022.json",
+    "scope": "Cinematic product, workflow, uses, concept-film, portability and contact scenes; original-photo disclosure viewer",
+    "tests": "87 passed; 158 public assets; responsive QA at 320,390,768,844,1440 pixels",
+    "status": "Local preview, not pushed or deployed"
   }
 }

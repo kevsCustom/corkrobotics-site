@@ -15,7 +15,7 @@
         observer.unobserve(entry.target);
       }
     }, {threshold: .12});
-    document.querySelectorAll('.product-home .introduction-body > *, .product-home .core-layout > *, .product-home .software-layout > *, .product-home .section-heading > *, .product-home .use-card, .product-home .detail-film, .product-home .module-notes > *, .product-home .portability-layout > *, .product-home .contact-row > *').forEach(el => observer.observe(el));
+    document.querySelectorAll('.product-home .introduction-body > *, .product-home .core-layout > *, .product-home .software-layout > *, .product-home .workflow-steps li, .product-home .section-heading > *, .product-home .use-card, .product-home .detail-film, .product-home .module-notes > *, .product-home .portability-layout > *, .product-home .contact-row > *').forEach(el => observer.observe(el));
   }
   preference.addEventListener('change', stopMotion);
   const figure = document.querySelector('#product-views');
@@ -28,6 +28,7 @@
   const views = {
     carry: {name:'carry', alt:'A hand lifting folded CorkBot by its carry handle', caption:'Compact enough to carry · Current prototype', height:684},
     folded: {name:'folded', alt:'CorkBot folded into a compact shape, with the pen and camera visible', caption:'Folded between projects · Current prototype', height:683},
+    upright: {name:'upright', alt:'CorkBot upright with its pen tool fitted', caption:'Pen configuration · Original studio photograph', height:684},
     hero: {name:'hero', alt:'CorkBot with its drawing arm extended over a black work mat', caption:'Ready to draw · Original studio photograph', height:684},
   };
   let request = 0;

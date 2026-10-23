@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-22",
+  "status": "Local preview, not published",
+  "direction": "Consistent cinematic homepage with subtle purposeful effects",
+  "motion": {
+    "references": [
+      "https://www.tasteskill.dev",
+      "https://transitions.dev",
+      "https://reactbits.dev",
+      "https://github.com/greensock/gsap-skills"
+    ],
+    "choices": [
+      "A single SVG pen-path illustration traces as the workflow section scrolls through view.",
+      "Sticky workflow headline on sufficiently tall desktop screens; natural document flow on phones and short landscape screens.",
+      "Gentle image-frame settling and concept-film aperture opening. Staggered text reveals, quick arrow and underline hover feedback.",
+      "Native CSS scroll/view timelines, no animation dependency or scroll interception; complete static content in unsupported browsers and with reduced motion."
+    ],
+    "notUsed": "No autoplay, particles, cursor followers, blur effects, or animated numerical claims."
+  },
+  "images": [
+    {
+      "name": "folded",
+      "method": "Built-in ImageGen background restyle; not a new photograph. Human visual review is not pixel identity verification.",
+      "source": "assets/img/corkbot/corkbot-folded-1024.webp",
+      "outputs": [
+        "assets/img/corkbot/corkbot-folded-dark-1536.webp",
+        "assets/img/corkbot/corkbot-folded-dark-768.webp"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target: provided photograph of the actual CorkBot robot in its folded pose. Website asset, landscape 1536x1024. Replace ONLY the white studio backdrop and white floor with a near-black graphite studio cyclorama, #101315, matching an understated cinematic industrial product website. Preserve the exact robot hardware, camera, pen, cables, fasteners, holes, pose, geometry, proportions, perspective and cropping. Do not redesign the robot or invent parts. Keep full object visible with soft neutral rim lighting to separate dark edges from the background; original materials remain dark metal and black. Background edges near #101315, no bright accents. No text, logos, graphics, smoke, effects, extra objects or patterns. This is a background restyle of a real prototype photograph, not a future product redesign.",
+      "disclosure": "Caption and alt text identify the restyle; original photograph available through the homepage photo viewer."
+    },
+    {
+      "name": "upright",
+      "method": "Built-in ImageGen background restyle; not a new photograph. Human visual review is not pixel identity verification.",
+      "source": "assets/img/corkbot/corkbot-upright-1024.webp",
+      "outputs": [
+        "assets/img/corkbot/corkbot-upright-dark-1536.webp",
+        "assets/img/corkbot/corkbot-upright-dark-768.webp"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target: provided photograph of the actual CorkBot robot in its upright pose. Website asset, landscape 1536x1024. Replace ONLY the white studio backdrop and white floor with a near-black graphite studio cyclorama, #101315, matching an understated cinematic industrial product website. Preserve the exact robot hardware, camera, pen, cables, fasteners, holes, pose, geometry, proportions, perspective and cropping. Do not redesign the robot or invent parts. Keep full object visible with soft neutral rim lighting to separate dark edges from the background; original materials remain dark metal and black. Background edges near #101315, no bright accents. No text, logos, graphics, smoke, effects, extra objects or patterns. This is a background restyle of a real prototype photograph, not a future product redesign.",
+      "disclosure": "Caption and alt text identify the restyle; original photograph available through the homepage photo viewer."
+    }
+  ],
+  "validation": {
+    "offline": "87 checks passed on final sources; 158 public assets built; git diff --check clean.",
+    "responsive": "320, 390, 768, 844 landscape, and 1440 CSS pixels; no horizontal overflow, broken loaded images, or headings exceeding two lines after fixes.",
+    "interactions": "Original photo viewer opens, switches to Folded and Upright, and closes by keyboard; concept film opens/closes by keyboard; scroll line offset changed from .778989 to .436664 across 288px scroll. Four original prototype views retained.",
+    "limitations": "OS reduced-motion preference not changed during browser QA; fallbacks reviewed in source. No production deployment or live signup submission."
+  }
+}
