@@ -31,7 +31,7 @@
     "hero": "assets/img/corkbot/corkbot-dark-1534.webp",
     "mobile_hero": "assets/img/corkbot/corkbot-dark-768.webp",
     "source": "assets/img/corkbot/corkbot-hero-1534.webp",
-    "method": "Built-in ImageGen background restyle, not a new photograph. Caption and alt text identify the restyle. Original source remains in the Drawing photo selector.",
+    "method": "Built-in ImageGen background restyle, not a new photograph. Production provenance is recorded here; public production-note captions removed at operator request on 2026-10-22. Original source remains in the Drawing photo selector.",
     "prompt": "Use case: precise-object-edit. Edit target: supplied photograph of the real CorkBot pen drawing robot on its black mat. Asset: cinematic website hero background, landscape 1536x1024. Change ONLY the white studio background to a near-black charcoal studio cyclorama (#101315) with restrained soft studio light. Remove the branding printed in the empty upper left background only. CRITICAL: keep the entire actual robot, all its exact parts, screws, cables, holes, slots, arm, pen, mat, silhouettes, proportions, perspective and pose unchanged. Do not redesign or hallucinate any component, and do not remove or add any hardware. The robot must remain completely visible, with enough neutral rim light to distinguish its black edges against charcoal. Keep full object and mat in frame; preserve composition. Background dark throughout with no bright white areas. No added text, labels, graphics, starfield, smoke, floor patterns, neon or futuristic effects. Photographic understated precision industrial equipment studio image."
   },
   "resources_reviewed": [
