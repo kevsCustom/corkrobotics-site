@@ -60,7 +60,7 @@
     const available = items.filter((item) => releaseUrl(item.latest));
     const unavailable = items.filter((item) => !releaseUrl(item.latest));
     if (!available.length) {
-      root.innerHTML = `<div class="release-empty"><h3>${kind === "firmware" ? "Firmware releases are not published yet." : "CorkBot Studio is in development."}</h3><p>${kind === "firmware" ? "Downloads will appear here when a release is available." : "Public desktop downloads are not available yet. Get in touch for information about the software."}</p><a class="text-link" href="mailto:support@corkrobotics.com">Contact support <span aria-hidden="true">↗</span></a></div>`;
+      root.innerHTML = `<div class="release-empty"><h3>${kind === "firmware" ? "Firmware releases are not published yet." : "CorkBot Studio is in development."}</h3><p>${kind === "firmware" ? "Downloads will appear here when a release is available." : "Public desktop downloads are not available yet. Get in touch for information about the software."}</p><a class="text-link" href="mailto:support@corkrobotics.com">Contact support <span aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" /></svg></span></a></div>`;
       return;
     }
     root.innerHTML =
