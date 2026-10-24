@@ -26,10 +26,10 @@
   const controls = figure.querySelector('.product-view-controls');
   if (!image || !source || !caption || !controls) return;
   const views = {
-    carry: {name:'carry', alt:'A hand lifting folded CorkBot by its carry handle', caption:'Compact enough to carry', height:684},
-    folded: {name:'folded', alt:'CorkBot folded into a compact shape, with the pen and camera visible', caption:'Folded between projects', height:683},
-    upright: {name:'upright', alt:'CorkBot upright with its pen tool fitted', caption:'Pen configuration', height:684},
-    hero: {name:'hero', alt:'CorkBot with its drawing arm extended over a black work mat', caption:'Ready to draw', height:684},
+    carry: {name:'carry', alt:'A hand lifting folded Cork V1 by its carry handle', caption:'Compact enough to carry', height:684},
+    folded: {name:'folded', alt:'Cork V1 folded into a compact shape, with the pen and camera visible', caption:'Folded between projects', height:683},
+    upright: {name:'upright', alt:'Cork V1 upright with its pen tool fitted', caption:'Pen configuration', height:684},
+    hero: {name:'hero', alt:'Cork V1 with its drawing arm extended over a black work mat', caption:'Ready to draw', height:684},
   };
   let request = 0;
   controls.hidden = false;

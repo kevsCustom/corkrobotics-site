@@ -6,16 +6,16 @@ const PROVIDER_TIMEOUT_MS = 8000;
 const TOTAL_PROVIDER_BUDGET_MS = 20000;
 const TURNSTILE_ACTION = 'launch_signup';
 const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
-const CONSENT_VERSION = 'corkbot-launch-2026-10-09';
+const CONSENT_VERSION = 'cork-v1-launch-2026-10-24';
 const DIAGNOSTIC_STAGES = ['turnstile_siteverify', 'mailerlite_lookup', 'mailerlite_upsert'];
 const DIAGNOSTIC_OUTCOMES = ['http_error', 'transport_error', 'timeout', 'invalid_json', 'response_too_large', 'schema_error', 'unexpected_active', 'verification_failed'];
 const ERRORS = {
   method_not_allowed: [405, 'This request method is not supported.'],
-  origin_not_allowed: [403, 'Please sign up from the CorkBot launch page.'],
+  origin_not_allowed: [403, 'Please sign up from the Cork V1 launch page.'],
   invalid_content_type: [415, 'Please send the signup as JSON.'],
   body_too_large: [413, 'The signup request is too large.'],
   invalid_request: [400, 'Please check your email and signup details.'],
-  consent_required: [400, 'Please agree to receive CorkBot launch emails before signing up.'],
+  consent_required: [400, 'Please agree to receive Cork V1 launch emails before signing up.'],
   invalid_email: [400, 'Please enter a valid email address.'],
   signup_unavailable: [503, 'Email signup is not available yet. Please try again later.'],
   use_hosted_form: [503, 'Please use the email signup link on the launch page.'],

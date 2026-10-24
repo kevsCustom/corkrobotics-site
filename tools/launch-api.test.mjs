@@ -166,7 +166,7 @@ test('Brevo sends a dedicated DOI request and optional consent/source fields wit
   assert.equal(body.redirectionUrl, `${origin}/thank-you`);
   assert.equal(body.contactPixelTrackingConsent, false);
   assert.equal(body.attributes.LAUNCH_UTM_SOURCE, 'instagram');
-  assert.equal(body.attributes.LAUNCH_CONSENT_VERSION, 'corkbot-launch-2026-10-09');
+  assert.equal(body.attributes.LAUNCH_CONSENT_VERSION, 'cork-v1-launch-2026-10-24');
   assert.ok(!('emailBlacklisted' in body));
   assert.ok(!('excludeListIds' in body));
 });
