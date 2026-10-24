@@ -50,9 +50,9 @@
     motionButton.querySelector("[data-motion-label]").textContent = playing
       ? "Pause preview"
       : "Play preview";
-    motionButton.querySelector(".motion-symbol").textContent = playing
-      ? "Ⅱ"
-      : "▶";
+    motionButton.querySelector(".motion-symbol").innerHTML = playing
+      ? "<svg class=\"ui-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M8 5v14M16 5v14\" /></svg>"
+      : "<svg class=\"ui-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m8 5 11 7-11 7Z\" /></svg>";
   };
   const startPreview = async () => {
     if (!preview) return;

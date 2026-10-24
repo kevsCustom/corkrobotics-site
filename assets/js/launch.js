@@ -221,7 +221,7 @@
         throw new Error(safeError);
       }
       if (body.next === 'subscribed') {
-        document.querySelector('#success-mark').textContent = '✓';
+        document.querySelector('#success-mark').innerHTML = "<svg class=\"ui-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m5 12 4 4L19 6\" /></svg>";
         document.querySelector('#success-title').textContent = 'You’re on the list.';
         document.querySelector('#success-description').textContent = 'This email is already confirmed. Watch your inbox for CorkBot product updates and launch news.';
       }
