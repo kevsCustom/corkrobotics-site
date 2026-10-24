@@ -304,7 +304,7 @@ test('signup failure console warnings contain only allowlisted classifications d
     const ui = fixture({ post: () => ({ ok: false, json: async () => ({ ok: false, error: 'provider_unavailable', message: 'Check your inbox before trying again.', diagnostic, email: privateEmail, key: privateKey }) }) });
     await flush(); ui.load(); ui.widgets[0].options.callback(privateToken); await ui.submit();
     assert.equal(ui.warnings.length, 1);
-    assert.equal(ui.warnings[0][0], 'CorkBot signup diagnostic');
+    assert.equal(ui.warnings[0][0], 'Cork V1 signup diagnostic');
     assert.deepEqual(JSON.parse(JSON.stringify(ui.warnings[0][1])), { stage, outcome: 'http_error', http_status: 401 });
     const serialized = JSON.stringify(ui.warnings);
     for (const privateValue of [privateEmail, privateToken, privateKey, privateId]) assert.ok(!serialized.includes(privateValue));

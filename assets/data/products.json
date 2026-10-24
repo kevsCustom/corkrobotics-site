@@ -1,7 +1,7 @@
 [
   {
     "slug": "corkbot-v0",
-    "name": "corkBot v0",
+    "name": "Cork V1",
     "badge": "Main Robot Unit",
     "description": "Portable modular robot core with closed-loop servo motion, integrated power, modular tool heads, and plug-and-play submodule support.",
     "status": "coming-soon",

@@ -57,7 +57,7 @@
     // exception, email, credentials, or challenge token.
     const safe = { stage: value.stage, outcome: value.outcome };
     if (Number.isInteger(value.http_status) && value.http_status >= 100 && value.http_status <= 599) safe.http_status = value.http_status;
-    try { console.warn('CorkBot signup diagnostic', safe); } catch { /* Diagnostics must not affect signup recovery. */ }
+    try { console.warn('Cork V1 signup diagnostic', safe); } catch { /* Diagnostics must not affect signup recovery. */ }
   };
   const requestJSON = async (url, options = {}) => {
     const { timeoutMs = 30000, ...requestOptions } = options;
@@ -223,7 +223,7 @@
       if (body.next === 'subscribed') {
         document.querySelector('#success-mark').innerHTML = "<svg class=\"ui-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m5 12 4 4L19 6\" /></svg>";
         document.querySelector('#success-title').textContent = 'You’re on the list.';
-        document.querySelector('#success-description').textContent = 'This email is already confirmed. Watch your inbox for CorkBot product updates and launch news.';
+        document.querySelector('#success-description').textContent = 'This email is already confirmed. Watch your inbox for Cork V1 product updates and launch news.';
       }
       apiReady = false;
       form.hidden = true;
