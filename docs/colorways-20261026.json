@@ -1,7 +1,7 @@
 {
-  "asset_revision": "cable-arm-r5",
-  "mask_revision": "Derived from v8/r3 website photos; cable and arm underside corrected through image edits in r5, not a change to source component masks",
-  "source_collection": "drawBot workspace: output/corkbot_colorways_20261022/website_set_20261026",
+  "asset_revision": "source-mask-r6",
+  "mask_revision": "v9: source-traced tip cable and clip; far arm rim, full lower edge, middle curved underside and near pivot underside coverage; two exposed patches above horizontal cable restored; prior shell and r3 corrections retained",
+  "source_collection": "drawBot workspace: output/corkbot_colorways_20261022/website_set_20261026_r6",
   "default": "black",
   "variants": [
     {
@@ -14,18 +14,18 @@
       "alt": "Cork V1 in Black with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-black.webp",
-          "sha256": "43d7b7da09dc4ff991f4be7d93e1de9435d241b49c2d27ab84278574604ac5a1",
+          "path": "assets/img/colorways/r6/cork-v1-black.webp",
           "bytes": 101718,
+          "sha256": "43d7b7da09dc4ff991f4be7d93e1de9435d241b49c2d27ab84278574604ac5a1",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-black-768.webp",
-          "sha256": "d04cbd759ee6d54d805ac474c6497916371d7f6b872dbd555da3a1ab636c8cc0",
+          "path": "assets/img/colorways/r6/cork-v1-black-768.webp",
           "bytes": 20886,
+          "sha256": "d04cbd759ee6d54d805ac474c6497916371d7f6b872dbd555da3a1ab636c8cc0",
           "dimensions": [
             768,
             513
@@ -43,18 +43,18 @@
       "alt": "Cork V1 in Champagne with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-champagne.webp",
-          "sha256": "cbf552657b3c82b3c2983f55fe708702db73687b86af01e9586564f231a8d23c",
-          "bytes": 73884,
+          "path": "assets/img/colorways/r6/cork-v1-champagne.webp",
+          "bytes": 122930,
+          "sha256": "d4b5429586810cfe688515bb1f7e07e3e1266801f8e63f409468d7a34b594afd",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-champagne-768.webp",
-          "sha256": "7b46b6022713f4de9894feb698fb2b2db43c9287ed0ebd8989c21956019990b9",
-          "bytes": 20156,
+          "path": "assets/img/colorways/r6/cork-v1-champagne-768.webp",
+          "bytes": 26118,
+          "sha256": "1a09cce52e516c1b5ecf48019da44fc55c750b7e708f7fc21cb2f68a012a7813",
           "dimensions": [
             768,
             513
@@ -72,18 +72,18 @@
       "alt": "Cork V1 in Sky Blue with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-sky-blue.webp",
-          "sha256": "3644c0eedc8ab1e7dc7bc8b53933fdddad6a15f113d1f4f0cb68b2ba8ba6522b",
-          "bytes": 69464,
+          "path": "assets/img/colorways/r6/cork-v1-sky-blue.webp",
+          "bytes": 122622,
+          "sha256": "dd42723326b9f8732aa29cf34178aaa1885109ef4fec47841cd406d66e491fb4",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-sky-blue-768.webp",
-          "sha256": "531ba7a6fd19c850ba3a348561fd0d8ac6c3473536ad5e16db7356ee3980646d",
-          "bytes": 21374,
+          "path": "assets/img/colorways/r6/cork-v1-sky-blue-768.webp",
+          "bytes": 27678,
+          "sha256": "35df8de6221e5f62c6ba5c7bb1e318b6b953c34ef65f1afe393b8180aad74a52",
           "dimensions": [
             768,
             513
@@ -101,18 +101,18 @@
       "alt": "Cork V1 in Cobalt Blue with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-cobalt-blue.webp",
-          "sha256": "f0809d748442d2e48e4aca905e8fc25bc0adfdef26902604e67b4646430a9eed",
-          "bytes": 76052,
+          "path": "assets/img/colorways/r6/cork-v1-cobalt-blue.webp",
+          "bytes": 114882,
+          "sha256": "14b7e7ce6f9a0f1a6fdc4fa3d95e4af30e87cf4083f1b4a939e5867aca917037",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-cobalt-blue-768.webp",
-          "sha256": "ebb912a9d4b7fabd9742ac83b5f8ec7c46650b18572e9b7f96e3f785065163a4",
-          "bytes": 20110,
+          "path": "assets/img/colorways/r6/cork-v1-cobalt-blue-768.webp",
+          "bytes": 25806,
+          "sha256": "ed26d322368afbab958377cd84208f6eb02bc1c0f5a46dfe440b61eab6060c0f",
           "dimensions": [
             768,
             513
@@ -130,18 +130,18 @@
       "alt": "Cork V1 in Dark Green with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-dark-green.webp",
-          "sha256": "3290cec0e02ad11d441c46d49203493293f87fc8e23213045b4f584c7e9bb464",
-          "bytes": 61986,
+          "path": "assets/img/colorways/r6/cork-v1-dark-green.webp",
+          "bytes": 111002,
+          "sha256": "2130c78f4612ecee2bfe1fcd3e25b2d0fa5ff549e2de39f55d6bff4b828f0626",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-dark-green-768.webp",
-          "sha256": "707e4b99c5e44082eb5102d9098813de0137dc7cbc5f4f76993aebcf31b0b9b6",
-          "bytes": 18008,
+          "path": "assets/img/colorways/r6/cork-v1-dark-green-768.webp",
+          "bytes": 23530,
+          "sha256": "d9a655ea651292dd5852cd6a8a4955bf7f759fbc3956d00880897b66543cd9ac",
           "dimensions": [
             768,
             513
@@ -159,18 +159,18 @@
       "alt": "Cork V1 in Red with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-red.webp",
-          "sha256": "85c535e759817a1a03d5fe908378ce5f44f911c632254721fe9b2699ed857f40",
-          "bytes": 62738,
+          "path": "assets/img/colorways/r6/cork-v1-red.webp",
+          "bytes": 116894,
+          "sha256": "4c15ae621ee65335a713519c8e20ab11a05319a8b5420b128d15d27d21e1a70f",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-red-768.webp",
-          "sha256": "50d18e64afb1f96403e53c623309e95ee9f09ee59aa4694f6214b449b3e6bb23",
-          "bytes": 20342,
+          "path": "assets/img/colorways/r6/cork-v1-red-768.webp",
+          "bytes": 26354,
+          "sha256": "ebe17c26d8854ff84eb0f8a42cbd561118aedf1c06b2a7c49efb78b947381e71",
           "dimensions": [
             768,
             513
@@ -188,18 +188,18 @@
       "alt": "Cork V1 in Rose Pink with black housings on a dark drawing mat",
       "files": {
         "web": {
-          "path": "assets/img/colorways/r5/cork-v1-rose-pink.webp",
-          "sha256": "0be00877fc5cf63716c9e8f358b89f673466dcc9cc8a946fc2cb3d22ae4596b6",
-          "bytes": 62608,
+          "path": "assets/img/colorways/r6/cork-v1-rose-pink.webp",
+          "bytes": 118636,
+          "sha256": "8129b83cc322a2bba96c5218e5dbf0c7601b0503bd2dd0ae53c7c0e69926b40e",
           "dimensions": [
             1534,
             1025
           ]
         },
         "web_small": {
-          "path": "assets/img/colorways/r5/cork-v1-rose-pink-768.webp",
-          "sha256": "7e19853505406b05170c2c261f4ee823318d5ad1b9899cf1d6e1bff7011684f0",
-          "bytes": 19484,
+          "path": "assets/img/colorways/r6/cork-v1-rose-pink-768.webp",
+          "bytes": 25182,
+          "sha256": "c22835d32db424619ae93161329f740f564c345203523cbe4b2b5c1cc82850f3",
           "dimensions": [
             768,
             513
@@ -208,5 +208,5 @@
       }
     }
   ],
-  "note": "Six colored previews corrected with built-in image_gen from prior website previews and operator annotation: cable stripe darkened to black and missed lower arm edge colored. Black remains original and default. Visual review performed; generated edits do not claim pixel identity outside correction regions. Seven finishes; digital color approximation disclaimer retained."
+  "note": "Seven finishes share the same original photograph and corrected source masks. Restored original cable/clip and hardware shading; extended selected finish over far rim, metal beside cable, near pivot underside, full lower arm edge and middle curved underside. Black is unchanged. Native image geometry preserved; digital preview colors are not calibrated physical shade matches. Supersedes the generated r5 variants. Includes the final two exposed-metal patches above the horizontal cable."
 }
