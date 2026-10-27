@@ -53,8 +53,8 @@
     candidate.height = 1025;
     candidate.alt = choice.dataset.alt;
     candidate.sizes = '(max-width: 900px) 100vw, 67vw';
-    candidate.srcset = `/assets/img/colorways/r3/cork-v1-${choice.value}-768.webp 768w, /assets/img/colorways/r3/cork-v1-${choice.value}.webp 1534w`;
-    candidate.src = `/assets/img/colorways/r3/cork-v1-${choice.value}.webp`;
+    candidate.srcset = `/assets/img/colorways/r5/cork-v1-${choice.value}-768.webp 768w, /assets/img/colorways/r5/cork-v1-${choice.value}.webp 1534w`;
+    candidate.src = `/assets/img/colorways/r5/cork-v1-${choice.value}.webp`;
     try {
       await candidate.decode();
       if (token !== request) return;
