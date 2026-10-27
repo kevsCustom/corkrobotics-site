@@ -1,5 +1,5 @@
 {
-  "asset_revision": "cable-clearance-r3",
+  "asset_revision": "cable-clearance-r3 plus rose-pink-r4",
   "mask_revision": "v8: two local cable exclusions trimmed to reveal the rear metal rim; v7 black diagonal shell correction retained",
   "source_collection": "drawBot workspace: output/corkbot_colorways_20261022/website_set_20261026",
   "default": "black",
@@ -47,8 +47,8 @@
       "label": "Champagne",
       "supplier_color": "Champagne",
       "default": false,
-      "swatch": "#B5A68D",
-      "swatch_status": "digital art direction, not a measured supplier color",
+      "swatch": "#CBAF82",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
       "alt": "Cork V1 in Champagne with black housings on a dark drawing mat",
       "files": {
         "master": {
@@ -85,8 +85,8 @@
       "label": "Sky Blue",
       "supplier_color": "Sky Blue",
       "default": false,
-      "swatch": "#4989AC",
-      "swatch_status": "digital art direction, not a measured supplier color",
+      "swatch": "#5CB9D6",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
       "alt": "Cork V1 in Sky Blue with black housings on a dark drawing mat",
       "files": {
         "master": {
@@ -123,8 +123,8 @@
       "label": "Cobalt Blue",
       "supplier_color": "Cobalt Blue",
       "default": false,
-      "swatch": "#1D3D76",
-      "swatch_status": "digital art direction, not a measured supplier color",
+      "swatch": "#1964C5",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
       "alt": "Cork V1 in Cobalt Blue with black housings on a dark drawing mat",
       "files": {
         "master": {
@@ -161,8 +161,8 @@
       "label": "Dark Green",
       "supplier_color": "Dark Green",
       "default": false,
-      "swatch": "#284D3E",
-      "swatch_status": "digital art direction, not a measured supplier color",
+      "swatch": "#3F6352",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
       "alt": "Cork V1 in Dark Green with black housings on a dark drawing mat",
       "files": {
         "master": {
@@ -199,8 +199,8 @@
       "label": "Red",
       "supplier_color": "Red",
       "default": false,
-      "swatch": "#8F3030",
-      "swatch_status": "digital art direction, not a measured supplier color",
+      "swatch": "#953030",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
       "alt": "Cork V1 in Red with black housings on a dark drawing mat",
       "files": {
         "master": {
@@ -231,7 +231,36 @@
           ]
         }
       }
+    },
+    {
+      "id": "rose-pink",
+      "label": "Rose Pink",
+      "supplier_color": "Pink",
+      "default": false,
+      "swatch": "#C1A2B2",
+      "swatch_status": "Median center of user-provided JLC reference screenshot; not calibrated",
+      "alt": "Cork V1 in Rose Pink with black housings on a dark drawing mat",
+      "files": {
+        "web": {
+          "path": "assets/img/colorways/r3/cork-v1-rose-pink.webp",
+          "sha256": "6f947922ff2f485bb96e51a9f3bdfc694fe631e621d005134e8ea0419acee650",
+          "dimensions": [
+            1535,
+            1025
+          ],
+          "bytes": 59062
+        },
+        "web_small": {
+          "path": "assets/img/colorways/r3/cork-v1-rose-pink-768.webp",
+          "sha256": "e61c266213d7ce0326df8609406c4bbd09217bec0fe103bc9dbed8c60769058b",
+          "dimensions": [
+            768,
+            513
+          ],
+          "bytes": 19616
+        }
+      }
     }
   ],
-  "note": "Corrected r3 WebPs copied byte-for-byte to versioned public paths. Native geometry, black shell and cable retained. Digital previews, not measured supplier matches. Local interactive preview for design review."
+  "note": "Existing six r3 photos preserved. Added Rose Pink with built-in image_gen using Champagne master and user-supplied JLC pink swatch; approximate digital preview. Seven swatch controls; colored dots sampled from user JLC screenshots (not calibrated physical measurements). Black remains default."
 }

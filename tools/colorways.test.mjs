@@ -11,7 +11,7 @@ function viewer({reduced = true} = {}) {
       getAttribute(k){return this.attrs.get(k);},removeAttribute(k){this.attrs.delete(k);},
       remove(){stage.images=stage.images.filter(image=>image!==this);}};
   }
-  const choices = ['black','champagne','sky-blue','cobalt-blue','dark-green','red'].map((value,index)=>({
+  const choices = ['black','champagne','sky-blue','cobalt-blue','dark-green','red','rose-pink'].map((value,index)=>({
     value,checked:index===0,dataset:{label:value,alt:`Cork V1 ${value}`}}));
   const image=Object.assign(element(),{src:'black',alt:'Cork V1 black'});
   const stage=Object.assign(element(),{images:[image],style:{setProperty(k,v){this[k]=v;}},append(image){this.images.push(image);},querySelector(){return this.images[0];}});
@@ -68,4 +68,11 @@ test('crossfade layers are cleaned up if reduced motion changes during the anima
   assert.equal(p.stage.images.length,2);assert.equal(p.stage.images[0].getAttribute('aria-hidden'),'true');
   p.motion.matches=true;p.motion.events.change();assert.equal(p.stage.images.length,1);assert.equal(p.animations[0].cancelled,true);
   const next=p.select(2);p.pending[1].resolve();await next;assert.equal(p.animations.length,1);assert.equal(p.stage.images.length,1);
+});
+
+test('seventh Rose Pink finish updates the count and supports comparison',async()=>{
+  const p=viewer();const pink=p.select(6);p.pending[0].resolve();await pink;
+  assert.equal(p.name,'rose-pink');assert.equal(p.selectors['[data-finish-number]'].textContent,'07 / 07');
+  assert.match(p.stage.images[0].src,/rose-pink.webp$/);p.compareClick();
+  assert.equal(p.selectors['.finish-original'].hidden,false);
 });

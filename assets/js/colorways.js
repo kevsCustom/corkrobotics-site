@@ -70,7 +70,7 @@
       } else settle();
       current = choice;
       name.textContent = choice.dataset.label;
-      number.textContent = `${String(choices.indexOf(choice) + 1).padStart(2, '0')} / 06`;
+      number.textContent = `${String(choices.indexOf(choice) + 1).padStart(2, '0')} / ${String(choices.length).padStart(2, '0')}`;
       comparisonName.textContent = choice.dataset.label;
       status.textContent = `${choice.dataset.label} selected.`;
       if (choice.value === 'black') renderComparison(false);

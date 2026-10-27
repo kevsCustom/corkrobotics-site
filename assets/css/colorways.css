@@ -1,4 +1,4 @@
-/* A quiet photographic finish study. All six images share the same camera. */
+/* A quiet photographic finish study. All finish images share the same camera. */
 /* Allow classic scrollbars inside a 320px viewport without forcing overflow. */
 .product-home{min-width:0}
 .finish-section{padding-block:clamp(48px,7vw,112px) var(--scene-space);scroll-margin-top:32px}
