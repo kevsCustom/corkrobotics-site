@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-27",
+  "film": "Three robots. One workflow.",
+  "source": "Approved v003_insert_cell render",
+  "source_hd_sha256": "504fae49e679c32723202dcbc4eb0c1bc9b86396c4165caf0d10bb3179ee124a",
+  "source_4k_sha256": "b6a4b6ed504eb466a248c15cdd7c2a16bc53c0cdf9a6980e0d6f8134c0ec0030",
+  "hd": "Approved source, byte-for-byte copy",
+  "web_4k": "libx264 preset fast CRF21 yuv420p faststart, silent; fits Pages 25 MiB limit",
+  "poster": "Frame 0 extracted from approved HD film, WebP quality85 full,82 1024px,80 640px",
+  "disclosure": "Concept visualization \u00b7 Planned capabilities",
+  "assets": [
+    {
+      "path": "assets/media/corkbot/insert-cell-film-4k.mp4",
+      "bytes": 19843790,
+      "sha256": "60b6bdca74d9dedeb1a1f53d16f06080da7fce8c350fa0c16fe58ba10f0d1465",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 3840,
+            "height": 2160,
+            "r_frame_rate": "24/1",
+            "nb_frames": "912"
+          }
+        ],
+        "format": {
+          "duration": "38.000000",
+          "size": "19843790"
+        }
+      },
+      "full_decode": "passed"
+    },
+    {
+      "path": "assets/media/corkbot/insert-cell-film-hd.mp4",
+      "bytes": 9268671,
+      "sha256": "504fae49e679c32723202dcbc4eb0c1bc9b86396c4165caf0d10bb3179ee124a",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "24/1",
+            "nb_frames": "912"
+          }
+        ],
+        "format": {
+          "duration": "38.000000",
+          "size": "9268671"
+        }
+      },
+      "full_decode": "passed"
+    },
+    {
+      "path": "assets/media/corkbot/insert-cell-poster-1024.webp",
+      "bytes": 37888,
+      "sha256": "c3e6b8f75ed4b4828a68ae28b8437c3427c2dfa814f184fb7b6ea98aea58f8ce"
+    },
+    {
+      "path": "assets/media/corkbot/insert-cell-poster-640.webp",
+      "bytes": 20086,
+      "sha256": "246f2859d4e6678b4ae2209e7d89cc2ff118d58b4fb647b230d202be10a2fbd9"
+    },
+    {
+      "path": "assets/media/corkbot/insert-cell-poster.webp",
+      "bytes": 96444,
+      "sha256": "351415d120c18ee44b1dcb71814ac90c5971bb5197b614c872ddeb729e9deacf"
+    }
+  ],
+  "validation": {
+    "automated_tests": 94,
+    "failed_tests": 0,
+    "public_build_assets": 180,
+    "browser": "Desktop 1440x900 and compact320x568: click-to-play HD;38s; Escape closes, unloads and pauses;320px no overflow; existing mobile film switches disclosure correctly"
+  }
+}

@@ -132,6 +132,12 @@
 
   if (!dialog || !film || typeof dialog.showModal !== "function") return;
   const films = {
+    insertCell: {
+      title: "Three robots. One workflow.",
+      poster: "/assets/media/corkbot/insert-cell-poster.webp",
+      original: "/assets/media/corkbot/insert-cell-film-4k.mp4",
+      disclosure: "Concept visualization · Planned capabilities",
+    },
     mobile: {
       title: "Mobile base concept",
       poster: "/assets/media/corkbot/mobile-poster.webp",
@@ -157,6 +163,10 @@
         "aria-label",
         `${selected.title}. Simulated demonstration.`,
       );
+      const disclosure = dialog.querySelector(".film-disclosure");
+      if (disclosure)
+        disclosure.textContent = selected.disclosure ||
+          "Simulated demonstration · Modules in development";
       film.poster = selected.poster;
       film.src = link.href;
       dialog.querySelector(".film-original").href = selected.original;
