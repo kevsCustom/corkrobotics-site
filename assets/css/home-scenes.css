@@ -175,3 +175,8 @@
 }
 
 @media(min-width:761px) and (max-height:700px){.workflow-lead{position:static}}
+
+/* Keep the complete three-robot scene visible at every screen size. */
+.product-home .team-film .film-poster-link img{height:auto;aspect-ratio:16/9;object-fit:contain}
+.product-home .team-film-description{max-width:78ch;margin:0;padding:0 var(--gutter) 26px;color:var(--muted);font-size:15px;line-height:1.7}
+.team-film{scroll-margin-top:32px}

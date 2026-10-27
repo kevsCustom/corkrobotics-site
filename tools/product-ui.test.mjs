@@ -141,11 +141,13 @@ test("blocked autoplay retains an honest play control and does not retry while s
 });
 
 
-test("concept modal pauses when the photo-only page is hidden or left", async () => {
+test("concept films switch sources and disclosures, and pause when the page is hidden or left", async () => {
   const link = events({
     dataset: { film: "mobile" },
     href: "/assets/media/corkbot/mobile-film-hd.mp4",
   });
+  const teamLink = events({ dataset: { film: "insertCell" }, href: "/assets/media/corkbot/insert-cell-film-hd.mp4" });
+  const gripperLink = events({ dataset: { film: "gripper" }, href: "/assets/media/corkbot/gripper-film-hd.mp4" });
   const film = events({ paused: true });
   film.play = () => {
     film.paused = false;
@@ -158,6 +160,7 @@ test("concept modal pauses when the photo-only page is hidden or left", async ()
     ".full-film": film,
     "#film-title": {},
     ".film-original": {},
+    ".film-disclosure": {},
     ".film-error a": {},
     ".film-error": {},
     ".dialog-close": close,
@@ -170,16 +173,31 @@ test("concept modal pauses when the photo-only page is hidden or left", async ()
     hidden: false,
     body: { classList: { add: () => {} } },
     querySelector: (selector) => selector === ".film-dialog" ? dialog : null,
-    querySelectorAll: (selector) => selector === "[data-film]" ? [link] : [],
+    querySelectorAll: (selector) => selector === "[data-film]" ? [link, teamLink, gripperLink] : [],
   });
   const window = events({ matchMedia: () => events({ matches: false }) });
   vm.runInNewContext(productSource, { document, window, navigator: {} });
+  assert.equal(film.src, undefined, "no film is loaded before a click");
   const play = async () => {
     link.emit("click", { preventDefault: () => {} });
     await flush();
     assert.equal(film.paused, false);
   };
-  await play();
+  for (const [trigger, title, stem, disclosure] of [
+    [teamLink, "Three robots. One workflow.", "insert-cell", "Concept visualization · Planned capabilities"],
+    [gripperLink, "Rotating base + three-axis gripper concept", "gripper", "Simulated demonstration · Modules in development"],
+    [link, "Mobile base concept", "mobile", "Simulated demonstration · Modules in development"],
+  ]) {
+    trigger.emit("click", { preventDefault: () => {} });
+    await flush();
+    assert.equal(film.src, trigger.href);
+    assert.equal(film.poster, `/assets/media/corkbot/${stem}-poster.webp`);
+    assert.equal(nodes["#film-title"].textContent, title);
+    assert.equal(nodes[".film-disclosure"].textContent, disclosure);
+    assert.equal(nodes[".film-original"].href, `/assets/media/corkbot/${stem}-film-4k.mp4`);
+    assert.equal(nodes[".film-error a"].href, nodes[".film-original"].href);
+    assert.equal(film.paused, false);
+  }
   document.hidden = true;
   document.emit("visibilitychange");
   assert.equal(film.paused, true);
