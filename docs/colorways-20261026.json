@@ -1,0 +1,237 @@
+{
+  "asset_revision": "cable-clearance-r3",
+  "mask_revision": "v8: two local cable exclusions trimmed to reveal the rear metal rim; v7 black diagonal shell correction retained",
+  "source_collection": "drawBot workspace: output/corkbot_colorways_20261022/website_set_20261026",
+  "default": "black",
+  "variants": [
+    {
+      "id": "black",
+      "label": "Black",
+      "supplier_color": "Black",
+      "default": true,
+      "swatch": "#24262A",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Black with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-black.png",
+          "bytes": 1490508,
+          "sha256": "69ba461f3b08314c400087b1ac70d683f0b5fc39d00b98c77c63bfd35fe15b3d",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-black.webp",
+          "bytes": 101718,
+          "sha256": "43d7b7da09dc4ff991f4be7d93e1de9435d241b49c2d27ab84278574604ac5a1",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-black-768.webp",
+          "bytes": 20886,
+          "sha256": "d04cbd759ee6d54d805ac474c6497916371d7f6b872dbd555da3a1ab636c8cc0",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    },
+    {
+      "id": "champagne",
+      "label": "Champagne",
+      "supplier_color": "Champagne",
+      "default": false,
+      "swatch": "#B5A68D",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Champagne with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-champagne.png",
+          "bytes": 1557641,
+          "sha256": "00b45f815948fa18b069952a867fddcfbb690f4a6bb9bfb2938130d277b9e574",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-champagne.webp",
+          "bytes": 122980,
+          "sha256": "18c4660ce87d9a968418db8f126b3e34715bb6fe979ec01b29bd6eb994f5f58c",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-champagne-768.webp",
+          "bytes": 25908,
+          "sha256": "a2ae142c755faf9a7f5fe9715b727d60a3353672481df7a32fd0ac6c242e6cd4",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    },
+    {
+      "id": "sky-blue",
+      "label": "Sky Blue",
+      "supplier_color": "Sky Blue",
+      "default": false,
+      "swatch": "#4989AC",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Sky Blue with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-sky-blue.png",
+          "bytes": 1554779,
+          "sha256": "ca6a9ce724521fece2fb3d99208c054f1b65c731e7dc31f08f732b0d40e964b9",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-sky-blue.webp",
+          "bytes": 122862,
+          "sha256": "5569bd59dadfff5883de337db7ca2fcb71b1d8d76299762dc6984e212f8fe9c7",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-sky-blue-768.webp",
+          "bytes": 27800,
+          "sha256": "06959a0ee13b785b4deeed780e982473e181c151f78be4ae6f03a97fed7f2bf0",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    },
+    {
+      "id": "cobalt-blue",
+      "label": "Cobalt Blue",
+      "supplier_color": "Cobalt Blue",
+      "default": false,
+      "swatch": "#1D3D76",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Cobalt Blue with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-cobalt-blue.png",
+          "bytes": 1525827,
+          "sha256": "fd9a37b6ebe7a4d7b92d814c7a7d18be773bb93376e5c06d38b80ad9318289a8",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-cobalt-blue.webp",
+          "bytes": 114674,
+          "sha256": "ab246e8b622e8e37f9f02f2f70ad8b46813fc3695d80ef6d8f7639d3bbe4ff3a",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-cobalt-blue-768.webp",
+          "bytes": 25892,
+          "sha256": "18fdd2212fc1bd512b2a286efb45e54ca3b57613ae548a4dac70deb6566e8f95",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    },
+    {
+      "id": "dark-green",
+      "label": "Dark Green",
+      "supplier_color": "Dark Green",
+      "default": false,
+      "swatch": "#284D3E",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Dark Green with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-dark-green.png",
+          "bytes": 1515311,
+          "sha256": "a5d0f740b987a0e9e55c837413f4da06c9ec08eb66d47f483c9767461232051e",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-dark-green.webp",
+          "bytes": 111124,
+          "sha256": "c83270608710ac9272be74ef1e7d8611df68cab8d6f2fa60edd55c07e8bd07c5",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-dark-green-768.webp",
+          "bytes": 23568,
+          "sha256": "7be5fc3e664be2cfa0ff66644db33f51083757eacf3eb2540b258171dd14bd23",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    },
+    {
+      "id": "red",
+      "label": "Red",
+      "supplier_color": "Red",
+      "default": false,
+      "swatch": "#8F3030",
+      "swatch_status": "digital art direction, not a measured supplier color",
+      "alt": "Cork V1 in Red with black housings on a dark drawing mat",
+      "files": {
+        "master": {
+          "path": "masters/corkbot-red.png",
+          "bytes": 1530734,
+          "sha256": "c32b0b84c39a6ba0ddc152d2e485dcf62bdfa03f43157e1db82bfb1f3212e643",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web": {
+          "path": "web/corkbot-red.webp",
+          "bytes": 116968,
+          "sha256": "84e1e2dad162b9557d1a8c7fe645311f26a520f8ddd47bef1b510248012f68bb",
+          "dimensions": [
+            1534,
+            1025
+          ]
+        },
+        "web_small": {
+          "path": "web/corkbot-red-768.webp",
+          "bytes": 26432,
+          "sha256": "e73b4309419cb9c5240cd7ebbe7da0ae937793ba295ab93e9b302baaf8a920a1",
+          "dimensions": [
+            768,
+            513
+          ]
+        }
+      }
+    }
+  ],
+  "note": "Corrected r3 WebPs copied byte-for-byte to versioned public paths. Native geometry, black shell and cable retained. Digital previews, not measured supplier matches. Local interactive preview for design review."
+}
