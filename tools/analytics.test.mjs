@@ -285,15 +285,15 @@ test('unknown paths and dynamic titles cannot disclose emails or secret path com
   assert.doesNotMatch(JSON.stringify(ui.commands()), /person%40|person@|SECRET|PRIVATE_TOKEN|private-label/);
 });
 
-test('legitimate HTML, index and trailing-slash aliases map to fixed public routes and titles', () => {
+test('public aliases map to fixed titles and retired product routes map to 404', () => {
   for (const [path, canonical, title] of [
     ['/index.html', '/', 'Cork V1 — A modular robot by Cork Robotics'],
     ['/downloads.html', '/downloads', 'Software & downloads — Cork Robotics'],
     ['/gallery/', '/gallery', 'Concept gallery — Cork Robotics'],
     ['/reservation-terms.html', '/reservation-terms', 'Cork V1 launch list — Cork Robotics'],
     ['/support.html', '/support', 'Cork Robotics apparel — Cork Robotics'],
-    ['/marketapp/downloads/index.html', '/marketapp/downloads', 'Download MarketApp Bull Pen — Cork Robotics'],
-    ['/marketapp/privacy/index', '/marketapp/privacy', 'MarketApp Privacy Policy — Cork Robotics'],
+    ['/marketapp/downloads/index.html', '/404', 'Page not found — Cork Robotics'],
+    ['/marketapp/privacy/index', '/404', 'Page not found — Cork Robotics'],
   ]) {
     const ui = fixture({ url: `https://corkrobotics.com${path}`, title: 'DYNAMIC_SECRET', cookies: { cork_analytics_consent: 'accepted' } });
     ui.loaded();
@@ -359,11 +359,11 @@ test('all shipped HTML includes shared assets in order, and the public build inc
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 16);
+  assert.equal(pages.length, 13);
   for (const path of pages) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);
-    assert.match(html, /analytics\.js\?v=20261024-cork-v1" defer/, path);
+    assert.match(html, /analytics\.js\?v=20261028-retired-product" defer/, path);
     assert.match(html, /analytics-config\.js\?v=20261011" defer/);
     assert.ok(html.indexOf('analytics-config.js') < html.indexOf('analytics.js'), path);
     assert.match(html, /\/assets\/css\/analytics\.css\?v=20261011/);

@@ -12,7 +12,7 @@ export const PUBLIC_FILES = [
   'favicon.ico', 'favicon.svg', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png',
   'apple-touch-icon.png', 'm14.bin',
 ];
-export const PUBLIC_DIRECTORIES = ['assets', 'css', 'js', 'img', 'updates', 'releases', 'marketapp'];
+export const PUBLIC_DIRECTORIES = ['assets', 'css', 'js', 'img', 'updates', 'releases'];
 const BLOCKED_NAMES = new Set(['node_modules', 'functions', 'tools', 'docs', 'tests', 'build', 'dist']);
 
 async function maybeStat(path) {

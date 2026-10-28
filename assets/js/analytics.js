@@ -26,9 +26,6 @@
     '/uses/business-customization': 'Cork V1 for Small Business Customization | Cork Robotics',
     '/uses/art-and-making': 'Cork V1 for Artists and Makers | Cork Robotics',
     '/uses/robotics-learning': 'Explore Robotics with Cork V1 | Cork Robotics',
-    '/marketapp/downloads': 'Download MarketApp Bull Pen — Cork Robotics',
-    '/marketapp/privacy': 'MarketApp Privacy Policy — Cork Robotics',
-    '/marketapp/terms': 'MarketApp Terms of Use — Cork Robotics',
   };
   let started = false;
   let scriptReady = false;
