@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-28",
+  "feature": "Packed flat. Ready to feed.",
+  "source": "corkbot-cad-agent/concepts/C2_thin_fold/anim/C2_travel_to_use.mp4",
+  "source_sha256": "fd482e1a11b815ece07fc3e2c803015e03676550d4a0fd62c2b1ce292537fff2",
+  "source_video_stream_preserved": true,
+  "media_preparation": "Lossless MP4 remux with faststart; original1280x720,24fps,192frames,8seconds. Poster extracted at7seconds; WebP quality86. Source unchanged.",
+  "design": "Existing graphite/Manrope direction; full-width uncropped motion study with large two-line heading, quiet caption and pause control. No new framework, icons or decorative effects.",
+  "skill": "Existing Taste single-section guidance; retained surrounding gallery design. New component lint0fail0warn; browser inspected with CUA, not skill CDP inspector. Whole-page lint flags existing eyebrows, numbering and rules outside replacement scope.",
+  "assets": [
+    {
+      "path": "assets/media/corkbot/folding-feeder.mp4",
+      "bytes": 1769519,
+      "sha256": "945a0b3b7e751daff4a8586305fe96b72fc292eee3a6e0bcf6071819e6571efd"
+    },
+    {
+      "path": "assets/media/corkbot/folding-feeder-poster.webp",
+      "bytes": 18924,
+      "sha256": "982dbe2c96cbb8a346895e4acbc1727773bcf013b51e346a658712c927b839f9"
+    }
+  ],
+  "validation": {
+    "tests": 100,
+    "failed": 0,
+    "build_public_assets": 173,
+    "full_video_decode": "pass",
+    "browser": "1440,768,390 widths inspected; no horizontal overflow; native8s playback; pause works; offscreen/image-modal pause verified; image viewer10/10 wraps to01/10; Escape closes",
+    "reduced_motion_and_data_saver": "unit tested: no automatic video load, explicit play allowed; late playback promises cannot override pause/preferences",
+    "removed": "Two old paper-feed cards and their6 image assets; stale12-render claim replaced on gallery and homepage"
+  }
+}

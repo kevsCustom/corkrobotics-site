@@ -7,7 +7,7 @@
     <title>Cork V1 concept gallery — Cork Robotics</title>
     <meta
       name="description"
-      content="Explore 12 Cork V1 concept renders: the core robot, planned tools, mobile and rotating bases, and paper-feed configurations. Further module development depends on funding."
+      content="Explore Cork V1 concept renders and a folding paper-feeder animation: the core robot, planned tools, and bases. Further module development depends on funding."
     />
     <meta property="og:title" content="Cork V1 concept gallery — Cork Robotics" />
     <meta property="og:description" content="Explore Cork V1 concept renders of the core robot, planned tools, and bases. These design concepts are in development; final features and availability may change." />
@@ -28,9 +28,10 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/assets/css/product.css?v=20261018-seo-complete" />
-    <link rel="stylesheet" href="/assets/css/gallery.css?v=20260917" />
+    <link rel="stylesheet" href="/assets/css/gallery.css?v=20261028-folding-feeder" />
     <script src="/assets/js/product.js?v=20261024-icons" defer></script>
     <script src="/assets/js/gallery.js?v=20260917" defer></script>
+    <script src="/assets/js/gallery-motion.js?v=20261028" defer></script>
     <link rel="stylesheet" href="/assets/css/analytics.css?v=20261011" />
     <script src="/assets/js/analytics-config.js?v=20261011" defer></script>
     <script src="/assets/js/analytics.js?v=20261028-retired-product" defer></script>
@@ -70,7 +71,7 @@
     <main id="main" class="shell gallery-page">
       <section class="gallery-hero" aria-labelledby="gallery-heading">
         <div>
-          <p class="eyebrow">Concept gallery · 12 renders</p>
+          <p class="eyebrow">Concept gallery · Renders & motion</p>
           <h1 id="gallery-heading">More ways<br />to move.</h1>
         </div>
         <div class="gallery-intro">
@@ -89,8 +90,31 @@
           Further development of the planned modules depends on funding. These
           are design concepts; final features and availability may change.
         </p>
-        <span>Choose a render to explore</span>
+        <span>Explore the concepts below</span>
       </div>
+      <section class="feeder-feature" id="folding-feeder" aria-labelledby="feeder-title">
+        <div class="feeder-heading">
+          <h2 id="feeder-title">Packed flat.<br />Ready to feed.</h2>
+          <p>A folding paper-feeder concept for Cork V1. Watch the tray open from its compact travel position into the working layout.</p>
+        </div>
+        <figure class="feeder-film">
+          <video id="feeder-video" class="feeder-video" width="1280" height="720" muted loop playsinline preload="none"
+            poster="/assets/media/corkbot/folding-feeder-poster.webp"
+            data-motion-src="/assets/media/corkbot/folding-feeder.mp4"
+            aria-label="Animation of the folding paper feeder opening from travel to use"></video>
+          <figcaption class="feeder-caption">
+            <p>Folding paper feeder <span>Concept animation · 8 seconds</span></p>
+            <div class="feeder-actions">
+              <button class="feeder-toggle" type="button" aria-controls="feeder-video" hidden>
+                <svg class="ui-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path data-motion-icon d="m8 5 11 7-11 7Z" /></svg>
+                <span data-motion-label>Play animation</span>
+              </button>
+              <a class="text-link" href="/assets/media/corkbot/folding-feeder.mp4" target="_blank" rel="noopener">Open video <svg class="ui-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+            </div>
+          </figcaption>
+          <p class="feeder-error" role="status" hidden>The animation couldn’t load. Try opening the video directly.</p>
+        </figure>
+      </section>
       <section class="gallery-grid" aria-label="Cork V1 concept renders">
         <article class="gallery-card" id="concept-01">
           <a
@@ -347,62 +371,6 @@
           </div>
           <h2>Rotating gripper setup</h2>
           <p>The rotating base, core, and gripper shown together.</p>
-        </article>
-        <article class="gallery-card" id="concept-11">
-          <a
-            class="gallery-image-link"
-            href="/assets/img/dev-preview-11-paper-feed.jpg"
-            data-gallery-image
-            aria-label="Enlarge Paper feeder"
-          >
-            <picture>
-              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-11-paper-feed-480.webp 480w, /assets/img/gallery/dev-preview-11-paper-feed-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
-              <img
-              src="/assets/img/dev-preview-11-paper-feed.jpg"
-              alt="Standalone automated paper feeder module concept"
-              width="1996"
-              height="1124"
-              loading="lazy"
-              decoding="async"
-            />
-            </picture>
-            <span class="gallery-enlarge" aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" /></svg></span>
-          </a>
-          <div class="gallery-meta">
-            <span>Planned module</span><span>11</span>
-          </div>
-          <h2>Paper feeder</h2>
-          <p>
-            A paper-handling concept for repeated drawing and writing tasks.
-          </p>
-        </article>
-        <article class="gallery-card" id="concept-12">
-          <a
-            class="gallery-image-link"
-            href="/assets/img/dev-preview-12-paper-feed-mounted.jpg"
-            data-gallery-image
-            aria-label="Enlarge Paper-feed drawing setup"
-          >
-            <picture>
-              <source type="image/webp" srcset="/assets/img/gallery/dev-preview-12-paper-feed-mounted-480.webp 480w, /assets/img/gallery/dev-preview-12-paper-feed-mounted-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 1000px) calc((100vw - 80px) / 2), (max-width: 1760px) 29vw, 515px" />
-              <img
-              src="/assets/img/dev-preview-12-paper-feed-mounted.jpg"
-              alt="Cork V1 mounted on the proposed automated paper feeder"
-              width="1608"
-              height="1186"
-              loading="lazy"
-              decoding="async"
-            />
-            </picture>
-            <span class="gallery-enlarge" aria-hidden="true"><svg class="ui-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" /></svg></span>
-          </a>
-          <div class="gallery-meta">
-            <span>Paper-feed configuration</span><span>12</span>
-          </div>
-          <h2>Paper-feed drawing setup</h2>
-          <p>
-            The core and paper feeder shown as a complete drawing configuration.
-          </p>
         </article>
       </section>
       <section
