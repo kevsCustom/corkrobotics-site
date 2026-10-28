@@ -28,10 +28,10 @@ test('public build preserves legacy and launch assets while excluding backend, s
   });
   try {
     const output = await buildLaunchPages(root);
-    for (const path of ['launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html', 'how-it-works.html', 'uses/business-customization.html', 'uses/art-and-making.html', 'uses/robotics-learning.html', '_routes.json', '_headers', '_redirects', 'robots.txt', 'sitemap.xml', 'assets/css/product.css', 'assets/media/film.mp4', 'js/main.js', 'marketapp/downloads/latest.json', 'marketapp/downloads/MarketApp.zip', 'updates/firmware/latest.json', 'releases/firmware/image.bin', 'm14.bin']) {
+    for (const path of ['launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html', 'how-it-works.html', 'uses/business-customization.html', 'uses/art-and-making.html', 'uses/robotics-learning.html', '_routes.json', '_headers', '_redirects', 'robots.txt', 'sitemap.xml', 'assets/css/product.css', 'assets/media/film.mp4', 'js/main.js', 'updates/firmware/latest.json', 'releases/firmware/image.bin', 'm14.bin']) {
       assert.deepEqual(await readFile(resolve(output.directory, path)), await readFile(resolve(root, path)));
     }
-    for (const path of ['functions/api/launch/subscribe.js', 'docs/setup.md', 'tools/tests.mjs', '.dev.vars', 'assets/.env', 'assets/node_modules/private.js', 'assets/build/compiler.bin', 'package.json', 'uses/private-preview.html']) {
+    for (const path of ['marketapp/downloads/latest.json', 'marketapp/downloads/MarketApp.zip', 'functions/api/launch/subscribe.js', 'docs/setup.md', 'tools/tests.mjs', '.dev.vars', 'assets/.env', 'assets/node_modules/private.js', 'assets/build/compiler.bin', 'package.json', 'uses/private-preview.html']) {
       await assert.rejects(lstat(resolve(output.directory, path)), { code: 'ENOENT' });
     }
   } finally { await rm(root, { recursive: true, force: true }); }

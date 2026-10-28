@@ -487,13 +487,11 @@ code {
 .status-pill { background: rgba(15, 118, 110, .10); color: var(--accent-2); }
 .release-actions { display:flex; gap: var(--s-3); flex-wrap:wrap; margin-top: var(--s-4); }
 
-/* MarketApp download */
-.marketapp-download-hero h1 { max-width: 12ch; }
+/* Download components */
 .featured-download { padding: var(--s-6); }
 .featured-download h2 { max-width: none; margin-top: var(--s-4); font-size: 30px; }
 .featured-download > p { font-size: 16px; }
 .featured-download .btn { width:100%; }
-.marketapp-integrity { grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); }
 .integrity-copy { display:grid; gap: var(--s-5); }
 .checksum-block { display:grid; gap: var(--s-2); min-width: 0; }
 .checksum-block span,
@@ -525,7 +523,7 @@ code {
 .beta-note h2 { max-width: 15ch; font-size: 32px; }
 .beta-note > p { color: var(--muted); }
 
-/* MarketApp privacy policy */
+/* Legal page components */
 .legal-page { background: rgba(246, 248, 251, .62); }
 .legal-hero {
   padding: clamp(68px, 9vw, 112px) 0 var(--s-7);
