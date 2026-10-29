@@ -10,7 +10,7 @@
   {
     "slug": "main-control-board",
     "name": "Main Control Board",
-    "badge": "ESP32 Control",
+    "badge": "Robot Control",
     "description": "Primary controller firmware channel for motion, device state, and OTA update handoff.",
     "status": "coming-soon",
     "image": "/assets/img/product-main-board.png?v=launch-20260602"
@@ -19,7 +19,7 @@
     "slug": "sensor-board",
     "name": "Sensor Board",
     "badge": "Telemetry",
-    "description": "Modular ESP32 sensor firmware channel for synchronized data collection and experiments.",
+    "description": "Modular sensor firmware channel for synchronized data collection and experiments.",
     "status": "coming-soon",
     "image": "/assets/img/product-sensor-board.png?v=launch-20260602"
   },

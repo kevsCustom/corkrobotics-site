@@ -9,8 +9,8 @@
   "boards": [
     {
       "id": "main-board",
-      "displayName": "Main Board",
-      "description": "Primary ESP32 controller firmware.",
+      "displayName": "Main controller",
+      "description": "Core control firmware for Cork V1.",
       "chip": "esp32",
       "architecture": "xtensa-esp32",
       "hardwareIds": [
@@ -22,7 +22,7 @@
         "releasedAt": "2026-06-17T06:04:20.254Z",
         "required": false,
         "notes": [
-          "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: ACAN2517FD normal/listen receive with explicit poll, no motion or TMC enable."
+          "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: CAN controller normal/listen receive with explicit poll, no motion or motor driver enable."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
@@ -39,7 +39,7 @@
           "releasedAt": "2026-06-17T06:04:20.254Z",
           "required": false,
           "notes": [
-            "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: ACAN2517FD normal/listen receive with explicit poll, no motion or TMC enable."
+            "Main-board SAFE_BOOT CAN2 encoder diagnostic poll update: CAN controller normal/listen receive with explicit poll, no motion or motor driver enable."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
@@ -55,7 +55,7 @@
           "releasedAt": "2026-06-17T05:57:34.552Z",
           "required": false,
           "notes": [
-            "Main-board SAFE_BOOT CAN2 encoder diagnostic: ACAN2517FD listen/normal receive, encoder heartbeat/status decode, no motion or TMC enable."
+            "Main-board SAFE_BOOT CAN2 encoder diagnostic: CAN controller listen/normal receive, encoder heartbeat/status decode, no motion or motor driver enable."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
@@ -87,7 +87,7 @@
           "releasedAt": "2026-06-16T22:35:56.342Z",
           "required": false,
           "notes": [
-            "Main ESP32 Node2 CAN2 probe pin-name fix after UART recovery diagnostics; keeps no-motion gates and sensor relay protections."
+            "Main controller Node2 CAN2 probe pin-name fix after UART recovery diagnostics; keeps no-motion gates and sensor relay protections."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
@@ -103,7 +103,7 @@
           "releasedAt": "2026-06-16T00:00:00.000Z",
           "required": false,
           "notes": [
-            "Distributed main ESP32 desktop-connect and OTA readiness fix: valid status JSON, 115200 handshake, sensor OTA keeps main gateway pollable."
+            "Distributed main controller desktop-connect and OTA readiness fix: valid status JSON, 115200 handshake, sensor OTA keeps main gateway pollable."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
@@ -134,8 +134,8 @@
     },
     {
       "id": "sensor-board",
-      "displayName": "Sensor Board",
-      "description": "Sensor ESP32 firmware.",
+      "displayName": "Sensor controller",
+      "description": "Sensor firmware for Cork V1.",
       "chip": "esp32",
       "architecture": "xtensa-esp32",
       "hardwareIds": [
@@ -147,7 +147,7 @@
         "releasedAt": "2026-06-16T00:00:00.000Z",
         "required": false,
         "notes": [
-          "Sensor ESP32-S3 Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
+          "Sensor controller Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
         ],
         "minHardwareRevision": null,
         "maxHardwareRevision": null,
@@ -164,7 +164,7 @@
           "releasedAt": "2026-06-16T00:00:00.000Z",
           "required": false,
           "notes": [
-            "Sensor ESP32-S3 Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
+            "Sensor controller Wi-Fi/OTA gateway status replies are queued behind realtime pressure/IMU telemetry priority."
           ],
           "minHardwareRevision": null,
           "maxHardwareRevision": null,
