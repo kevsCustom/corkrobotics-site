@@ -6,7 +6,7 @@
   const label = button.querySelector('[data-motion-label]');
   const icon = button.querySelector('[data-motion-icon]');
   const error = document.querySelector('.feeder-error');
-  const dialog = document.querySelector('.image-dialog');
+  const dialog = document.querySelector('.image-dialog, .film-dialog');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = navigator.connection;
   let visible = false, active = true, manualPlay = false, manualPause = false;
@@ -80,6 +80,6 @@
   document.addEventListener('visibilitychange', sync);
   window.addEventListener('pagehide', () => { active = false; stop(); });
   window.addEventListener('pageshow', () => { active = true; sync(); });
-  document.querySelectorAll('[data-gallery-image]').forEach(link => link.addEventListener('click', sync));
+  document.querySelectorAll('[data-gallery-image], [data-film]').forEach(link => link.addEventListener('click', sync));
   dialog?.addEventListener('close', sync);
 })();

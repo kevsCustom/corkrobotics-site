@@ -28,13 +28,13 @@ function page({reduced = false, saveData = false, reject = false, delayed = fals
   const button = events({hidden:true,querySelector:s=>s==='[data-motion-label]'?label:icon});
   const dialog = events({open:false}), imageLink = events();
   const preference = events({matches:reduced}), connection = events({saveData});
-  const document = events({hidden:false,querySelector:s=>({'.feeder-video':video,'.feeder-toggle':button,'.feeder-error':error,'.image-dialog':dialog})[s],querySelectorAll:()=>[imageLink]});
+  const document = events({hidden:false,querySelector:s=>({'.feeder-video':video,'.feeder-toggle':button,'.feeder-error':error,'.image-dialog, .film-dialog':dialog})[s],querySelectorAll:()=>[imageLink]});
   class IntersectionObserver { constructor(fn) { observe = fn; } observe() {} }
   const window = events({matchMedia:()=>preference, IntersectionObserver});
   vm.runInNewContext(source,{window,document,navigator:{connection},IntersectionObserver});
   return {video,button,label,error,dialog,imageLink,document,window,preference,connection,finish:()=>finish(),visible:value=>observe([{isIntersecting:value}])};
 }
-test('animation loads only on screen and pauses offscreen or behind an image dialog',async()=>{
+test('animation loads only on screen and pauses offscreen or behind an image or film dialog',async()=>{
   const p=page();assert.equal(p.video.src,undefined);
   p.visible(true);await flush();assert.equal(p.video.paused,false);
   p.visible(false);assert.equal(p.video.paused,true);
