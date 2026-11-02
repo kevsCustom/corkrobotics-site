@@ -144,9 +144,10 @@
       original: "/assets/media/corkbot/mobile-film-4k.mp4",
     },
     gripper: {
-      title: "Rotating base + three-axis gripper concept",
-      poster: "/assets/media/corkbot/gripper-poster.webp",
-      original: "/assets/media/corkbot/gripper-film-4k.mp4",
+      title: "Four-axis gripper concept",
+      poster: "/assets/media/corkbot/gripper-4axis-poster.webp",
+      original: "/assets/media/corkbot/gripper-4axis-film-hd.mp4",
+      originalLabel: "Open video",
     },
   };
   document.querySelectorAll("[data-film]").forEach((link) =>
@@ -170,6 +171,8 @@
       film.poster = selected.poster;
       film.src = link.href;
       dialog.querySelector(".film-original").href = selected.original;
+      const originalLabel = dialog.querySelector(".film-original-label");
+      if (originalLabel) originalLabel.textContent = selected.originalLabel || "Watch in 4K";
       dialog.querySelector(".film-error a").href = selected.original;
       dialog.querySelector(".film-error").hidden = true;
       dialog.showModal();
