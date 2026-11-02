@@ -147,7 +147,7 @@ test("concept films switch sources and disclosures, and pause when the page is h
     href: "/assets/media/corkbot/mobile-film-hd.mp4",
   });
   const teamLink = events({ dataset: { film: "insertCell" }, href: "/assets/media/corkbot/insert-cell-film-hd.mp4" });
-  const gripperLink = events({ dataset: { film: "gripper" }, href: "/assets/media/corkbot/gripper-film-hd.mp4" });
+  const gripperLink = events({ dataset: { film: "gripper" }, href: "/assets/media/corkbot/gripper-4axis-film-hd.mp4" });
   const film = events({ paused: true });
   film.play = () => {
     film.paused = false;
@@ -160,6 +160,7 @@ test("concept films switch sources and disclosures, and pause when the page is h
     ".full-film": film,
     "#film-title": {},
     ".film-original": {},
+    ".film-original-label": {},
     ".film-disclosure": {},
     ".film-error a": {},
     ".film-error": {},
@@ -185,7 +186,7 @@ test("concept films switch sources and disclosures, and pause when the page is h
   };
   for (const [trigger, title, stem, disclosure] of [
     [teamLink, "Three robots. One workflow.", "insert-cell", "Concept visualization · Planned capabilities"],
-    [gripperLink, "Rotating base + three-axis gripper concept", "gripper", "Simulated demonstration · Modules in development"],
+    [gripperLink, "Four-axis gripper concept", "gripper-4axis", "Simulated demonstration · Modules in development"],
     [link, "Mobile base concept", "mobile", "Simulated demonstration · Modules in development"],
   ]) {
     trigger.emit("click", { preventDefault: () => {} });
@@ -194,8 +195,9 @@ test("concept films switch sources and disclosures, and pause when the page is h
     assert.equal(film.poster, `/assets/media/corkbot/${stem}-poster.webp`);
     assert.equal(nodes["#film-title"].textContent, title);
     assert.equal(nodes[".film-disclosure"].textContent, disclosure);
-    assert.equal(nodes[".film-original"].href, `/assets/media/corkbot/${stem}-film-4k.mp4`);
+    assert.equal(nodes[".film-original"].href, `/assets/media/corkbot/${stem}-film-${stem === "gripper-4axis" ? "hd" : "4k"}.mp4`);
     assert.equal(nodes[".film-error a"].href, nodes[".film-original"].href);
+    assert.equal(nodes[".film-original-label"].textContent, stem === "gripper-4axis" ? "Open video" : "Watch in 4K");
     assert.equal(film.paused, false);
   }
   document.hidden = true;

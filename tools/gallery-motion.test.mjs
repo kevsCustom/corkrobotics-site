@@ -10,29 +10,36 @@ function events(target = {}) {
   target.emit = name => handlers.get(name)?.forEach(fn => fn());
   return target;
 }
-function page({reduced = false, saveData = false, reject = false, delayed = false} = {}) {
-  let observe, finish;
-  const label = {}, icon = {setAttribute() {}}, error = {hidden: true};
-  const video = events({paused:true, dataset:{motionSrc:'/film.mp4'}, plays:0});
-  video.getAttribute = () => video.src || null;
-  video.removeAttribute = () => { delete video.src; };
-  video.load = () => {};
-  video.pause = () => { video.paused = true; video.emit('pause'); };
-  video.play = () => {
-    video.plays++;
-    if (reject) return Promise.reject(new Error('autoplay blocked'));
-    const played = () => { video.paused = false; video.emit('play'); };
-    if (delayed) return new Promise(resolve => { finish = () => { played(); resolve(); }; });
-    played(); return Promise.resolve();
-  };
-  const button = events({hidden:true,querySelector:s=>s==='[data-motion-label]'?label:icon});
+function page({reduced = false, saveData = false, reject = false, delayed = false, count = 1} = {}) {
   const dialog = events({open:false}), imageLink = events();
   const preference = events({matches:reduced}), connection = events({saveData});
-  const document = events({hidden:false,querySelector:s=>({'.feeder-video':video,'.feeder-toggle':button,'.feeder-error':error,'.image-dialog, .film-dialog':dialog})[s],querySelectorAll:()=>[imageLink]});
-  class IntersectionObserver { constructor(fn) { observe = fn; } observe() {} }
+  const players = Array.from({length:count}, (_, index) => {
+    let finish;
+    const label = {}, icon = {setAttribute() {}}, error = {hidden:true};
+    const video = events({paused:true, dataset:{motionSrc:`/film-${index}.mp4`}, plays:0});
+    video.getAttribute = () => video.src || null;
+    video.removeAttribute = () => { delete video.src; };
+    video.load = () => {};
+    video.pause = () => { video.paused = true; video.emit('pause'); };
+    video.play = () => {
+      video.plays++;
+      if (reject) return Promise.reject(new Error('autoplay blocked'));
+      const played = () => { video.paused = false; video.emit('play'); };
+      if (delayed) return new Promise(resolve => { finish = () => { played(); resolve(); }; });
+      played(); return Promise.resolve();
+    };
+    const button = events({hidden:true,querySelector:s=>s==='[data-motion-label]'?label:icon});
+    const feature = {querySelector:s=>({'.feeder-video':video,'.feeder-toggle':button,'.feeder-error':error})[s]};
+    return {video,button,label,error,feature,finish:()=>finish()};
+  });
+  const document = events({hidden:false,querySelector:()=>dialog,querySelectorAll:s=>s==='[data-motion-feature]'?players.map(p=>p.feature):[imageLink]});
+  class IntersectionObserver {
+    constructor(fn) { this.fn=fn; }
+    observe(video) { players.find(p=>p.video===video).visible=value=>this.fn([{isIntersecting:value}]); }
+  }
   const window = events({matchMedia:()=>preference, IntersectionObserver});
   vm.runInNewContext(source,{window,document,navigator:{connection},IntersectionObserver});
-  return {video,button,label,error,dialog,imageLink,document,window,preference,connection,finish:()=>finish(),visible:value=>observe([{isIntersecting:value}])};
+  return {...players[0],players,dialog,imageLink,document,window,preference,connection};
 }
 test('animation loads only on screen and pauses offscreen or behind an image or film dialog',async()=>{
   const p=page();assert.equal(p.video.src,undefined);
@@ -67,4 +74,16 @@ test('late play completion cannot restart a hidden or manually paused animation'
 test('failed media retains the poster and offers the direct video fallback',async()=>{
   const p=page();p.visible(true);await flush();p.video.emit('error');p.visible(false);p.visible(true);
   assert.equal(p.error.hidden,false);assert.equal(p.button.hidden,true);assert.equal(p.video.src,undefined);assert.equal(p.video.paused,true);
+});
+
+test('two animations keep playback, manual pause and errors independent', async () => {
+  const p=page({count:2}); const [gripper,feeder]=p.players;
+  gripper.visible(true);await flush();
+  assert.equal(gripper.video.paused,false);assert.equal(feeder.video.src,undefined);
+  gripper.button.emit('click');feeder.visible(true);await flush();
+  assert.equal(gripper.video.paused,true);assert.equal(feeder.video.paused,false);
+  gripper.video.emit('error');assert.equal(feeder.error.hidden,true);assert.equal(feeder.video.paused,false);
+  p.dialog.open=true;p.imageLink.emit('click');assert.equal(feeder.video.paused,true);
+  p.dialog.open=false;p.dialog.emit('close');await flush();assert.equal(feeder.video.paused,false);
+  assert.equal(gripper.video.paused,true);
 });

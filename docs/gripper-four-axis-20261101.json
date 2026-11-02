@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-01",
+  "source": "corkbot-cad-agent/concepts/G1_4axis_gripper/anim/blender/G1_corkbot_operating.mp4",
+  "source_sha256": "6ee376e7bda26df663a3176a6d0cf765b473e8ad96a334b5efa19e38751eaf3e",
+  "trim_seconds": {
+    "start": 6,
+    "end_exclusive": 15,
+    "duration": 9
+  },
+  "source_frames": {
+    "first": 180,
+    "last": 449,
+    "count": 270,
+    "fps": 30
+  },
+  "encoding": "1920x1080 H264 CRF18 slow; yuv420p; silent; faststart; no crop or upscale",
+  "frame_alignment_ssim": {
+    "frames": 270,
+    "min": 0.996263,
+    "mean": 0.9969745333333334
+  },
+  "full_decode": "pass",
+  "assets": [
+    {
+      "path": "assets/media/corkbot/gripper-4axis-film-hd.mp4",
+      "bytes": 2928449,
+      "sha256": "5df71b23d8f65e273d15110648095f534286b504cd5ecba622901316e47d11d7"
+    },
+    {
+      "path": "assets/media/corkbot/gripper-4axis-poster.webp",
+      "bytes": 36434,
+      "sha256": "3219683891782176b5854452656bc76eea58eb868c1294e9b0df723626cdb8c6"
+    }
+  ],
+  "gallery": "New first feature Four axes. One gripper.; retired 5 images showing 3-axis design; 5 remaining static renders",
+  "homepage": "Four-axis copy and new 9-second film in existing dialog; correct non-4K link label",
+  "tests": "101 passed;14 focused tests rerun after film link label update",
+  "build_public_assets": 158,
+  "browser": "desktop1440/tablet768/phone390 inspected; 9s gripper +8s feeder playback/pause independent; five-image viewer wraps01/5 to05/5; homepage new9s dialog verified",
+  "retired_assets": [
+    "assets/img/dev-preview-04-gripper-system.jpg",
+    "assets/img/dev-preview-05-gripper-horizontal.jpg",
+    "assets/img/dev-preview-06-gripper-vertical.jpg",
+    "assets/img/dev-preview-08-mobile-gripper.jpg",
+    "assets/img/dev-preview-10-rotating-base-mounted.jpg",
+    "assets/img/gallery/dev-preview-04-gripper-system-480.webp",
+    "assets/img/gallery/dev-preview-04-gripper-system-960.webp",
+    "assets/img/gallery/dev-preview-05-gripper-horizontal-480.webp",
+    "assets/img/gallery/dev-preview-05-gripper-horizontal-960.webp",
+    "assets/img/gallery/dev-preview-06-gripper-vertical-480.webp",
+    "assets/img/gallery/dev-preview-06-gripper-vertical-960.webp",
+    "assets/img/gallery/dev-preview-08-mobile-gripper-480.webp",
+    "assets/img/gallery/dev-preview-08-mobile-gripper-960.webp",
+    "assets/img/gallery/dev-preview-10-rotating-base-mounted-480.webp",
+    "assets/img/gallery/dev-preview-10-rotating-base-mounted-960.webp",
+    "assets/media/corkbot/gripper-film-4k.mp4",
+    "assets/media/corkbot/gripper-film-hd.mp4",
+    "assets/media/corkbot/gripper-poster.webp"
+  ]
+}
