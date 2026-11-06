@@ -25,6 +25,8 @@
 .project-opening-copy>.project-meta{margin-top:14px}
 .project-hero-image{margin:0;min-width:0}
 .project-hero-image img{display:block;width:100%;height:auto;background:#fff}
+/* The supplied render has two views; show only the complete stand on the right. */
+.projects-page img.project-stand-only{aspect-ratio:1;object-fit:cover;object-position:right}
 .projects-page figcaption{font-size:12px;color:var(--muted);padding:16px 0;line-height:1.6}
 .project-chapter{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:5vw;padding:80px 0}
 .project-chapter>div>p{max-width:34ch;margin-top:24px}
