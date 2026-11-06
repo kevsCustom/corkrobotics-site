@@ -18,7 +18,9 @@
 .project-opening{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:5vw;align-items:center;padding:32px 0 104px}
 .project-opening-copy>p{max-width:40ch;margin:24px 0 0}
 .projects-page .project-lead{font-size:24px;line-height:1.45;color:var(--ink)}
-.project-opening .project-primary{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;background:var(--ink);color:var(--paper);border:0;margin-top:32px}
+.project-actions{display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center;margin-top:32px}
+.project-feature-actions{display:flex;flex-wrap:wrap;gap:12px 28px}
+.project-opening .project-primary{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;background:var(--ink);color:var(--paper);border:0;margin-top:0}
 .project-opening .project-primary:hover{background:#dbe3de}
 .project-opening-copy>.project-meta{margin-top:14px}
 .project-hero-image{margin:0;min-width:0}
