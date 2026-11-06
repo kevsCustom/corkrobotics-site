@@ -5,7 +5,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const PUBLIC_FILES = [
-  'index.html', '404.html', 'downloads.html', 'gallery.html',
+  'index.html', '404.html', 'downloads.html', 'gallery.html', 'projects.html', 'projects/camera-stand.html',
   'launch.html', 'launch-privacy.html', 'thank-you.html', 'reservation-terms.html', 'support.html',
   'how-it-works.html', 'uses/business-customization.html', 'uses/art-and-making.html', 'uses/robotics-learning.html',
   '_headers', '_redirects', '_routes.json', 'robots.txt', 'sitemap.xml',
