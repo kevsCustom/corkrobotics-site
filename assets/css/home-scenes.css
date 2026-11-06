@@ -51,6 +51,7 @@
 .cad-heading>p{max-width:24ch;color:#c6cdce;font-size:17px;margin:0}
 .cad-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5vw;list-style:none;padding:0;margin:56px 0 0}
 .cad-steps h3{font-size:clamp(23px,2.3vw,32px);line-height:1.2;margin:0 0 16px;letter-spacing:-.025em}
+.cad-project-link{margin-top:36px}
 .cad-steps p{font-size:17px;max-width:32ch;color:#c6cdce;margin:0}
 @media(max-width:760px){
  .cad-heading{display:block}

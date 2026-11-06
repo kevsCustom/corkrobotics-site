@@ -359,11 +359,11 @@ test('all shipped HTML includes shared assets in order, and the public build inc
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 13);
+  assert.equal(pages.length, 15);
   for (const path of pages) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);
-    assert.match(html, /analytics\.js\?v=20261028-retired-product" defer/, path);
+    assert.match(html, /analytics\.js\?v=20261105-projects" defer/, path);
     assert.match(html, /analytics-config\.js\?v=20261011" defer/);
     assert.ok(html.indexOf('analytics-config.js') < html.indexOf('analytics.js'), path);
     assert.match(html, /\/assets\/css\/analytics\.css\?v=20261011/);

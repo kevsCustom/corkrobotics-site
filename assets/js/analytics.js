@@ -16,6 +16,8 @@
     '/': 'Cork V1 — A modular robot by Cork Robotics',
     '/404': 'Page not found — Cork Robotics',
     '/downloads': 'Software & downloads — Cork Robotics',
+    '/projects': 'Projects — Cork Robotics',
+    '/projects/camera-stand': 'Camera stand — Cork Robotics',
     '/gallery': 'Concept gallery — Cork Robotics',
     '/launch': 'Cork V1 launch updates — Cork Robotics',
     '/launch-privacy': 'Website and launch email privacy — Cork Robotics',
