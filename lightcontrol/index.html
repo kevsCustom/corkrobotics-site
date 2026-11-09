@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>lightControl — Build a sound-reactive LED light — Cork Robotics</title>
+  <meta name="description" content="lightControl is a sound-reactive LED light you build yourself on an ESP32-C3. Install the firmware from your browser, then control it from the free lightControl iPhone app." />
+  <link rel="canonical" href="https://corkrobotics.com/lightcontrol/" />
+  <meta property="og:title" content="lightControl" />
+  <meta property="og:description" content="Build a sound-reactive LED light on an ESP32-C3. Install the firmware from your browser and control it from your iPhone." />
+  <meta property="og:url" content="https://corkrobotics.com/lightcontrol/" />
+  <meta property="og:image" content="https://corkrobotics.com/assets/img/social-card.png?v=launch-20260602" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="/favicon.ico?v=launch-20260602-tabicon3" />
+  <link rel="icon" href="/favicon.ico?v=launch-20260602-tabicon3" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png?v=launch-20260602-tabicon3" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=launch-20260602-tabicon3" />
+  <link rel="mask-icon" href="/favicon.svg?v=launch-20260602-tabicon3" color="#0d1117" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=lightcontrol-20261109" />
+  <link rel="stylesheet" href="/assets/css/lightcontrol.css?v=20261109" />
+  <script type="module" src="https://unpkg.com/esp-web-tools@10.2.1/dist/web/install-button.js?module"></script>
+</head>
+<body class="lc-page">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/img/logo.png?v=launch-20260602" alt="Cork Robotics" />
+        <span>Cork Robotics</span>
+      </a>
+      <nav class="nav" aria-label="lightControl navigation">
+        <a href="/lightcontrol/" aria-current="page">Overview</a>
+        <a href="/lightcontrol/#install">Install</a>
+        <a href="/lightcontrol/support/">Support</a>
+        <a href="/lightcontrol/privacy/">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="legal-page">
+  <section class="legal-hero"><div class="container legal-hero-inner">
+    <p class="eyebrow">lightControl · Build it yourself</p>
+    <h1>A sound-reactive light you build.</h1>
+    <p class="lead">A sound-reactive LED light you build yourself, on an ESP32-C3. Install the firmware here, then set it up and control it from the lightControl LED iPhone app.</p>
+    <div class="lc-actions">
+      <a class="btn" href="#install">Install the firmware</a>
+      <a class="btn secondary" href="/lightcontrol/support/">Support &amp; FAQ</a>
+    </div>
+  </div></section>
+
+  <section class="section legal-section"><div class="container legal-layout">
+    <aside class="legal-toc" aria-label="lightControl contents"><p class="eyebrow">On this page</p><ol>
+      <li><a href="#install">Install the firmware</a></li>
+      <li><a href="#app">Get the app</a></li>
+      <li><a href="#downloads">CAD &amp; assembly</a></li>
+      <li><a href="#leds">Set up your LEDs</a></li>
+      <li><a href="#parts">What you need</a></li>
+      <li><a href="#wiring">Wiring</a></li>
+      <li><a href="#wifi">Wi-Fi is optional</a></li>
+    </ol></aside>
+    <article class="legal-content">
+      <section id="install"><p class="eyebrow">01 · Install</p><h2>Install the firmware</h2>
+        <div class="lc-install">
+          <h3>Connect and install</h3>
+          <esp-web-install-button manifest="/lightcontrol/firmware/manifest.json">
+            <button slot="activate" class="btn" type="button">Connect and install</button>
+            <span slot="unsupported"><p class="lc-note">Your browser can't install firmware. Use Chrome or Edge on a Mac, Windows or Linux computer.</p></span>
+            <span slot="not-allowed"><p class="lc-note">Installing needs a secure (https) page.</p></span>
+          </esp-web-install-button>
+          <p class="lc-note">Plug the ESP32-C3 into this computer with a data USB cable, press the button and pick the port that appears. Takes about a minute. Works in Chrome and Edge on desktop.</p>
+          <p class="lc-note">Firmware 1.0.0 for ESP32-C3. <a href="/lightcontrol/firmware/lightControl-1.0.0.bin" download>Download firmware (.bin)</a></p>
+          <details class="lc-help">
+            <summary>No port appears, or it won't connect?</summary>
+            <ul>
+              <li>Try another USB cable. Many cables only charge and carry no data.</li>
+              <li>Hold the board's <strong>BOOT</strong> button while you plug it in, let go, then press <em>Connect and install</em> again.</li>
+              <li>Close anything else using the board, such as the Arduino serial monitor or another installer tab.</li>
+              <li>When it finishes, the first 30 LEDs glow warm white. If they stay dark, check the 5&nbsp;V supply, ground and the data wire to GPIO&nbsp;3.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <section id="app"><p class="eyebrow">02 · App</p><h2>Get the app</h2>
+        <!-- APP_STORE_LINK -->
+        <p><span class="lc-status">Coming soon to the App Store</span></p>
+        <p>The free <strong>lightControl LED</strong> iPhone app is coming soon to the App Store. Once installed, open it and your light appears under <em>Lights</em>. On first power-up the light glows warm white so you know the wiring works.</p>
+      </section>
+
+      <section id="downloads"><p class="eyebrow">Build files · November 6, 2026</p><h2>CAD, print files &amp; assembly</h2>
+        <p>These are the original November 6 mesh-based design files, from before the clean round-hole update. They are provided as an earlier design revision.</p>
+        <p>The older mechanical guide references a 12 V strip. The lightControl electronics use a 5 V WS2812B strip; do not apply 12 V to those electronics.</p>
+        <ul>
+          <li><a href="https://github.com/kevsCustom/corkrobotics-site/raw/refs/heads/main/source-downloads/studio-light-cad-20261106.zip">Full Fusion STEP and 3MF assembly (ZIP, 55.5 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly.3mf" download>Full assembly (3MF, 7.3 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/studio-light-print-20261106.zip" download>Per-part STLs and five Bambu print plates (ZIP, 15.4 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly_guide.pdf" download>Assembly guide with cut list and 1:1 sorting card (PDF)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly_plot.pdf" download>CorkBot plotting version (PDF)</a></li>
+          <li><a href="/lightcontrol/downloads/studio-light-source-20261106.zip" download>Design generator source (ZIP)</a></li>
+        </ul>
+        <a href="/lightcontrol/downloads/exploded.png"><img src="/lightcontrol/downloads/exploded.png" alt="Exploded assembly renders of the November 6 Studio Light design" style="display:block;width:100%;height:auto" loading="lazy" /></a>
+      </section>
+
+      <section id="leds"><p class="eyebrow">03 · LED Setup</p><h2>Tell it about your LEDs</h2>
+        <ol>
+          <li>In the app, open your light, then <em>LED Setup</em>.</li>
+          <li>Enter how many LEDs your strip has. The light restarts to apply it.</li>
+          <li>Tap <em>Test colours</em>. The first LED should be red, the second green and the third blue. If not, change the colour order.</li>
+          <li>Choose <em>Loop</em> if the strip forms a closed shape, or <em>Strip</em> for a single run.</li>
+          <li>Step the start LED until the lit LED sits where you want bars and sunrises to begin, such as the bottom middle of a square.</li>
+          <li>Set the power limit to what your 5&nbsp;V supply can deliver.</li>
+        </ol>
+      </section>
+
+      <section id="parts"><p class="eyebrow">04 · Parts</p><h2>What you need</h2>
+        <ul>
+          <li>ESP32-C3 board (any with native USB, such as the ESP32-C3 SuperMini)</li>
+          <li>WS2812B LED strip (up to 600 LEDs)</li>
+          <li>INMP441 I2S microphone (only for Bar Spectrum)</li>
+          <li>5&nbsp;V power supply sized for your strip: about 60&nbsp;mA per LED at full white</li>
+          <li>5 V AHCT125 / AHCT1G125 data buffer and 330&nbsp;&Omega; resistor for the LED data line</li>
+        </ul>
+      </section>
+
+      <section id="wiring"><p class="eyebrow">05 · Wiring</p><h2>Wiring</h2>
+        <p><a class="btn secondary" href="/assets/Studio_Light_Wiring.pdf" download>Download wiring diagram (PDF)</a></p>
+        <div class="lc-table-wrap">
+          <table class="lc-table">
+            <thead><tr><th>From</th><th>To ESP32-C3</th></tr></thead>
+            <tbody>
+              <tr><td>LED strip DIN (through 5 V AHCT buffer and 330&nbsp;&Omega;)</td><td>GPIO 3</td></tr>
+              <tr><td>LED strip 5V / GND</td><td>5&nbsp;V supply; supply GND also to the board's GND</td></tr>
+              <tr><td>INMP441 SCK</td><td>GPIO 5</td></tr>
+              <tr><td>INMP441 WS</td><td>GPIO 4</td></tr>
+              <tr><td>INMP441 SD</td><td>GPIO 10</td></tr>
+              <tr><td>INMP441 L/R</td><td>GND</td></tr>
+              <tr><td>INMP441 VDD / GND</td><td>3V3 / GND</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="lc-warn">Power long strips from the supply, not through the board's USB. A computer's USB port gives about 500&nbsp;mA, enough for roughly 8 LEDs at full white.</p>
+      </section>
+
+      <section id="wifi"><p class="eyebrow">06 · Wi-Fi</p><h2>Wi-Fi is optional</h2>
+        <p>The light works over Bluetooth alone. Give it Wi-Fi in the app only if you schedule sunrises, so it keeps the right time after a power cut.</p>
+        <p>Questions? See <a href="/lightcontrol/support/">Support</a> or read the <a href="/lightcontrol/privacy/">privacy policy</a>.</p>
+      </section>
+    </article>
+  </div></section>
+</main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span data-year></span> Cork Robotics</span>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="/lightcontrol/">lightControl</a>
+        <a href="/lightcontrol/support/">lightControl Support</a>
+        <a href="/lightcontrol/privacy/">lightControl Privacy</a>
+        <a href="mailto:corsmeierkevin@gmail.com?subject=lightControl">corsmeierkevin@gmail.com</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=launch-20260602"></script>
+</body>
+</html>
