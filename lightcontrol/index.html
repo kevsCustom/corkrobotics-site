@@ -55,6 +55,7 @@
     <aside class="legal-toc" aria-label="lightControl contents"><p class="eyebrow">On this page</p><ol>
       <li><a href="#install">Install the firmware</a></li>
       <li><a href="#app">Get the app</a></li>
+      <li><a href="#downloads">CAD &amp; assembly</a></li>
       <li><a href="#leds">Set up your LEDs</a></li>
       <li><a href="#parts">What you need</a></li>
       <li><a href="#wiring">Wiring</a></li>
@@ -70,7 +71,7 @@
             <span slot="not-allowed"><p class="lc-note">Installing needs a secure (https) page.</p></span>
           </esp-web-install-button>
           <p class="lc-note">Plug the ESP32-C3 into this computer with a data USB cable, press the button and pick the port that appears. Takes about a minute. Works in Chrome and Edge on desktop.</p>
-          <p class="lc-note">Firmware 1.0.0 for ESP32-C3.</p>
+          <p class="lc-note">Firmware 1.0.0 for ESP32-C3. <a href="/lightcontrol/firmware/lightControl-1.0.0.bin" download>Download firmware (.bin)</a></p>
         </div>
       </section>
 
@@ -78,6 +79,20 @@
         <!-- APP_STORE_LINK -->
         <p><span class="lc-status">Coming soon to the App Store</span></p>
         <p>The free <strong>lightControl LED</strong> iPhone app is coming soon to the App Store. Once installed, open it and your light appears under <em>Lights</em>. On first power-up the light glows warm white so you know the wiring works.</p>
+      </section>
+
+      <section id="downloads"><p class="eyebrow">Build files · November 6, 2026</p><h2>CAD, print files &amp; assembly</h2>
+        <p>These are the original November 6 mesh-based design files, from before the clean round-hole update. They are provided as an earlier design revision.</p>
+        <p>The older mechanical guide references a 12 V strip. The lightControl electronics use a 5 V WS2812B strip; do not apply 12 V to those electronics.</p>
+        <ul>
+          <li><a href="https://github.com/kevsCustom/corkrobotics-site/raw/refs/heads/main/source-downloads/studio-light-cad-20261106.zip">Full Fusion STEP and 3MF assembly (ZIP, 55.5 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly.3mf" download>Full assembly (3MF, 7.3 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/studio-light-print-20261106.zip" download>Per-part STLs and five Bambu print plates (ZIP, 15.4 MB)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly_guide.pdf" download>Assembly guide with cut list and 1:1 sorting card (PDF)</a></li>
+          <li><a href="/lightcontrol/downloads/assembly_plot.pdf" download>CorkBot plotting version (PDF)</a></li>
+          <li><a href="/lightcontrol/downloads/studio-light-source-20261106.zip" download>Design generator source (ZIP)</a></li>
+        </ul>
+        <a href="/lightcontrol/downloads/exploded.png"><img src="/lightcontrol/downloads/exploded.png" alt="Exploded assembly renders of the November 6 Studio Light design" style="display:block;width:100%;height:auto" loading="lazy" /></a>
       </section>
 
       <section id="leds"><p class="eyebrow">03 · LED Setup</p><h2>Tell it about your LEDs</h2>
@@ -97,16 +112,17 @@
           <li>WS2812B LED strip (up to 600 LEDs)</li>
           <li>INMP441 I2S microphone (only for Bar Spectrum)</li>
           <li>5&nbsp;V power supply sized for your strip: about 60&nbsp;mA per LED at full white</li>
-          <li>330&nbsp;&Omega; resistor for the LED data line</li>
+          <li>5 V AHCT125 / AHCT1G125 data buffer and 330&nbsp;&Omega; resistor for the LED data line</li>
         </ul>
       </section>
 
       <section id="wiring"><p class="eyebrow">05 · Wiring</p><h2>Wiring</h2>
+        <p><a class="btn secondary" href="/assets/Studio_Light_Wiring.pdf" download>Download wiring diagram (PDF)</a></p>
         <div class="lc-table-wrap">
           <table class="lc-table">
             <thead><tr><th>From</th><th>To ESP32-C3</th></tr></thead>
             <tbody>
-              <tr><td>LED strip DIN (through 330&nbsp;&Omega;)</td><td>GPIO 3</td></tr>
+              <tr><td>LED strip DIN (through 5 V AHCT buffer and 330&nbsp;&Omega;)</td><td>GPIO 3</td></tr>
               <tr><td>LED strip 5V / GND</td><td>5&nbsp;V supply; supply GND also to the board's GND</td></tr>
               <tr><td>INMP441 SCK</td><td>GPIO 5</td></tr>
               <tr><td>INMP441 WS</td><td>GPIO 4</td></tr>
