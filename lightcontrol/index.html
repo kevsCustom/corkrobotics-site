@@ -72,6 +72,15 @@
           </esp-web-install-button>
           <p class="lc-note">Plug the ESP32-C3 into this computer with a data USB cable, press the button and pick the port that appears. Takes about a minute. Works in Chrome and Edge on desktop.</p>
           <p class="lc-note">Firmware 1.0.0 for ESP32-C3. <a href="/lightcontrol/firmware/lightControl-1.0.0.bin" download>Download firmware (.bin)</a></p>
+          <details class="lc-help">
+            <summary>No port appears, or it won't connect?</summary>
+            <ul>
+              <li>Try another USB cable. Many cables only charge and carry no data.</li>
+              <li>Hold the board's <strong>BOOT</strong> button while you plug it in, let go, then press <em>Connect and install</em> again.</li>
+              <li>Close anything else using the board, such as the Arduino serial monitor or another installer tab.</li>
+              <li>When it finishes, the first 30 LEDs glow warm white. If they stay dark, check the 5&nbsp;V supply, ground and the data wire to GPIO&nbsp;3.</li>
+            </ul>
+          </details>
         </div>
       </section>
 
