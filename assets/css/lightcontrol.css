@@ -71,3 +71,6 @@
   .lc-table th, .lc-table td { padding: 8px; }
 }
 .lc-page .legal-section { padding-top: var(--s-7); }
+.lc-help { border-top: 1px solid var(--line); padding-top: var(--s-3); }
+.lc-help summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+.lc-help ul { margin: var(--s-3) 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 15px; display: grid; gap: var(--s-2); }
