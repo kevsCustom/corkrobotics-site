@@ -1,0 +1,73 @@
+/* lightControl pages (/lightcontrol/). Builds on styles.css and its legal-page layout. */
+.lc-page .legal-hero h1 { max-width: 16ch; }
+.lc-actions { display:flex; flex-wrap:wrap; gap: var(--s-3); align-items:center; }
+.lc-install {
+  display:grid;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--shadow);
+}
+.lc-install h3 { margin: 0; }
+.lc-install esp-web-install-button { display:block; }
+.lc-install .btn { cursor:pointer; font: inherit; font-weight: 800; }
+.lc-note { color: var(--muted); font-size: 15px; }
+.lc-status {
+  display:inline-flex;
+  align-items:center;
+  min-height: 26px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(21, 96, 189, .10);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+}
+.legal-content ol { display:grid; gap: var(--s-3); margin: var(--s-5) 0 0; padding-left: 1.4rem; }
+.legal-content ol li::marker { color: var(--accent); font-weight: 800; }
+.legal-content code {
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: .9em;
+  overflow-wrap: anywhere;
+}
+.lc-table-wrap { max-width: 100%; margin-top: var(--s-5); overflow-x: auto; }
+.lc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,.94);
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+.lc-table th, .lc-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.lc-table th { color: var(--ink); font-weight: 800; background: var(--surface-2); }
+.lc-table td { color: var(--muted); }
+.lc-warn {
+  margin-top: var(--s-5);
+  padding: var(--s-3) 0 var(--s-3) var(--s-4);
+  border-left: 3px solid var(--warning);
+}
+.legal-content .lc-faq h3 { margin-top: var(--s-6); }
+.legal-content .lc-faq h3:first-of-type { margin-top: var(--s-5); }
+.legal-content .lc-faq h3 + p { margin-top: var(--s-3); }
+.lc-page .legal-layout > * { min-width: 0; }
+
+@media (max-width: 640px) {
+  .lc-install { padding: var(--s-5); }
+  .lc-install .btn { width: 100%; }
+  .lc-table { font-size: 14px; }
+  .lc-table th, .lc-table td { padding: 8px; }
+}
+.lc-page .legal-section { padding-top: var(--s-7); }

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>lightControl Support — Cork Robotics</title>
+  <meta name="description" content="Help for lightControl: getting the iPhone app, installing the ESP32-C3 firmware, finding your light, LED Setup, Wi-Fi, factory reset, parts and wiring." />
+  <link rel="canonical" href="https://corkrobotics.com/lightcontrol/support/" />
+  <meta property="og:title" content="lightControl Support" />
+  <meta property="og:description" content="Answers for building, installing and setting up your lightControl light." />
+  <meta property="og:url" content="https://corkrobotics.com/lightcontrol/support/" />
+  <meta property="og:image" content="https://corkrobotics.com/assets/img/social-card.png?v=launch-20260602" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="/favicon.ico?v=launch-20260602-tabicon3" />
+  <link rel="icon" href="/favicon.ico?v=launch-20260602-tabicon3" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=launch-20260602-tabicon3" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png?v=launch-20260602-tabicon3" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=launch-20260602-tabicon3" />
+  <link rel="mask-icon" href="/favicon.svg?v=launch-20260602-tabicon3" color="#0d1117" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=lightcontrol-20261109" />
+  <link rel="stylesheet" href="/assets/css/lightcontrol.css?v=20261109" />
+</head>
+<body class="lc-page">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/img/logo.png?v=launch-20260602" alt="Cork Robotics" />
+        <span>Cork Robotics</span>
+      </a>
+      <nav class="nav" aria-label="lightControl navigation">
+        <a href="/lightcontrol/">Overview</a>
+        <a href="/lightcontrol/#install">Install</a>
+        <a href="/lightcontrol/support/" aria-current="page">Support</a>
+        <a href="/lightcontrol/privacy/">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="legal-page">
+  <section class="legal-hero"><div class="container legal-hero-inner">
+    <p class="eyebrow">lightControl · Support</p>
+    <h1>Help with your light.</h1>
+    <p class="lead">Answers for building, installing and setting up a lightControl light. Still stuck? Email <a href="mailto:corsmeierkevin@gmail.com?subject=lightControl%20support">corsmeierkevin@gmail.com</a>.</p>
+  </div></section>
+  <section class="section legal-section"><div class="container legal-layout">
+    <aside class="legal-toc" aria-label="Support contents"><p class="eyebrow">On this page</p><ol>
+      <li><a href="#app">Get the app</a></li>
+      <li><a href="#firmware">Install the firmware</a></li>
+      <li><a href="#not-found">Light not in the app</a></li>
+      <li><a href="#led-setup">LED Setup</a></li>
+      <li><a href="#wifi">Wi-Fi</a></li>
+      <li><a href="#reset">Factory reset</a></li>
+      <li><a href="#parts">Parts and wiring</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol></aside>
+    <article class="legal-content">
+      <section id="app"><p class="eyebrow">01 · App</p><h2>Get the app</h2>
+        <!-- APP_STORE_LINK -->
+        <p>The free <strong>lightControl</strong> iPhone app is coming soon to the App Store. It needs iOS 17 or later and Bluetooth. It has no accounts and nothing to sign in to.</p>
+        <p>The app has two tabs. <em>Lights</em> finds lightControl lights near you; tap one to change its name, power, brightness, mode and mode settings, LED Setup and more. <em>Wi-Fi</em> stores your home Wi-Fi on the phone so you can send it to a light, which is optional.</p>
+      </section>
+
+      <section id="firmware"><p class="eyebrow">02 · Firmware</p><h2>Install the firmware</h2>
+        <ol>
+          <li>Open the <a href="/lightcontrol/#install">installer</a> in <strong>Chrome or Edge on a Mac, Windows or Linux computer</strong>. Safari, Firefox and phone browsers can't install firmware, because they don't support Web Serial.</li>
+          <li>Plug the ESP32-C3 into the computer with a <strong>data</strong> USB cable. Some cables only charge; if no port appears, try another cable.</li>
+          <li>Press <em>Connect and install</em>, pick the port that appears and follow the steps. It takes about a minute.</li>
+          <li>When it finishes, the light glows warm white on its first 30 LEDs. That proves the wiring before any app setup.</li>
+        </ol>
+        <p>If the port doesn't appear, hold the board's BOOT button while plugging it in, then try again.</p>
+        <p>Prefer to build it yourself? The firmware is an Arduino sketch for the ESP32-C3 (board package esp32 by Espressif, ESP32C3 Dev Module, Huge APP partition scheme, USB CDC On Boot enabled).</p>
+      </section>
+
+      <section id="not-found"><p class="eyebrow">03 · Troubleshooting</p><h2>My light doesn't appear in the app</h2>
+        <ul>
+          <li><strong>Bluetooth is off or not allowed.</strong> Turn Bluetooth on in Control Center, and allow Bluetooth for lightControl in iOS Settings. The app tells you on the <em>Lights</em> tab if either is the problem.</li>
+          <li><strong>The light has no power or no firmware.</strong> A freshly installed light glows warm white. If it stays dark, check the 5&nbsp;V supply, the common ground and the data wire to GPIO&nbsp;3, then reinstall the firmware.</li>
+          <li><strong>Too far away.</strong> Bring the phone close to the light. A new light is called <em>lightControl</em> until you rename it.</li>
+          <li><strong>It just restarted.</strong> After a change of LED count or colour order, or a restart or factory reset, the light comes back in a few seconds and the app reconnects by itself.</li>
+          <li><strong>Only lightControl lights are listed.</strong> The app ignores every other Bluetooth device, so you won't see your light in iOS Settings &gt; Bluetooth. That is normal.</li>
+        </ul>
+        <p>Still nothing? Connect the board to a computer and open a serial monitor at 115200 baud. At boot the firmware prints its version, name, LED layout, mode and Wi-Fi state, which helps when you email for help.</p>
+      </section>
+
+      <section id="led-setup"><p class="eyebrow">04 · LED Setup</p><h2>LED Setup</h2>
+        <p>Open your light in the app, then <em>LED Setup</em>.</p>
+        <div class="lc-faq">
+          <h3>LED count</h3>
+          <p>Enter how many LEDs your strip has, up to 600, and apply. The light saves it and restarts; the app reconnects by itself.</p>
+          <h3>Colour order (Test colours)</h3>
+          <p>Tap <em>Test colours</em>. The first three LEDs should light red, green and blue for 20 seconds. If you see other colours, choose another colour order, apply, and test again. Most WS2812B strips are GRB. Changing the order also restarts the light.</p>
+          <h3>Loop or strip</h3>
+          <p>Choose <em>Loop</em> if the strip forms a closed shape, such as a square or circle. Bars and sunrises then climb up both sides from the start LED and meet at the top. Choose <em>Strip</em> for a single run; bars rise from the start LED in one direction.</p>
+          <h3>Start LED</h3>
+          <p>Step the start LED until the lit LED sits where you want bars and sunrises to begin, such as the bottom middle of a square. The selected LED lights white for 20 seconds so you can see it. This applies straight away.</p>
+          <h3>Power limit</h3>
+          <p>Each LED draws about 60&nbsp;mA at full white. Set the limit a little under what your 5&nbsp;V supply is rated for (the default is 1500&nbsp;mA); the light dims itself to stay under it. USB from a computer gives about 500&nbsp;mA, a phone charger usually 1000 to 2000&nbsp;mA.</p>
+        </div>
+      </section>
+
+      <section id="wifi"><p class="eyebrow">05 · Wi-Fi</p><h2>Do I need Wi-Fi?</h2>
+        <p>No. The light works over Bluetooth alone. Wi-Fi is used only for the Sunrise clock: the app sets the light's clock every time it connects, and Wi-Fi keeps that clock right after a power cut, so scheduled sunrises still start on time.</p>
+        <p>To add it, save your home network in the app's <em>Wi-Fi</em> tab, open your light and send the saved Wi-Fi to it. The light shows its connection status. <em>Forget Wi-Fi on this light</em> removes it again. Bluetooth stays on either way.</p>
+      </section>
+
+      <section id="reset"><p class="eyebrow">06 · Reset</p><h2>Factory reset</h2>
+        <p>Open your light in the app, then <em>Advanced</em> &gt; <em>Factory reset</em>. This erases the name, LED setup, every mode setting and the saved Wi-Fi, then restarts the light with the defaults: warm white, 30 LEDs, loop, GRB, 1500&nbsp;mA. <em>Restart light</em> in the same section reboots without erasing anything.</p>
+        <p>If the app can't connect to the light, reinstall the firmware from the <a href="/lightcontrol/#install">installer</a> and choose to erase the device when asked.</p>
+      </section>
+
+      <section id="parts"><p class="eyebrow">07 · Build</p><h2>Parts and wiring</h2>
+        <ul>
+          <li>ESP32-C3 board (any with native USB, such as the ESP32-C3 SuperMini)</li>
+          <li>WS2812B LED strip (up to 600 LEDs)</li>
+          <li>INMP441 I2S microphone (only for Bar Spectrum)</li>
+          <li>5&nbsp;V power supply sized for your strip: about 60&nbsp;mA per LED at full white</li>
+          <li>330&nbsp;&Omega; resistor for the LED data line</li>
+        </ul>
+        <div class="lc-table-wrap">
+          <table class="lc-table">
+            <thead><tr><th>From</th><th>To ESP32-C3</th></tr></thead>
+            <tbody>
+              <tr><td>LED strip DIN (through 330&nbsp;&Omega;)</td><td>GPIO 3</td></tr>
+              <tr><td>LED strip 5V / GND</td><td>5&nbsp;V supply; supply GND also to the board's GND</td></tr>
+              <tr><td>INMP441 SCK</td><td>GPIO 5</td></tr>
+              <tr><td>INMP441 WS</td><td>GPIO 4</td></tr>
+              <tr><td>INMP441 SD</td><td>GPIO 10</td></tr>
+              <tr><td>INMP441 L/R</td><td>GND</td></tr>
+              <tr><td>INMP441 VDD / GND</td><td>3V3 / GND</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="lc-warn">Power long strips from the supply, not through the board's USB. For long strips, feed 5&nbsp;V in at both ends.</p>
+      </section>
+
+      <section id="contact" class="legal-contact"><p class="eyebrow">08 · Contact</p><h2>Still need help?</h2>
+        <p>Email <a href="mailto:corsmeierkevin@gmail.com?subject=lightControl%20support">corsmeierkevin@gmail.com</a>. Tell us your board, LED strip and count, the firmware version (shown in the app under <em>Advanced</em>) and what you see. A photo of the wiring helps.</p>
+        <p>See also the <a href="/lightcontrol/privacy/">privacy policy</a>.</p>
+      </section>
+    </article>
+  </div></section>
+</main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span data-year></span> Cork Robotics</span>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="/lightcontrol/">lightControl</a>
+        <a href="/lightcontrol/support/">lightControl Support</a>
+        <a href="/lightcontrol/privacy/">lightControl Privacy</a>
+        <a href="mailto:corsmeierkevin@gmail.com?subject=lightControl">corsmeierkevin@gmail.com</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=launch-20260602"></script>
+</body>
+</html>
