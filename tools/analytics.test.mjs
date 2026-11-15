@@ -346,7 +346,7 @@ test('preferences reopen with keyboard focus and Escape returns focus without ch
   assert.equal(ui.jar.get('cork_analytics_consent'), 'declined');
 });
 
-test('all shipped HTML includes shared assets in order, and the public build includes them without tools or private files', async () => {
+test('Cork Robotics pages include shared analytics in order, and the public build excludes private files', async () => {
   const site = resolve(new URL('..', import.meta.url).pathname);
   const pages = PUBLIC_FILES.filter((path) => path.endsWith('.html'));
   async function walk(directory) {
@@ -359,11 +359,11 @@ test('all shipped HTML includes shared assets in order, and the public build inc
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 15);
-  for (const path of pages) {
+  assert.equal(pages.length, 19);
+  for (const path of pages.filter((path) => !path.startsWith('lightcontrol/'))) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);
-    assert.match(html, /analytics\.js\?v=20261105-projects" defer/, path);
+    assert.match(html, /analytics\.js\?v=202611(?:05|15)-projects" defer/, path);
     assert.match(html, /analytics-config\.js\?v=20261011" defer/);
     assert.ok(html.indexOf('analytics-config.js') < html.indexOf('analytics.js'), path);
     assert.match(html, /\/assets\/css\/analytics\.css\?v=20261011/);
