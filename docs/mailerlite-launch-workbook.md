@@ -1,12 +1,12 @@
-# CorkBot MailerLite launch workbook
+# Cork V1 MailerLite launch workbook
 
-Prepared October 9, 2026. MailerLite is selected; account connection and real-inbox acceptance remain pending. The site already has the signup adapter. The launch list is free. The proposed paid reservation was removed on October 16, 2026; optional apparel support is a separate concept with no checkout configured here.
+Prepared October 9; timing and sender notes updated November 19, 2026. Public timing is “Launching early 2027 on Kickstarter.” MailerLite is connected; confirmation has been tested. Welcome reply-routing and unsubscribe acceptance remain open. The site already has the signup adapter. The launch list is free. The proposed paid reservation was removed on October 16, 2026; optional apparel support is a separate concept with no checkout configured here.
 
 ## 1. Set the sender and company account
 
 - [ ] Create or sign into the company-owned [MailerLite account](https://accounts.mailerlite.com/), complete its business profile and inbox verification with the real company/website details, check any account-specific review or sending restrictions, and enter the company's actual footer mailing address.
-- [ ] Set **From name:** `Kevin at Cork Robotics`; **From address:** `kevin@corkrobotics.com`.
-- [ ] Use `kevin@corkrobotics.com` as Reply-to initially. Switch to the support mailbox only after Kevin confirms its complete address and verifies that incoming replies reach a monitored inbox. Do not infer a complete address from `support@`.
+- [ ] Set **From name:** `Cork Robotics`; **From address:** `updates@corkrobotics.com`.
+- [ ] Use `updates@corkrobotics.com` as Reply-to initially. Switch to the support mailbox only after Kevin confirms its complete address and verifies that incoming replies reach a monitored inbox. Do not infer a complete address from `support@`.
 - [ ] In Account settings → Domains, add/verify the sender and authenticate `corkrobotics.com` using the exact records MailerLite supplies. Add its DKIM/domain-verification records and reconcile its SPF requirement with the existing record. Preserve Google Workspace MX records and existing Google authentication records: Workspace continues hosting the company's inboxes. Check authentication in MailerLite before sending. [Domain authentication](https://www.mailerlite.com/help/how-to-verify-and-authenticate-your-domain)
 - [ ] Create a dedicated subscriber group named **CorkBot launch 2026**. Record the real numeric group ID privately with the site configuration; the name is not the API ID.
 
@@ -27,7 +27,7 @@ The preferred finished flow is **corkrobotics.com/launch → email + consent →
 | --- | --- |
 | `SIGNUP_PROVIDER` | `mailerlite` |
 | `MAILERLITE_API_KEY` | Secret: company account API token |
-| `MAILERLITE_GROUP_ID` | Actual CorkBot launch group ID |
+| `MAILERLITE_GROUP_ID` | Actual Cork V1 launch group ID |
 | `MAILERLITE_API_DOI_VERIFIED` | `true` on the controlled test environment after verifying the API DOI setting; retain in the public environment only after live-inbox acceptance |
 | `TURNSTILE_SITE_KEY` | Public key for the real site widget |
 | `TURNSTILE_SECRET_KEY` | Secret: matching widget secret |
@@ -37,7 +37,7 @@ The adapter requires the Turnstile key pair. It accepts a new subscriber only as
 
 ### Fastest alternate: MailerLite's hosted form
 
-Create an embedded form assigned to **CorkBot launch 2026**, using only email and a required consent checkbox. Use the page's current consent text: **“Email me CorkBot product updates and launch news. I can unsubscribe anytime.”** Link its privacy statement to `https://corkrobotics.com/launch-privacy`. Keep double opt-in enabled, configure its confirmation destination, and copy the real **Share URL** from the form overview. The site's existing hosted mode opens that provider form. [Form setup](https://www.mailerlite.com/help/how-to-create-an-embedded-form)
+Create an embedded form assigned to **CorkBot launch 2026**, using only email and a required consent checkbox. Use the page's current consent text: **“Email me Cork V1 product updates and launch news. I can unsubscribe anytime.”** Link its privacy statement to `https://corkrobotics.com/launch-privacy`. Keep double opt-in enabled, configure its confirmation destination, and copy the real **Share URL** from the form overview. The site's existing hosted mode opens that provider form. [Form setup](https://www.mailerlite.com/help/how-to-create-an-embedded-form)
 
 Set `SIGNUP_PROVIDER=mailerlite_form`, `MAILERLITE_FORM_URL` to that actual HTTPS share URL, and `MAILERLITE_FORM_DOI_VERIFIED=true` after checking its live flow. This mode needs no site API token or site Turnstile pair. The supported share domains are MailerLite's own domains; a custom branded form domain needs a reviewed allowlist change. The site does not pass a typed email or campaign fields into the share URL. Set any fixed source labels in the provider form deliberately; do not assume site UTM fields are stored in this mode.
 
@@ -64,13 +64,13 @@ These are ready to place in MailerLite's editors; they have not been sent. DOI e
 
 ### Confirmation email
 
-**Subject:** Confirm your CorkBot launch updates
+**Subject:** Confirm your Cork V1 launch updates
 
 **Preview text:** One click to confirm you want product updates and launch news.
 
 Hi,
 
-Please confirm that you want to receive CorkBot product updates and news of our planned Kickstarter launch from Cork Robotics.
+Please confirm that you want to receive Cork V1 product updates and news of our planned Kickstarter launch from Cork Robotics.
 
 **Button label: Confirm my email**
 
@@ -82,26 +82,26 @@ Kevin at Cork Robotics
 
 ### Welcome email — after confirmed subscription
 
-**Subject:** You're on the CorkBot launch list
+**Subject:** You're on the Cork V1 launch list
 
 **Preview text:** Thanks for following along. Here's what happens next.
 
 Hi,
 
-I'm Kevin from Cork Robotics. Thanks for joining the CorkBot launch list.
+I'm Kevin from Cork Robotics. Thanks for joining the Cork V1 launch list.
 
-CorkBot is a compact, modular robot in development for drawing, making, and hands-on exploration. I'll share demonstrations, product updates, and the news when our Kickstarter campaign opens.
+Cork V1 is a compact, modular robot in development for drawing, making, and hands-on exploration. I'll share demonstrations, product updates, and the news when our Kickstarter campaign opens.
 
-The launch date, final configuration, and price are still being finalized. I'll share those details before the campaign opens so you can decide whether CorkBot fits what you want to make.
+We’re planning to launch on Kickstarter in early 2027. The exact launch date, final configuration, and price announcement are still being finalized. I'll share those details before the campaign opens so you can decide whether Cork V1 fits what you want to make.
 
 Joining this email list is free. It doesn't reserve a unit or commit you to buy.
 
-I'd love to hear what you'd use CorkBot for. You can reply directly to this email.
+I'd love to hear what you'd use Cork V1 for. You can reply directly to this email.
 
 Kevin
 Cork Robotics
 
-**Editor instruction:** Send as `Kevin at Cork Robotics <kevin@corkrobotics.com>` with the verified Reply-to. Keep MailerLite's unsubscribe and real company-address footer. Keep the free launch-list welcome focused on product updates; no reservation or payment button is offered.
+**Editor instruction:** Send as `Cork Robotics <updates@corkrobotics.com>` with the verified Reply-to. Keep MailerLite's unsubscribe and real company-address footer. Keep the free launch-list welcome focused on product updates; no reservation or payment button is offered.
 
 ## 5. Controlled live-inbox acceptance
 
@@ -119,7 +119,7 @@ Use operator-controlled test inboxes; preserve existing customer records. Record
 
 The proposed paid reservation has been withdrawn. The free launch list remains the primary action. A signup does not guarantee a unit, launch price, or delivery priority.
 
-Kevin is considering two Cork Robotics hoodie options as optional support. No apparel purchase link is configured in this site. Before adding one, confirm the real product pages, prices, sizes, fulfillment regions, shipping costs, dispatch expectations, and return policy. A hoodie purchase is a merchandise order and does not create a CorkBot reservation or automatically subscribe the buyer to this launch list. Offer the same explicit email consent and confirmation process separately.
+Kevin is considering two Cork Robotics hoodie options as optional support. No apparel purchase link is configured in this site. Before adding one, confirm the real product pages, prices, sizes, fulfillment regions, shipping costs, dispatch expectations, and return policy. A hoodie purchase is a merchandise order and does not create a Cork V1 reservation or automatically subscribe the buyer to this launch list. Offer the same explicit email consent and confirmation process separately.
 
 Keep product and mailing records separate. Do not reuse MarketApp billing products, subscriptions, webhooks, or payment records for a merchandise flow. This site has no apparel checkout or payment-verification endpoint; add only the reviewed store destination once ready.
 
