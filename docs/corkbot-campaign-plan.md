@@ -1,10 +1,10 @@
-# CorkBot prelaunch campaign working plan
+# Cork V1 prelaunch campaign working plan
 
-Updated October 16, 2026. CorkBot is targeting December 8, 2026 on Kickstarter. The public campaign path is a free launch email list at https://corkrobotics.com/launch. The paid robot-reservation proposal has been withdrawn.
+Updated November 19, 2026. Cork V1 is planning to launch in early 2027 on Kickstarter. The exact date and opening time will be announced after the readiness review. The public campaign path is a free launch email list at https://corkrobotics.com/launch. The paid robot-reservation proposal has been withdrawn.
 
 ## Free launch list
 
-Demonstrations should show what CorkBot does and close with one useful action: join the free launch list, then click the email confirmation link. Keep signup, the consent statement and the confirmation reminder clear. Joining does not reserve a robot or commit someone to back the campaign.
+Demonstrations should show what Cork V1 does and close with one useful action: join the free launch list, then click the email confirmation link. Keep signup, the consent statement and the confirmation reminder clear. Joining does not reserve a robot or commit someone to back the campaign.
 
 Cloudflare hosts the page and validates signup requests. MailerLite manages the launch list, confirmation, welcome messages, campaigns, suppression and unsubscribes. Google Workspace continues hosting company inboxes. The signup implementation does not create a separate Cloudflare subscriber database. See [launch setup](launch-setup.md) and the [MailerLite workbook](mailerlite-launch-workbook.md).
 
@@ -12,11 +12,11 @@ Cloudflare hosts the page and validates signup requests. MailerLite manages the 
 
 Apparel can be offered separately as a way to support Cork Robotics. The operator has two hoodie options; product names, prices, sizes, fulfillment and actual checkout URLs still need to be verified. Do not publish an invented shop link or take a payment against an undefined offer.
 
-Keep the launch list as the primary action. Once the shop is ready, a secondary section after signup or in a confirmed subscriber's welcome email can invite people to explore the hoodies. Keep the confirmation email focused on confirmation. An apparel purchase does not reserve a CorkBot, include a Kickstarter pledge or guarantee an early price. Marketing signup remains a separate consent choice.
+Keep the launch list as the primary action. Once the shop is ready, a secondary section after signup or in a confirmed subscriber's welcome email can invite people to explore the hoodies. Keep the confirmation email focused on confirmation. An apparel purchase does not reserve a Cork V1, include a Kickstarter pledge or guarantee an early price. Marketing signup remains a separate consent choice.
 
 Suggested support copy after the product destinations are verified:
 
-> Want to support what we are building? Explore our two Cork Robotics hoodie designs. Apparel purchases do not reserve a CorkBot or include a Kickstarter pledge.
+> Want to support what we are building? Explore our two Cork Robotics hoodie designs. Apparel purchases do not reserve a Cork V1 or include a Kickstarter pledge.
 
 Use one secondary Explore the hoodies link pointing to the real storefront. Keep apparel orders, confirmed subscribers and eventual Kickstarter backers separate in reporting.
 
