@@ -359,7 +359,7 @@ test('Cork Robotics pages include shared analytics in order, and the public buil
   for (const directory of PUBLIC_DIRECTORIES) {
     try { await walk(directory); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
-  assert.equal(pages.length, 21);
+  assert.equal(pages.length, 22);
   for (const path of pages.filter((path) => !path.startsWith('lightcontrol/'))) {
     const html = await readFile(resolve(site, path), 'utf8');
     assert.equal((html.match(/\/assets\/js\/analytics\.js\?/g) || []).length, 1, path);

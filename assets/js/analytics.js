@@ -21,6 +21,7 @@
     '/projects/lighter-sleeve': 'Lighter sleeve — Cork Robotics',
     '/projects/coral-pen-holder': 'Coral pen holder — Cork Robotics',
     '/projects/led-picture-frame': 'LED picture frame — Cork Robotics',
+    '/projects/hanging-lamp': 'Hanging lamp — Cork Robotics',
     '/gallery': 'Concept gallery — Cork Robotics',
     '/launch': 'Cork V1 launch updates — Cork Robotics',
     '/launch-privacy': 'Website and launch email privacy — Cork Robotics',
